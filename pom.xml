@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.bravedawn</groupId>
+    <artifactId>mall</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--
+        1. 聚合工程里可分为顶级项目（顶级工程、父工程）与子工程，这两者的关系其实就是父子继承的关系，
+        子工程在maven里称为模块（module），模块之间是平级的，是可以相互依赖的。
+        2. 子模块可以使用顶级工程里所有的资源（依赖），子模块之间如果要使用资源，必须构建依赖（构建关系）
+        3. 一个顶级工程可以有多个不同的子工程共同组合而成。
+    -->
+    <modules>
+        <module>mall-common</module>
+        <module>mall-pojo</module>
+        <module>mall-mapper</module>
+        <module>mall-service</module>
+        <module>mall-api</module>
+    </modules>
+
+
+</project>
