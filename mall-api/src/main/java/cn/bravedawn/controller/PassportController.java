@@ -4,6 +4,8 @@ import cn.bravedawn.bo.UserBO;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.UserService;
 import cn.bravedawn.utils.JsonResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author 冯晓
  * @Date 2020/1/3 19:43
  */
+@Api(value = "注册登录", tags = {"用于注册登录的相关接口"})
 @RestController
 @RequestMapping("passport")
 public class PassportController {
@@ -22,6 +25,7 @@ public class PassportController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "用户名是否存在", notes = "用户名是否存在", httpMethod = "GET")
     @GetMapping("usernameIsExist")
     public JsonResult usernameIsExist(@RequestParam String username){
         // 1.对请求参数进行判空操作
@@ -40,6 +44,7 @@ public class PassportController {
     }
 
 
+    @ApiOperation(value = "用户注册", notes = "用户注册", httpMethod = "POST")
     @PostMapping("/regist")
     public JsonResult regist(@RequestBody UserBO userBO,
                                   HttpServletRequest request,
