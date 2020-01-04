@@ -26,12 +26,12 @@ public class Swagger2 {
     // 配置swagger2核心配置 docket
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)          // 指定api类型为swagger2
-                            .apiInfo(apiInfo())                 // 用于定义api文档汇总信息
+        return new Docket(DocumentationType.SWAGGER_2)              // 指定api类型为swagger2
+                            .apiInfo(apiInfo())                     // 用于定义api文档汇总信息
                 .select()
                 .apis(RequestHandlerSelectors
-                        .basePackage("cn.bravedawn.controller"))   // 指定controller包
-                .paths(PathSelectors.any())                     // 所有controller
+                        .basePackage("cn.bravedawn.controller"))    // 指定controller包
+                .paths(PathSelectors.any())                         // 所有controller
                 .build();
     }
 

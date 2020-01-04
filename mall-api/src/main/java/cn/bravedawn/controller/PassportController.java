@@ -3,7 +3,9 @@ package cn.bravedawn.controller;
 import cn.bravedawn.bo.UserBO;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.UserService;
+import cn.bravedawn.utils.CookieUtils;
 import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.JsonUtils;
 import cn.bravedawn.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -81,6 +83,13 @@ public class PassportController {
         // 4. 实现注册
         Users userResult = userService.createUser(userBO);
 
+        // 5. 信息脱敏
+        userResult = setNullProperty(userResult);
+
+        // 6. 添加cookie信息
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userResult), true);
+
         return JsonResult.ok();
     }
 
@@ -107,6 +116,23 @@ public class PassportController {
             return JsonResult.errorMsg("用户名或密码不正确");
         }
 
+        // 2. 信息脱敏
+        userResult = setNullProperty(userResult);
+
+        // 3. 添加cookie信息
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userResult), true);
+
         return JsonResult.ok(userResult);
+    }
+
+    private Users setNullProperty(Users userResult) {
+        userResult.setPassword(null);
+        userResult.setMobile(null);
+        userResult.setEmail(null);
+        userResult.setCreatedTime(null);
+        userResult.setUpdatedTime(null);
+        userResult.setBirthday(null);
+        return userResult;
     }
 }
