@@ -4,6 +4,7 @@ import cn.bravedawn.bo.UserBO;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.UserService;
 import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +37,7 @@ public class PassportController {
         // 2.查询数据库用户是否存在
         boolean isExist = userService.queryUserNameIsExist(username);
         if (isExist){
-            return JsonResult.errorMsg("用户已存在");
+            return JsonResult.errorMsg("用户存在");
         }
 
         // 3.用户不存在返回200
@@ -81,5 +82,31 @@ public class PassportController {
         Users userResult = userService.createUser(userBO);
 
         return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
+    @PostMapping("/login")
+    public JsonResult login(@RequestBody UserBO userBO,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception {
+
+        String username = userBO.getUsername();
+        String password = userBO.getPassword();
+
+        // 0. 判断用户名和密码必须不为空
+        if (StringUtils.isBlank(username) ||
+                StringUtils.isBlank(password)) {
+            return JsonResult.errorMsg("用户名或密码不能为空");
+        }
+
+        // 1. 实现登录
+        Users userResult = userService.queryUserForLogin(username,
+                MD5Utils.getMD5Str(password));
+
+        if (userResult == null) {
+            return JsonResult.errorMsg("用户名或密码不正确");
+        }
+
+        return JsonResult.ok(userResult);
     }
 }
