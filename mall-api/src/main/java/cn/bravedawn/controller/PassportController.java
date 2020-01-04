@@ -36,7 +36,7 @@ public class PassportController {
         // 2.查询数据库用户是否存在
         boolean isExist = userService.queryUserNameIsExist(username);
         if (isExist){
-            return JsonResult.errorMsg("用户不存在");
+            return JsonResult.errorMsg("用户已存在");
         }
 
         // 3.用户不存在返回200
