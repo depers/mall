@@ -1,4 +1,4 @@
-package cn.bravedawn.service.Impl;
+package cn.bravedawn.service.impl;
 
 import cn.bravedawn.mapper.StuMapper;
 import cn.bravedawn.pojo.Stu;
