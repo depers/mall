@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         return user == null ? false : true;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Users createUser(UserBO userBO) {
         String userId = sid.nextShort();
@@ -72,6 +73,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Users queryUserForLogin(String username, String password) {
         Example userExample = new Example(Users.class);
