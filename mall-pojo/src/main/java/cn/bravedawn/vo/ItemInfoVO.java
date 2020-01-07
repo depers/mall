@@ -9,6 +9,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 商品详情VO
  * @Author 冯晓
  * @Date 2020/1/7 14:16
  */

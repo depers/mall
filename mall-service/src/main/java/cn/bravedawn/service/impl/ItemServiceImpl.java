@@ -1,11 +1,10 @@
 package cn.bravedawn.service.impl;
 
+import cn.bravedawn.enums.CommentLevel;
 import cn.bravedawn.mapper.*;
-import cn.bravedawn.pojo.Items;
-import cn.bravedawn.pojo.ItemsImg;
-import cn.bravedawn.pojo.ItemsParam;
-import cn.bravedawn.pojo.ItemsSpec;
+import cn.bravedawn.pojo.*;
 import cn.bravedawn.service.ItemService;
+import cn.bravedawn.vo.CommentLevelCountsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -72,5 +71,38 @@ public class ItemServiceImpl implements ItemService {
         criteria.andEqualTo("itemId", itemId);
 
         return itemsParamMapper.selectOneByExample(itemsParamExp);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public CommentLevelCountsVO queryCommentCounts(String itemId) {
+        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer totalCounts = goodCounts + normalCounts + badCounts;
+
+        CommentLevelCountsVO countsVO = new CommentLevelCountsVO();
+        countsVO.setTotalCounts(totalCounts);
+        countsVO.setGoodCounts(goodCounts);
+        countsVO.setNormalCounts(normalCounts);
+        countsVO.setBadCounts(badCounts);
+
+        return countsVO;
+    }
+
+    /**
+     * 根据商品id和评价等级查询评价数量
+     * @param itemId
+     * @param level
+     * @return
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    Integer getCommentCounts(String itemId, Integer level) {
+        ItemsComments condition = new ItemsComments();
+        condition.setItemId(itemId);
+        if (level != null) {
+            condition.setCommentLevel(level);
+        }
+        return itemsCommentsMapper.selectCount(condition);
     }
 }

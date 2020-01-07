@@ -4,6 +4,7 @@ import cn.bravedawn.pojo.Items;
 import cn.bravedawn.pojo.ItemsImg;
 import cn.bravedawn.pojo.ItemsParam;
 import cn.bravedawn.pojo.ItemsSpec;
+import cn.bravedawn.vo.CommentLevelCountsVO;
 
 import java.util.List;
 
@@ -40,4 +41,10 @@ public interface ItemService {
      * @return
      */
     public ItemsParam queryItemParam(String itemId);
+
+    /**
+     * 根据商品id查询商品的评价等级数量
+     * @param itemId
+     */
+    public CommentLevelCountsVO queryCommentCounts(String itemId);
 }
