@@ -1,8 +1,11 @@
 package cn.bravedawn.mapper;
 
 import cn.bravedawn.vo.CategoryVO;
+import cn.bravedawn.vo.NewItemsVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author 冯晓
@@ -11,4 +14,6 @@ import java.util.List;
 public interface CategoryMapperCustom {
 
     List<CategoryVO> getSubCatList(Integer rootCatId);
+
+    List<NewItemsVO> getSixNewItemsLazy(@Param("paramsMap") Map<String, Object> map);
 }

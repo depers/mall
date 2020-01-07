@@ -2,6 +2,7 @@ package cn.bravedawn.service;
 
 import cn.bravedawn.pojo.Category;
 import cn.bravedawn.vo.CategoryVO;
+import cn.bravedawn.vo.NewItemsVO;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface CategoryService {
      * @return
      */
     List<CategoryVO> getSubCatList(Integer rootCatId);
+
+    /**
+     * 查询首页每个一级分类下的6条最新商品数据
+     * @param rootCatId
+     * @return
+     */
+    List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
 }

@@ -7,6 +7,7 @@ import cn.bravedawn.service.CarouselService;
 import cn.bravedawn.service.CategoryService;
 import cn.bravedawn.utils.JsonResult;
 import cn.bravedawn.vo.CategoryVO;
+import cn.bravedawn.vo.NewItemsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -66,6 +67,20 @@ public class IndexController {
         }
 
         List<CategoryVO> list = categoryService.getSubCatList(rootCatId);
+        return JsonResult.ok(list);
+    }
+
+    @ApiOperation(value = "查询每个一级分类下的最新6条商品数据", notes = "查询每个一级分类下的最新6条商品数据", httpMethod = "GET")
+    @GetMapping("/sixNewItems/{rootCatId}")
+    public JsonResult sixNewItems(
+            @ApiParam(name = "rootCatId", value = "一级分类id", required = true)
+            @PathVariable Integer rootCatId) {
+
+        if (rootCatId == null) {
+            return JsonResult.errorMsg("分类不存在");
+        }
+
+        List<NewItemsVO> list = categoryService.getSixNewItemsLazy(rootCatId);
         return JsonResult.ok(list);
     }
 }
