@@ -4,6 +4,7 @@ import cn.bravedawn.enums.CommentLevel;
 import cn.bravedawn.mapper.*;
 import cn.bravedawn.pojo.*;
 import cn.bravedawn.service.ItemService;
+import cn.bravedawn.utils.DesensitizationUtil;
 import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.CommentLevelCountsVO;
 import cn.bravedawn.vo.ItemCommentVO;
@@ -131,6 +132,10 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(page, pageSize);
 
         List<ItemCommentVO> list = itemsMapperCustom.queryItemComments(map);
+        // 实现用户昵称的脱敏
+        for (ItemCommentVO vo : list) {
+            vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
+        }
 
         return setterPagedGrid(list, page);
     }
