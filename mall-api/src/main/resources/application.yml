@@ -58,3 +58,7 @@ mapper:
     mappers: cn.bravedawn.my.mapper.MyMapper
     not-empty: false    # 在进行数据库操作的的时候，判断表达式 username != null, 是否追加 username != ''
     identity: MYSQL
+# 分页插件配置
+pagehelper:
+    helperDialect: mysql                   # 配置方言
+    supportMethodsArguments: true          # 分页是否支持传递方法参数

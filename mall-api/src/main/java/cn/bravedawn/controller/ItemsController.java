@@ -6,6 +6,7 @@ import cn.bravedawn.pojo.ItemsParam;
 import cn.bravedawn.pojo.ItemsSpec;
 import cn.bravedawn.service.ItemService;
 import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.CommentLevelCountsVO;
 import cn.bravedawn.vo.ItemInfoVO;
 import io.swagger.annotations.Api;
@@ -25,7 +26,7 @@ import java.util.List;
 @Api(value = "商品接口", tags = {"商品信息展示的相关接口"})
 @RestController
 @RequestMapping("items")
-public class ItemsController {
+public class ItemsController extends BaseController{
 
     @Autowired
     private ItemService itemService;
@@ -70,5 +71,38 @@ public class ItemsController {
 
         CommentLevelCountsVO countsVO = itemService.queryCommentCounts(itemId);
         return JsonResult.ok(countsVO);
+    }
+
+
+    @ApiOperation(value = "查询商品评论", notes = "查询商品评论", httpMethod = "GET")
+    @GetMapping("/comments")
+    public JsonResult comments(
+            @ApiParam(name = "itemId", value = "商品id", required = true)
+            @RequestParam String itemId,
+            @ApiParam(name = "level", value = "评价等级", required = false)
+            @RequestParam Integer level,
+            @ApiParam(name = "page", value = "查询下一页的第几页", required = false)
+            @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "分页的每一页显示的条数", required = false)
+            @RequestParam Integer pageSize) {
+
+        if (StringUtils.isBlank(itemId)) {
+            return JsonResult.errorMsg(null);
+        }
+
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = COMMON_PAGE_SIZE;
+        }
+
+        PagedGridResult grid = itemService.queryPagedComments(itemId,
+                level,
+                page,
+                pageSize);
+
+        return JsonResult.ok(grid);
     }
 }

@@ -1,6 +1,7 @@
 package cn.bravedawn;
 
 
+import cn.bravedawn.enums.CommentLevel;
 import cn.bravedawn.service.StuService;
 import cn.bravedawn.service.TestTransService;
 import org.junit.Test;
@@ -22,7 +23,8 @@ public class TransTest {
     //@Test
     public void myTest() {
 //        stuService.testPropagationTrans();
-        testTransService.testPropagationTrans();
+        //testTransService.testPropagationTrans();
+
     }
 
 }
