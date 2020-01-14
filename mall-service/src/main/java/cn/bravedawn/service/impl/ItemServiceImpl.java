@@ -8,6 +8,7 @@ import cn.bravedawn.utils.DesensitizationUtil;
 import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.CommentLevelCountsVO;
 import cn.bravedawn.vo.ItemCommentVO;
+import cn.bravedawn.vo.SearchItemsVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +140,22 @@ public class ItemServiceImpl implements ItemService {
 
         return setterPagedGrid(list, page);
     }
+
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("keywords", keywords);
+        map.put("sort", sort);
+
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> list = itemsMapperCustom.searchItems(map);
+
+        return setterPagedGrid(list, page);
+    }
+
 
     /**
      * 设置分页信息，包装返回结果
