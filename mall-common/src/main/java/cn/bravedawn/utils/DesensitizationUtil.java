@@ -16,15 +16,19 @@ public class DesensitizationUtil {
     private static final String SYMBOL = "*";
 
     public static void main(String[] args) {
+        String test = commonDisplay("1212");
+        String test1 = commonDisplay("1212121");
+        String test2 = commonDisplay("12121212");
+        String test3 = commonDisplay("1212121212");
         String name = commonDisplay("慕课网");
         String mobile = commonDisplay("13900000000");
         String mail = commonDisplay("admin@imooc.com");
         String address = commonDisplay("北京大运河东路888号");
 
         System.out.println(name);
-        System.out.println(mobile);
-        System.out.println(mail);
-        System.out.println(address);
+//        System.out.println(mobile);
+//        System.out.println(mail);
+//        System.out.println(address);
     }
 
     /**
@@ -48,11 +52,13 @@ public class DesensitizationUtil {
             stringBuilder.append(SYMBOL);
             stringBuilder.append(value.charAt(len - 1));
         } else {
+            // len = 3
             if (pamatwo <= 0) {
                 stringBuilder.append(value.substring(0, 1));
                 stringBuilder.append(SYMBOL);
                 stringBuilder.append(value.substring(len - 1, len));
 
+                // pamatwo >= 3 && 7 != len
             } else if (pamatwo >= SIZE / 2 && SIZE + 1 != len) {
                 int pamafive = (len - SIZE) / 2;
                 stringBuilder.append(value.substring(0, pamafive));
