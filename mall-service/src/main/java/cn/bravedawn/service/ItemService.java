@@ -6,6 +6,7 @@ import cn.bravedawn.pojo.ItemsParam;
 import cn.bravedawn.pojo.ItemsSpec;
 import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.CommentLevelCountsVO;
+import cn.bravedawn.vo.ShopcartVO;
 
 import java.util.List;
 
@@ -78,6 +79,13 @@ public interface ItemService {
      * @param pageSize
      * @return
      */
-    public PagedGridResult searchItems(Integer catId, String sort,
+    PagedGridResult searchItems(Integer catId, String sort,
                                       Integer page, Integer pageSize);
+
+    /**
+     * 根据规格ids查询最新的购物车中商品数据（用于刷新渲染购物车中的商品数据）
+     * @param specIds
+     * @return
+     */
+    List<ShopcartVO> queryItemsBySpecIds(String specIds);
 }

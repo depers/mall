@@ -2,6 +2,7 @@ package cn.bravedawn.mapper;
 
 import cn.bravedawn.vo.ItemCommentVO;
 import cn.bravedawn.vo.SearchItemsVO;
+import cn.bravedawn.vo.ShopcartVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,4 +34,11 @@ public interface ItemsMapperCustom {
      * @return
      */
     List<SearchItemsVO> searchItemsByThirdCat(@Param("paramsMap") Map<String, Object> map);
+
+    /**
+     * 根据规格ids查询最新的购物车中商品数据（用于刷新渲染购物车中的商品数据）
+     * @param specIdsList
+     * @return
+     */
+    List<ShopcartVO> queryItemsBySpecIds(@Param("paramsList") List specIdsList);
 }
