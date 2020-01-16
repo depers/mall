@@ -1,5 +1,6 @@
 package cn.bravedawn.service;
 
+import cn.bravedawn.bo.AddressBO;
 import cn.bravedawn.pojo.UserAddress;
 
 import java.util.List;
@@ -16,4 +17,10 @@ public interface AddressService {
      * @return
      */
     List<UserAddress> queryAll(String userId);
+
+    /**
+     * 用户新增地址
+     * @param addressBO
+     */
+    void addNewUserAddress(AddressBO addressBO);
 }
