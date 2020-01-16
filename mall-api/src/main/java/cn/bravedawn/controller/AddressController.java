@@ -104,4 +104,38 @@ public class AddressController {
 
         return JsonResult.ok();
     }
+
+    @ApiOperation(value = "用户修改地址", notes = "用户修改地址", httpMethod = "POST")
+    @PostMapping("/update")
+    public JsonResult update(@RequestBody AddressBO addressBO) {
+
+        if (StringUtils.isBlank(addressBO.getAddressId())) {
+            return JsonResult.errorMsg("修改地址错误：addressId不能为空");
+        }
+
+        JsonResult checkRes = checkAddress(addressBO);
+        if (checkRes.getStatus() != 200) {
+            return checkRes;
+        }
+
+        addressService.updateUserAddress(addressBO);
+
+        return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "用户删除地址", notes = "用户删除地址", httpMethod = "POST")
+    @PostMapping("/delete")
+    public JsonResult delete(
+            @ApiParam(name = "userId", value = "用户id", required = true)
+            @RequestParam String userId,
+            @ApiParam(name = "addressId", value = "地址id", required = true)
+            @RequestParam String addressId) {
+
+        if (StringUtils.isBlank(userId) || StringUtils.isBlank(addressId)) {
+            return JsonResult.errorMsg("");
+        }
+
+        addressService.deleteUserAddress(userId, addressId);
+        return JsonResult.ok();
+    }
 }
