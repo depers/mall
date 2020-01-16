@@ -138,4 +138,20 @@ public class AddressController {
         addressService.deleteUserAddress(userId, addressId);
         return JsonResult.ok();
     }
+
+    @ApiOperation(value = "用户设置默认地址", notes = "用户设置默认地址", httpMethod = "POST")
+    @PostMapping("/setDefalut")
+    public JsonResult setDefalut(
+            @ApiParam(name = "userId", value = "用户id", required = true)
+            @RequestParam String userId,
+            @ApiParam(name = "addressId", value = "地址id", required = true)
+            @RequestParam String addressId) {
+
+        if (StringUtils.isBlank(userId) || StringUtils.isBlank(addressId)) {
+            return JsonResult.errorMsg("");
+        }
+
+        addressService.updateUserAddressToBeDefault(userId, addressId);
+        return JsonResult.ok();
+    }
 }
