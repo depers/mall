@@ -1,6 +1,7 @@
 package cn.bravedawn.service.impl;
 
 import cn.bravedawn.bo.SubmitOrderBO;
+import cn.bravedawn.enums.OrderStatusEnum;
 import cn.bravedawn.enums.YesOrNo;
 import cn.bravedawn.mapper.OrderItemsMapper;
 import cn.bravedawn.mapper.OrderStatusMapper;
@@ -66,8 +67,6 @@ public class OrderServiceImpl implements OrderService {
                 + address.getDistrict() + " "
                 + address.getDetail());
 
-//        newOrder.setTotalAmount();
-//        newOrder.setRealPayAmount();
         newOrder.setPostAmount(postAmount);
 
         newOrder.setPayMethod(payMethod);
@@ -110,6 +109,9 @@ public class OrderServiceImpl implements OrderService {
             subOrderItem.setItemSpecName(itemSpec.getName());
             subOrderItem.setPrice(itemSpec.getPriceDiscount());
             orderItemsMapper.insert(subOrderItem);
+
+            // 2.4 在用户提交订单以后，规格表中需要扣除库存
+            itemService.decreaseItemSpecStock(itemSpecId, buyCounts);
         }
 
         newOrder.setTotalAmount(totalAmount);
@@ -117,6 +119,11 @@ public class OrderServiceImpl implements OrderService {
         ordersMapper.insert(newOrder);
 
 
-        // 3. 保存订单状态信息
+        // 3. 保存订单状态表
+        OrderStatus waitPayOrderStatus = new OrderStatus();
+        waitPayOrderStatus.setOrderId(orderId);
+        waitPayOrderStatus.setOrderStatus(OrderStatusEnum.WAIT_PAY.type);
+        waitPayOrderStatus.setCreatedTime(new Date());
+        orderStatusMapper.insert(waitPayOrderStatus);
     }
 }
