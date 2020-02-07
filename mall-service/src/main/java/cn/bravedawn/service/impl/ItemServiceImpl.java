@@ -1,6 +1,7 @@
 package cn.bravedawn.service.impl;
 
 import cn.bravedawn.enums.CommentLevel;
+import cn.bravedawn.enums.YesOrNo;
 import cn.bravedawn.mapper.*;
 import cn.bravedawn.pojo.*;
 import cn.bravedawn.service.ItemService;
@@ -193,5 +194,22 @@ public class ItemServiceImpl implements ItemService {
         grid.setTotal(pageList.getPages());
         grid.setRecords(pageList.getTotal());
         return grid;
+    }
+
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public ItemsSpec queryItemSpecById(String specId) {
+        return itemsSpecMapper.selectByPrimaryKey(specId);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public String queryItemMainImgById(String itemId) {
+        ItemsImg itemsImg = new ItemsImg();
+        itemsImg.setItemId(itemId);
+        itemsImg.setIsMain(YesOrNo.YES.type);
+        ItemsImg result = itemsImgMapper.selectOne(itemsImg);
+        return result != null ? result.getUrl() : "";
     }
 }

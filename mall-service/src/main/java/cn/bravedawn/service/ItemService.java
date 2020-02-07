@@ -88,4 +88,18 @@ public interface ItemService {
      * @return
      */
     List<ShopcartVO> queryItemsBySpecIds(String specIds);
+
+    /**
+     * 根据商品规格id获取规格对象的具体信息
+     * @param specId
+     * @return
+     */
+    ItemsSpec queryItemSpecById(String specId);
+
+    /**
+     * 根据商品id获得商品图片主图url
+     * @param itemId
+     * @return
+     */
+    String queryItemMainImgById(String itemId);
 }
