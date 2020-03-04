@@ -25,10 +25,14 @@ public class StuServiceImpl implements StuService {
         stuMapper.insert(stu);
     }
 
-    @Transactional(propagation = Propagation.NESTED)
+    //@Transactional(propagation = Propagation.NESTED)
     public void saveChildren() {
         saveChild1();
-        int a = 1 / 0;
+//        try {
+//            int a = 1 / 0;
+//        } catch (Exception e) {
+//            throw new ArithmeticException("算错了");
+//        }
         saveChild2();
     }
 

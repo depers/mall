@@ -36,17 +36,27 @@ public class TestTransServiceImpl implements TestTransService {
      *              举例：领导决策不对，老板怪罪，领导带着小弟一同受罪。小弟出了差错，领导可以推卸责任。
      */
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED,
+            rollbackFor = ArithmeticException.class,
+            noRollbackFor = RuntimeException.class)
     @Override
     public void testPropagationTrans() {
 
         stuService.saveParent();
-
+        stuService.saveChildren();
         try {
+            int i = 1/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("错了");
+        }
+        /*try {
             // save point
             stuService.saveChildren();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+
+
     }
 }
