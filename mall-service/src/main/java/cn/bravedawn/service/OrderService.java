@@ -1,6 +1,7 @@
 package cn.bravedawn.service;
 
 import cn.bravedawn.bo.SubmitOrderBO;
+import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.vo.OrderVO;
 
 /**
@@ -20,6 +21,12 @@ public interface OrderService {
      * @param orderId
      * @param orderStatus
      */
-    public void updateOrderStatus(String orderId, Integer orderStatus);
+    void updateOrderStatus(String orderId, Integer orderStatus);
 
+    /**
+     * 查询订单状态
+     * @param orderId
+     * @return
+     */
+    OrderStatus queryOrderStatusInfo(String orderId);
 }

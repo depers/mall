@@ -3,6 +3,7 @@ package cn.bravedawn.controller;
 import cn.bravedawn.bo.SubmitOrderBO;
 import cn.bravedawn.enums.OrderStatusEnum;
 import cn.bravedawn.enums.PayMethod;
+import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.service.OrderService;
 import cn.bravedawn.utils.CookieUtils;
 import cn.bravedawn.utils.JsonResult;
@@ -91,5 +92,11 @@ public class OrderController extends BaseController{
     public Integer notifyMerchantOrderPaid(String merchantOrderId) {
         orderService.updateOrderStatus(merchantOrderId, OrderStatusEnum.WAIT_DELIVER.type);
         return HttpStatus.OK.value();
+    }
+
+    @PostMapping("getPaidOrderInfo")
+    public JsonResult getPaidOrderInfo(String orderId) {
+        OrderStatus orderStatus = orderService.queryOrderStatusInfo(orderId);
+        return JsonResult.ok(orderStatus);
     }
 }
