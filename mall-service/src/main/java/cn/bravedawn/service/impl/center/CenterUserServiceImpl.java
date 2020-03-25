@@ -1,12 +1,16 @@
 package cn.bravedawn.service.impl.center;
 
+import cn.bravedawn.bo.center.CenterUserBO;
 import cn.bravedawn.mapper.UsersMapper;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.center.CenterUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * @Author 冯晓
@@ -25,5 +29,19 @@ public class CenterUserServiceImpl implements CenterUserService {
         Users user = usersMapper.selectByPrimaryKey(userId);
         user.setPassword(null);
         return user;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Users updateUserInfo(String userId, CenterUserBO centerUserBO) {
+
+        Users updateUser = new Users();
+        BeanUtils.copyProperties(centerUserBO, updateUser);
+        updateUser.setId(userId);
+        updateUser.setUpdatedTime(new Date());
+
+        usersMapper.updateByPrimaryKeySelective(updateUser);
+
+        return queryUserInfo(userId);
     }
 }

@@ -1,5 +1,6 @@
 package cn.bravedawn.service.center;
 
+import cn.bravedawn.bo.center.CenterUserBO;
 import cn.bravedawn.pojo.Users;
 
 /**
@@ -14,4 +15,11 @@ public interface CenterUserService {
          * @return
          */
         Users queryUserInfo(String userId);
+
+        /**
+         * 修改用户信息
+         * @param userId
+         * @param centerUserBO
+         */
+        Users updateUserInfo(String userId, CenterUserBO centerUserBO);
 }
