@@ -1,5 +1,9 @@
 package cn.bravedawn.controller;
 
+import cn.bravedawn.pojo.Orders;
+import cn.bravedawn.service.center.MyOrdersService;
+import cn.bravedawn.utils.JsonResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
@@ -10,6 +14,9 @@ import java.io.File;
  */
 @Controller
 public class BaseController {
+
+    @Autowired
+    public MyOrdersService myOrdersService;
 
     public static final String FOODIE_SHOPCART = "shopcart";
 
@@ -29,4 +36,16 @@ public class BaseController {
                                                             File.separator + "images" +
                                                             File.separator + "foodie" +
                                                             File.separator + "faces";
+
+    /**
+     * 用于验证用户和订单是否有关联关系，避免非法用户调用
+     * @return
+     */
+    public JsonResult checkUserOrder(String userId, String orderId) {
+        Orders order = myOrdersService.queryMyOrder(userId, orderId);
+        if (order == null) {
+            return JsonResult.errorMsg("订单不存在！");
+        }
+        return JsonResult.ok(order);
+    }
 }

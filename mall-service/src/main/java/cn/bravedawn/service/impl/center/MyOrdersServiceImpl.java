@@ -1,9 +1,12 @@
 package cn.bravedawn.service.impl.center;
 
 import cn.bravedawn.enums.OrderStatusEnum;
+import cn.bravedawn.enums.YesOrNo;
 import cn.bravedawn.mapper.OrderStatusMapper;
+import cn.bravedawn.mapper.OrdersMapper;
 import cn.bravedawn.mapper.OrdersMapperCustom;
 import cn.bravedawn.pojo.OrderStatus;
+import cn.bravedawn.pojo.Orders;
 import cn.bravedawn.service.center.MyOrdersService;
 import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.MyOrdersVO;
@@ -29,6 +32,9 @@ public class MyOrdersServiceImpl extends BaseService implements MyOrdersService 
 
     @Autowired
     public OrdersMapperCustom ordersMapperCustom;
+
+    @Autowired
+    public OrdersMapper ordersMapper;
 
     @Autowired
     public OrderStatusMapper orderStatusMapper;
@@ -63,6 +69,19 @@ public class MyOrdersServiceImpl extends BaseService implements MyOrdersService 
         criteria.andEqualTo("orderStatus", OrderStatusEnum.WAIT_DELIVER.type);
 
         orderStatusMapper.updateByExampleSelective(updateOrder, example);
+    }
+
+
+    @Transactional(propagation=Propagation.SUPPORTS)
+    @Override
+    public Orders queryMyOrder(String userId, String orderId) {
+
+        Orders orders = new Orders();
+        orders.setUserId(userId);
+        orders.setId(orderId);
+        orders.setIsDelete(YesOrNo.NO.type);
+
+        return ordersMapper.selectOne(orders);
     }
 
 }

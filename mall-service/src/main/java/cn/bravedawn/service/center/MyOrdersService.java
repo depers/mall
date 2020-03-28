@@ -1,5 +1,6 @@
 package cn.bravedawn.service.center;
 
+import cn.bravedawn.pojo.Orders;
 import cn.bravedawn.utils.PagedGridResult;
 
 /**
@@ -26,4 +27,13 @@ public interface MyOrdersService {
      * @Description: 订单状态 --> 商家发货
      */
     void updateDeliverOrderStatus(String orderId);
+
+    /**
+     * 查询我的订单
+     *
+     * @param userId
+     * @param orderId
+     * @return
+     */
+    Orders queryMyOrder(String userId, String orderId);
 }
