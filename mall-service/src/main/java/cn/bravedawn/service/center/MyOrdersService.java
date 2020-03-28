@@ -21,4 +21,9 @@ public interface MyOrdersService {
                                          Integer orderStatus,
                                          Integer page,
                                          Integer pageSize);
+
+    /**
+     * @Description: 订单状态 --> 商家发货
+     */
+    void updateDeliverOrderStatus(String orderId);
 }

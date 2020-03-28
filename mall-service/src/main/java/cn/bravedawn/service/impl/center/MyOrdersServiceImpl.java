@@ -1,13 +1,20 @@
 package cn.bravedawn.service.impl.center;
 
+import cn.bravedawn.enums.OrderStatusEnum;
+import cn.bravedawn.mapper.OrderStatusMapper;
 import cn.bravedawn.mapper.OrdersMapperCustom;
+import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.service.center.MyOrdersService;
 import cn.bravedawn.utils.PagedGridResult;
 import cn.bravedawn.vo.MyOrdersVO;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +30,10 @@ public class MyOrdersServiceImpl extends BaseService implements MyOrdersService 
     @Autowired
     public OrdersMapperCustom ordersMapperCustom;
 
+    @Autowired
+    public OrderStatusMapper orderStatusMapper;
+
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public PagedGridResult queryMyOrders(String userId, Integer orderStatus, Integer page, Integer pageSize) {
         Map<String, Object> map = new HashMap<>();
@@ -37,4 +48,21 @@ public class MyOrdersServiceImpl extends BaseService implements MyOrdersService 
 
         return setterPagedGrid(list, page);
     }
+
+    @Transactional(propagation=Propagation.REQUIRED)
+    @Override
+    public void updateDeliverOrderStatus(String orderId) {
+
+        OrderStatus updateOrder = new OrderStatus();
+        updateOrder.setOrderStatus(OrderStatusEnum.WAIT_RECEIVE.type);
+        updateOrder.setDeliverTime(new Date());
+
+        Example example = new Example(OrderStatus.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("orderId", orderId);
+        criteria.andEqualTo("orderStatus", OrderStatusEnum.WAIT_DELIVER.type);
+
+        orderStatusMapper.updateByExampleSelective(updateOrder, example);
+    }
+
 }
