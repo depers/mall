@@ -1,5 +1,6 @@
 package cn.bravedawn.service.center;
 
+import cn.bravedawn.bo.center.OrderItemsCommentBO;
 import cn.bravedawn.pojo.OrderItems;
 
 import java.util.List;
@@ -16,5 +17,8 @@ public interface MyCommentsService {
      * @return
      */
     List<OrderItems> queryPendingComment(String orderId);
+
+
+    void saveComments(String orderId, String userId, List<OrderItemsCommentBO> commentList);
 
 }
