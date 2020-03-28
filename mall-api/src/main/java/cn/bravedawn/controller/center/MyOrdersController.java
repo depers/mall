@@ -82,6 +82,10 @@ public class MyOrdersController extends BaseController {
             return checkResult;
         }
 
+        boolean res = myOrdersService.updateReceiveOrderStatus(orderId);
+        if (!res) {
+            return JsonResult.errorMsg("订单确认收货失败！");
+        }
 
         return JsonResult.ok();
     }
@@ -97,6 +101,11 @@ public class MyOrdersController extends BaseController {
         JsonResult checkResult = checkUserOrder(userId, orderId);
         if (checkResult.getStatus() != HttpStatus.OK.value()) {
             return checkResult;
+        }
+
+        boolean res = myOrdersService.deleteOrder(userId, orderId);
+        if (!res) {
+            return JsonResult.errorMsg("订单删除失败！");
         }
 
         return JsonResult.ok();
