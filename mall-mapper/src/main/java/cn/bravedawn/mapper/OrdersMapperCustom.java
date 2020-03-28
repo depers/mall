@@ -1,5 +1,6 @@
 package cn.bravedawn.mapper;
 
+import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.vo.MyOrdersVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +16,6 @@ public interface OrdersMapperCustom {
     List<MyOrdersVO> queryMyOrders(@Param("paramsMap") Map<String, Object> map);
 
     int getMyOrderStatusCounts(@Param("paramsMap") Map<String, Object> map);
+
+    List<OrderStatus> getMyOrderTrend(@Param("paramsMap") Map<String, Object> map);
 }
