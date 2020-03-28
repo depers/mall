@@ -1,5 +1,7 @@
 package cn.bravedawn.vo;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  * @Author 冯晓
  * @Date 2020/3/28 9:52
  */
+@Data
 public class MyOrdersVO {
 
     private String orderId;

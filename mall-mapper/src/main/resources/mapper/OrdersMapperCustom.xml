@@ -16,7 +16,6 @@
             <result column="itemId" property="itemId"/>
             <result column="itemName" property="itemName"/>
             <result column="itemImg" property="itemImg"/>
-            <result column="itemSpecId" property="itemSpecId"/>
             <result column="itemSpecName" property="itemSpecName"/>
             <result column="buyCounts" property="buyCounts"/>
             <result column="price" property="price"/>
@@ -53,7 +52,7 @@
             and os.order_status = #{paramsMap.orderStatus}
         </if>
         ORDER BY
-            od.updated_time ASC
+            od.updated_time desc
     </select>
 
 </mapper>
