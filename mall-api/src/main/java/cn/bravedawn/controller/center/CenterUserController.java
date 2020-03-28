@@ -80,6 +80,13 @@ public class CenterUserController extends BaseController {
                     // 获取文件的后缀名
                     String suffix = fileNameArr[fileNameArr.length - 1];
 
+                    if (!suffix.equalsIgnoreCase("png") &&
+                            !suffix.equalsIgnoreCase("jpg") &&
+                            !suffix.equalsIgnoreCase("jpeg") ) {
+                        return JsonResult.errorMsg("图片格式不正确！");
+                    }
+
+
                     // face-{userid}.png
                     // 文件名称重组 覆盖式上传，增量式：额外拼接当前时间
                     String newFileName = "face-" + userId + "." + suffix;
@@ -101,7 +108,7 @@ public class CenterUserController extends BaseController {
                     // 文件输出保存到目录
                     fileOutputStream = new FileOutputStream(outFile);
                     InputStream inputStream = file.getInputStream();
-                    IOUtils.copy(inputStream, fileOutputStream);
+                    IOUtils.copy(inputStream, fileOutputStream); // apache.commons.io;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
