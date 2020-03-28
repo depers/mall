@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.bravedawn.mapper.ItemsCommentsMapperCustom" >
-  <insert id="saveComments" parameterType="Map">
+  <insert id="saveComments" parameterType="map">
 
     insert into
     items_comments
@@ -35,7 +35,7 @@
 
   </insert>
 
-  <resultMap id="myComments" type="com.imooc.pojo.vo.MyCommentVO">
+  <resultMap id="myComments" type="cn.bravedawn.vo.MyCommentVO">
     <id column="commentId" property="commentId"/>
     <result column="content" property="content"/>
     <result column="createdTime" property="createdTime"/>
@@ -45,7 +45,7 @@
     <result column="itemImg" property="itemImg"/>
   </resultMap>
 
-  <select id="queryMyComments" parameterType="Map" resultMap="myComments">
+  <select id="queryMyComments" parameterType="map" resultMap="myComments">
     SELECT
         ic.id as commentId,
         ic.content as content,

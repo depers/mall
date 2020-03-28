@@ -2,6 +2,7 @@ package cn.bravedawn.service.center;
 
 import cn.bravedawn.bo.center.OrderItemsCommentBO;
 import cn.bravedawn.pojo.OrderItems;
+import cn.bravedawn.utils.PagedGridResult;
 
 import java.util.List;
 
@@ -18,7 +19,21 @@ public interface MyCommentsService {
      */
     List<OrderItems> queryPendingComment(String orderId);
 
-
+    /**
+     * 保存用户的评论
+     * @param orderId
+     * @param userId
+     * @param commentList
+     */
     void saveComments(String orderId, String userId, List<OrderItemsCommentBO> commentList);
+
+    /**
+     * 我的评价查询 分页
+     * @param userId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public PagedGridResult queryMyComments(String userId, Integer page, Integer pageSize);
 
 }

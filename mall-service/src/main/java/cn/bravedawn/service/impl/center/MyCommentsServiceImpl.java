@@ -10,6 +10,9 @@ import cn.bravedawn.pojo.OrderItems;
 import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.pojo.Orders;
 import cn.bravedawn.service.center.MyCommentsService;
+import cn.bravedawn.utils.PagedGridResult;
+import cn.bravedawn.vo.MyCommentVO;
+import com.github.pagehelper.PageHelper;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,7 @@ import java.util.Map;
  * @Date 2020/3/28 15:01
  */
 @Service
-public class MyCommentsServiceImpl implements MyCommentsService {
+public class MyCommentsServiceImpl extends BaseService implements MyCommentsService {
 
     @Autowired
     public OrderItemsMapper orderItemsMapper;
@@ -77,5 +80,20 @@ public class MyCommentsServiceImpl implements MyCommentsService {
         orderStatus.setOrderId(orderId);
         orderStatus.setCommentTime(new Date());
         orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult queryMyComments(String userId,
+                                           Integer page,
+                                           Integer pageSize) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        PageHelper.startPage(page, pageSize);
+        List<MyCommentVO> list = itemsCommentsMapperCustom.queryMyComments(map);
+
+        return setterPagedGrid(list, page);
     }
 }
