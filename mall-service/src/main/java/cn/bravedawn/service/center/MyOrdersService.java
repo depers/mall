@@ -2,6 +2,7 @@ package cn.bravedawn.service.center;
 
 import cn.bravedawn.pojo.Orders;
 import cn.bravedawn.utils.PagedGridResult;
+import cn.bravedawn.vo.OrderStatusCountsVO;
 
 /**
  * @Author 冯晓
@@ -51,4 +52,10 @@ public interface MyOrdersService {
      * @return
      */
     boolean deleteOrder(String userId, String orderId);
+
+    /**
+     * 查询用户订单数
+     * @param userId
+     */
+    OrderStatusCountsVO getOrderStatusCounts(String userId);
 }

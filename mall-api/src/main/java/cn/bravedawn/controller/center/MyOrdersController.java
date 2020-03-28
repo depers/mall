@@ -4,6 +4,7 @@ import cn.bravedawn.controller.BaseController;
 import cn.bravedawn.service.center.MyOrdersService;
 import cn.bravedawn.utils.JsonResult;
 import cn.bravedawn.utils.PagedGridResult;
+import cn.bravedawn.vo.OrderStatusCountsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -109,5 +110,21 @@ public class MyOrdersController extends BaseController {
         }
 
         return JsonResult.ok();
+    }
+
+
+    @ApiOperation(value = "获得订单状态数概况", notes = "获得订单状态数概况", httpMethod = "POST")
+    @PostMapping("/statusCounts")
+    public JsonResult statusCounts(
+            @ApiParam(name = "userId", value = "用户id", required = true)
+            @RequestParam String userId) {
+
+        if (StringUtils.isBlank(userId)) {
+            return JsonResult.errorMsg(null);
+        }
+
+        OrderStatusCountsVO result = myOrdersService.getOrderStatusCounts(userId);
+
+        return JsonResult.ok(result);
     }
 }
