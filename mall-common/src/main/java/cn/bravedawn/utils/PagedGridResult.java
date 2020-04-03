@@ -1,5 +1,7 @@
 package cn.bravedawn.utils;
 
+import lombok.ToString;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,7 @@ import java.util.List;
  * @Description: 用来返回分页Grid的数据格式
  * Copyright: Copyright (c) 2019
  */
+@ToString
 public class PagedGridResult {
 
     private int page;			// 当前页数

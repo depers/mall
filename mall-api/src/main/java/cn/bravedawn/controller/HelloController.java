@@ -1,5 +1,7 @@
 package cn.bravedawn.controller;
 
+import cn.bravedawn.mapper.StuMapperCustom;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -12,9 +14,14 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 public class HelloController {
 
+    @Autowired
+    private StuMapperCustom stuMapperCustom;
+
+    private String name = stuMapperCustom.getDBString();
 
     @GetMapping("/hello")
     public Object hello(){
+        System.out.println("---------------------"+name);
         return "hello world~";
     }
 }

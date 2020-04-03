@@ -127,7 +127,7 @@ public final class CookieUtils {
      * @Description: 设置Cookie的值 不设置生效时间,但编码
      * 在服务器被创建，返回给客户端，并且保存客户端
      * 如果设置了SETMAXAGE(int seconds)，会把cookie保存在客户端的硬盘中
-     * 如果没有设置，会默认把cookie保存在浏览器的内存中
+     * 如果没有设置，会默认把cookie保存在浏览器的内存中，如果关闭整个浏览器窗口该cookie信息就会消失
      * 一旦设置setPath()：只能通过设置的路径才能获取到当前的cookie信息
      * @param request
      * @param response

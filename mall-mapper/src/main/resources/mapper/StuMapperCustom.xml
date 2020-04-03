@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bravedawn.mapper.StuMapperCustom" >
+  <resultMap id="BaseResultMap" type="cn.bravedawn.pojo.Stu" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="getDBString" resultType="string">
+    select name from stu where id = 1281
+  </select>
+
+</mapper>
