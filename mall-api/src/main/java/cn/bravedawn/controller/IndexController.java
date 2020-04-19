@@ -74,7 +74,17 @@ public class IndexController {
     @ApiOperation(value = "获取商品分类(一级分类)", notes = "获取商品分类(一级分类)", httpMethod = "GET")
     @GetMapping("/cats")
     public JsonResult cats() {
-        List<Category> list = categoryService.queryAllRootLevelCat();
+
+        List<Category> list = Lists.newArrayList();
+        String catsStr = redisOperator.get("cats");
+
+        if (StringUtils.isBlank(catsStr)) {
+            list = categoryService.queryAllRootLevelCat();
+            redisOperator.set("cats", JsonUtils.objectToJson(list));
+        } else {
+            list = JsonUtils.jsonToList(catsStr, Category.class);
+        }
+
         return JsonResult.ok(list);
     }
 
@@ -89,7 +99,16 @@ public class IndexController {
             return JsonResult.errorMsg("分类不存在");
         }
 
-        List<CategoryVO> list = categoryService.getSubCatList(rootCatId);
+        List<CategoryVO> list = Lists.newArrayList();
+        String subCatStr = redisOperator.get("subCat:" + rootCatId);
+
+        if (StringUtils.isBlank(subCatStr)) {
+            list = categoryService.getSubCatList(rootCatId);
+            redisOperator.set("subCat:" + rootCatId, JsonUtils.objectToJson(list));
+        } else {
+            list = JsonUtils.jsonToList(subCatStr, CategoryVO.class);
+        }
+
         return JsonResult.ok(list);
     }
 
