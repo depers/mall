@@ -1,5 +1,6 @@
 package cn.bravedawn.controller;
 
+import cn.bravedawn.bo.ShopcartBO;
 import cn.bravedawn.bo.SubmitOrderBO;
 import cn.bravedawn.enums.OrderStatusEnum;
 import cn.bravedawn.enums.PayMethod;
@@ -7,11 +8,14 @@ import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.service.OrderService;
 import cn.bravedawn.utils.CookieUtils;
 import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.JsonUtils;
+import cn.bravedawn.utils.RedisOperator;
 import cn.bravedawn.vo.MerchantOrdersVO;
 import cn.bravedawn.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @Author 冯晓
@@ -39,6 +44,9 @@ public class OrderController extends BaseController{
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private RedisOperator redisOperator;
+
     @ApiOperation(value = "用户下单", notes = "用户下单", httpMethod = "POST")
     @PostMapping("/create")
     public JsonResult create(@RequestBody SubmitOrderBO submitOrderBO,
@@ -52,8 +60,15 @@ public class OrderController extends BaseController{
             return JsonResult.errorMsg("支付方式不支持！");
         }
 
+        // 查询购物车
+        String shopCartJson = redisOperator.get(FOODIE_SHOPCART + ":" + submitOrderBO.getUserId());
+        if (StringUtils.isBlank(shopCartJson)){
+            return JsonResult.errorMsg("购物车数据不正确");
+        }
+        List<ShopcartBO> shopcartList = JsonUtils.jsonToList(shopCartJson, ShopcartBO.class);
+
         // 1.创建订单
-        OrderVO orderVO = orderService.createOrder(submitOrderBO);
+        OrderVO orderVO = orderService.createOrder(shopcartList, submitOrderBO);
         String orderId = orderVO.getOrderId();
 
         // 2.创建订单以后，移除购物车中已结算（已提交）的商品

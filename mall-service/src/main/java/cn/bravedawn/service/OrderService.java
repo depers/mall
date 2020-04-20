@@ -1,8 +1,11 @@
 package cn.bravedawn.service;
 
+import cn.bravedawn.bo.ShopcartBO;
 import cn.bravedawn.bo.SubmitOrderBO;
 import cn.bravedawn.pojo.OrderStatus;
 import cn.bravedawn.vo.OrderVO;
+
+import java.util.List;
 
 /**
  * @Author 冯晓
@@ -14,7 +17,7 @@ public interface OrderService {
      * 用于创建订单相关信息
      * @param submitOrderBO
      */
-    OrderVO createOrder(SubmitOrderBO submitOrderBO);
+    OrderVO createOrder(List<ShopcartBO> shopcartList, SubmitOrderBO submitOrderBO);
 
     /**
      * 修改订单状态

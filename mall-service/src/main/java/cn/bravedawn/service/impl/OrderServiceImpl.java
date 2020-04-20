@@ -1,5 +1,6 @@
 package cn.bravedawn.service.impl;
 
+import cn.bravedawn.bo.ShopcartBO;
 import cn.bravedawn.bo.SubmitOrderBO;
 import cn.bravedawn.enums.OrderStatusEnum;
 import cn.bravedawn.enums.YesOrNo;
@@ -49,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public OrderVO createOrder(SubmitOrderBO submitOrderBO) {
+    public OrderVO createOrder(List<ShopcartBO> shopcartList, SubmitOrderBO submitOrderBO) {
         String userId = submitOrderBO.getUserId();
         String addressId = submitOrderBO.getAddressId();
         String itemSpecIds = submitOrderBO.getItemSpecIds();
@@ -90,8 +91,9 @@ public class OrderServiceImpl implements OrderService {
         Integer realPayAmount = 0;  // 优惠后的实际支付价格累计
         for (String itemSpecId : itemSpecIdArr) {
 
-            // TODO 整合redis后，商品购买的数量重新从redis的购物车中获取
-            int buyCounts = 1;
+            ShopcartBO cartItem = getBuyCountsFromShopCart(shopcartList, itemSpecId);
+            // 整合redis后，商品购买的数量重新从redis的购物车中获取
+            int buyCounts = cartItem.getBuyCounts();
 
             // 2.1 根据规格id，查询规格的具体信息，主要获取价格
             ItemsSpec itemSpec = itemService.queryItemSpecById(itemSpecId);
@@ -192,6 +194,21 @@ public class OrderServiceImpl implements OrderService {
         close.setOrderStatus(OrderStatusEnum.CLOSE.type);
         close.setCloseTime(new Date());
         orderStatusMapper.updateByPrimaryKeySelective(close);
+    }
+
+    /**
+     * 从redis中的购物车中获取商品，目的计算counts
+     * @param shopcartList
+     * @param specId
+     * @return
+     */
+    private ShopcartBO getBuyCountsFromShopCart(List<ShopcartBO> shopcartList, String specId){
+        for (ShopcartBO cart : shopcartList){
+            if (cart.getSpecId().equals(specId)){
+                return cart;
+            }
+        }
+        return null;
     }
 
 }
