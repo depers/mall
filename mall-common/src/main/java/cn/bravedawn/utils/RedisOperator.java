@@ -1,9 +1,14 @@
 package cn.bravedawn.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.StringRedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -92,6 +97,16 @@ public class RedisOperator {
         return redisTemplate.opsForValue().get(key);
     }
 
+
+    /**
+     * 批量查询，对应：mget
+     * @param keys
+     * @return
+     */
+    public List<String> mget(List<String> keys){
+        return redisTemplate.opsForValue().multiGet(keys);
+    }
+
     /**
      * 实现命令： HSET key field value，将哈希表 key中的域 field的值设为 value
      * @param key
@@ -157,5 +172,26 @@ public class RedisOperator {
      */
     public long rpush(String key, String value){
         return redisTemplate.opsForList().rightPush(key, value);
+    }
+
+
+    /**
+     * 批量查询，管道pipeline
+     * @param keys
+     * @return
+     */
+    public List<Object> batchGet(List<String> keys){
+        List<Object> result = redisTemplate.executePipelined(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                StringRedisConnection src = (StringRedisConnection) connection;
+                for(String key : keys){
+                    src.get(key);
+                }
+                return null;
+            }
+        });
+
+        return result;
     }
 }
