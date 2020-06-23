@@ -5,9 +5,11 @@ import cn.bravedawn.bo.UserBO;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.UserService;
 import cn.bravedawn.utils.*;
+import cn.bravedawn.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author 冯晓
@@ -120,13 +123,21 @@ public class PassportController extends BaseController{
         }
 
         // 2. 信息脱敏
-        userResult = setNullProperty(userResult);
+        // userResult = setNullProperty(userResult);
 
         // 3. 添加cookie信息
         CookieUtils.setCookie(request, response, "user",
                 JsonUtils.objectToJson(userResult), true);
 
-        // TODO 生成用户token，存入redis会话
+        // 4. 生成用户token，存入redis会话
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(REDIS_USER_TOKEN + ":" + userResult.getId(), uniqueToken);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(userResult, userVO);
+        userVO.setUserUniqueToken(uniqueToken);
+
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userVO), true);
+
         // 同步购物车数据
         syncShopCartData(userResult.getId(), request, response);
 

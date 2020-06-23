@@ -17,11 +17,11 @@ public class HelloController {
     @Autowired
     private StuMapperCustom stuMapperCustom;
 
-    private String name = stuMapperCustom.getDBString();
+    //private String name = stuMapperCustom.getDBString();
 
     @GetMapping("/hello")
     public Object hello(){
-        System.out.println("---------------------"+name);
+        //System.out.println("---------------------"+name);
         return "hello world~";
     }
 }
