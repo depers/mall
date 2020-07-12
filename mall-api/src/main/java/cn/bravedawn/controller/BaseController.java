@@ -1,12 +1,17 @@
 package cn.bravedawn.controller;
 
 import cn.bravedawn.pojo.Orders;
+import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.center.MyOrdersService;
 import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.RedisOperator;
+import cn.bravedawn.vo.UserVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * @Author 冯晓
@@ -17,6 +22,9 @@ public class BaseController {
 
     @Autowired
     public MyOrdersService myOrdersService;
+
+    @Autowired
+    private RedisOperator redisOperator;
 
     public static final String FOODIE_SHOPCART = "shopcart";
 
@@ -49,5 +57,19 @@ public class BaseController {
             return JsonResult.errorMsg("订单不存在！");
         }
         return JsonResult.ok(order);
+    }
+
+    /**
+     * 生成用户token，存入redis会话
+     * @param user
+     * @return
+     */
+    public UserVO conventUser(Users user){
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(REDIS_USER_TOKEN + ":" + user.getId(), uniqueToken);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        userVO.setUserUniqueToken(uniqueToken);
+        return userVO;
     }
 }

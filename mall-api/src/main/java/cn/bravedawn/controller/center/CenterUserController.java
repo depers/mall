@@ -9,6 +9,7 @@ import cn.bravedawn.utils.CookieUtils;
 import cn.bravedawn.utils.DateUtil;
 import cn.bravedawn.utils.JsonResult;
 import cn.bravedawn.utils.JsonUtils;
+import cn.bravedawn.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -137,11 +138,12 @@ public class CenterUserController extends BaseController {
         // 更新用户头像到数据库
         Users userResult = centerUserService.updateUserFace(userId, finalUserFaceUrl);
 
-        userResult = setNullProperty(userResult);
-        CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
+        // 增加令牌token，会整合进redis，分布式会话
+        UserVO userVO = conventUser(userResult);
 
-        // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
+        // userResult = setNullProperty(userResult);
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userVO), true);
 
         return JsonResult.ok();
     }
@@ -163,11 +165,14 @@ public class CenterUserController extends BaseController {
 
         Users userResult = centerUserService.updateUserInfo(userId, centerUserBO);
 
-        userResult = setNullProperty(userResult);
-        CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
+        // 增加令牌token，会整合进redis，分布式会话
+        UserVO userVO = conventUser(userResult);
 
-        // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
+        // userResult = setNullProperty(userResult);
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userVO), true);
+
+        // 增加令牌token，会整合进redis，分布式会话
 
         return JsonResult.ok();
     }

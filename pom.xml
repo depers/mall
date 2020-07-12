@@ -72,6 +72,18 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- 引入spring session依赖 -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
+        <!-- 引入spring安全框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
