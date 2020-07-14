@@ -21,7 +21,8 @@
         <module>mall-mapper</module>
         <module>mall-service</module>
         <module>mall-api</module>
-<!--        <module>mall-payment</module>-->
+        <module>mall-sso</module>
+        <!--        <module>mall-payment</module>-->
     </modules>
 
     <parent>
