@@ -140,7 +140,21 @@ public class SSOController {
             redisOperator.del(REDIS_TMP_TICKET + ":" + tmpTicket);
         }
 
-        return null;
+        // 2. 验证并且获取用户的userTicket
+        String userTicket = getCookie(request, COOKIE_USER_TICKET);
+        String userId = redisOperator.get(REDIS_USER_TICKET + ":" + userTicket);
+        if (StringUtils.isBlank(userId)){
+            return JsonResult.errorUserTicket("用户票据异常");
+        }
+
+        // 3. 验证门票对应的user会话是否存在
+        String userRedis = redisOperator.get(REDIS_USER_TOKEN + ":" + userId);
+        if (StringUtils.isBlank(userRedis)){
+            return JsonResult.errorUserTicket("用户票据异常");
+        }
+
+        // 4. 验证成功，返回用户会话信息
+        return JsonResult.ok(JsonUtils.jsonToPojo(userRedis, UserVO.class));
     }
 
     /**
@@ -171,6 +185,30 @@ public class SSOController {
         cookie.setDomain("sso.com");
         cookie.setPath("/");
         response.addCookie(cookie);
+    }
+
+
+    /**
+     * 获取cookie
+     * @param request
+     * @param key
+     * @return
+     */
+    private String getCookie(HttpServletRequest request, String key){
+        Cookie[] cookieList = request.getCookies();
+        if (cookieList == null || StringUtils.isBlank(key)){
+            return null;
+        }
+
+        String cookieValue = null;
+        for (int i = 0; i < cookieList.length; i++){
+            if (cookieList[i].getName().equals(key)){
+                cookieValue = cookieList[i].getValue();
+                break;
+            }
+        }
+
+        return cookieValue;
     }
 
 }

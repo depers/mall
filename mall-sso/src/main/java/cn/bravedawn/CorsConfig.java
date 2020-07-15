@@ -1,4 +1,4 @@
-package cn.bravedawn.config;
+package cn.bravedawn;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +22,11 @@ public class CorsConfig {
         config.addAllowedOrigin("http://center.bavedawn.cn:8080");
         config.addAllowedOrigin("http://shop.bravedawn.cn");
         config.addAllowedOrigin("http://center.bavedawn.cn");
+        // 设置sso跨域域名
+        config.addAllowedOrigin("http://www.mtv.com");
+        config.addAllowedOrigin("http://www.mtv.com:8080");
+        config.addAllowedOrigin("http://www.music.com");
+        config.addAllowedOrigin("http://www.music.com:8080");
 
         // 设置是否发送cookie信息
         config.setAllowCredentials(true);
