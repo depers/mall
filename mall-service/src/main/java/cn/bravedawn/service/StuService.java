@@ -8,4 +8,10 @@ public interface StuService {
 
     public void saveParent();
     public void saveChildren();
+
+    void saveSelectStuInfo();
+
+    void selectStuInfo();
+
+    void updateSelectStuInfo();
 }

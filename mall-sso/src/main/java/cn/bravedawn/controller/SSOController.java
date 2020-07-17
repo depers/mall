@@ -48,10 +48,44 @@ public class SSOController {
 
         model.addAttribute("returnUrl", returnUrl);
 
-        // TODO 后续完善校验是否登录
+        // 1. 获取userTicket门票，如果cookie中能够获取到，证明用户登录过，此时签发一个一次性的临时票据并且回跳
+        String userTicket = getCookie(request, COOKIE_USER_TICKET);
 
-        // 用户从未登录过，第一次进入则跳转到CAS的统一登录页面
+        boolean isVerified = verifyUserTicket(userTicket);
+        if (isVerified){
+            String tmpTicket = createTmpTicket();
+            return "redirect:" + returnUrl + "?tmpTicket=" + tmpTicket;
+        }
+
+        // 2. 用户从未登录过，第一次进入则跳转到CAS的统一登录页面
         return "login";
+    }
+
+    /**
+     * 验证CAS全局用户门票
+     * @param userTicket
+     * @return
+     */
+    private boolean verifyUserTicket(String userTicket){
+
+        // 1. 验证CAS门票不能为空
+        if (StringUtils.isBlank(userTicket)){
+            return false;
+        }
+
+        // 2. 验证CAS门票是否有效
+        String userId = redisOperator.get(REDIS_USER_TICKET + ":" + userTicket);
+        if (StringUtils.isBlank(userId)){
+            return false;
+        }
+
+        // 3. 验证门票对应的user会话是否存在
+        String userRedis = redisOperator.get(REDIS_USER_TOKEN + ":" + userId);
+        if (StringUtils.isBlank(userRedis)){
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -157,6 +191,30 @@ public class SSOController {
         return JsonResult.ok(JsonUtils.jsonToPojo(userRedis, UserVO.class));
     }
 
+
+    /**
+     * 用户退出登录
+     * @param userId
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("logout")
+    @ResponseBody
+    public JsonResult logout(String userId, HttpServletRequest request, HttpServletResponse response){
+        // 1. 获取CAS中的用户门票
+        String userTicket = getCookie(request, COOKIE_USER_TICKET);
+
+        // 2. 清除userTicket票据，redis/cookie
+        delCookie(COOKIE_USER_TICKET, response);
+        redisOperator.del(REDIS_USER_TICKET + ":" + userTicket);
+
+        // 3. 清除用户全局会话(分布式会话)
+        redisOperator.del(REDIS_USER_TOKEN + ":" + userId);
+
+        return JsonResult.ok();
+    }
+
     /**
      * 创建临时票据
      * @return
@@ -209,6 +267,19 @@ public class SSOController {
         }
 
         return cookieValue;
+    }
+
+    /**
+     * 删除cookie
+     * @param key
+     * @param response
+     */
+    private void delCookie(String key, HttpServletResponse response){
+        Cookie cookie = new Cookie(key, null);
+        cookie.setDomain("sso.com");
+        cookie.setPath("/");
+        cookie.setMaxAge(-1);
+        response.addCookie(cookie);
     }
 
 }

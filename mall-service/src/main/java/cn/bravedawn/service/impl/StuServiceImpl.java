@@ -3,6 +3,7 @@ package cn.bravedawn.service.impl;
 import cn.bravedawn.mapper.StuMapper;
 import cn.bravedawn.pojo.Stu;
 import cn.bravedawn.service.StuService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @Date 2020/1/2 19:32
  */
 @Service
+@Slf4j
 public class StuServiceImpl implements StuService {
 
     @Autowired
@@ -34,6 +36,37 @@ public class StuServiceImpl implements StuService {
 //            throw new ArithmeticException("算错了");
 //        }
         saveChild2();
+    }
+
+    @Override
+    public void saveSelectStuInfo() {
+        Stu stu1 = new Stu();
+        stu1.setId(1000);
+        stu1.setName("select");
+        stu1.setAge(18);
+        stuMapper.insert(stu1);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void selectStuInfo() {
+        Stu stu = new Stu();
+        stu.setId(1000);
+        Stu stu1 = stuMapper.selectOne(stu);
+        if (stu1 == null){
+            log.info("stu is null");
+        } else{
+            log.info("stu info = {}.", stu1.toString());
+        }
+
+    }
+
+    @Override
+    public void updateSelectStuInfo() {
+        Stu stu = new Stu();
+        stu.setId(1000);
+        stu.setAge(11);
+        stuMapper.updateByPrimaryKeySelective(stu);
     }
 
     public void saveChild1() {
