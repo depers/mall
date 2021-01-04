@@ -22,6 +22,7 @@
         <module>mall-service</module>
         <module>mall-api</module>
         <module>mall-sso</module>
+        <module>mall-search</module>
         <!--        <module>mall-payment</module>-->
     </modules>
 
