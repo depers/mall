@@ -10,10 +10,11 @@ import org.springframework.data.elasticsearch.annotations.Field;
  * @description: es索引
  * @date : Created in 2021/1/4 22:08
  */
-@Document(indexName = "student", type = "_doc")
+@Document(indexName = "student", shards = 5)
 public class Student {
 
     @Id
+    // 设置该注解后，es的文档_id字段会和我们设置的id字段保持同步；不然文档中_id字段es会自动生成
     private Long id;
 
     @Field(store = true)

@@ -1,11 +1,15 @@
 package cn.bravedawn;
 
 import cn.bravedawn.es.pojo.Student;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,10 +23,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
+@Slf4j
 public class ESTest {
 
     @Autowired
-    private ElasticsearchTemplate esTemplate;
+    private ElasticsearchRestTemplate esTemplate;
+
+    @Autowired
+    ElasticsearchRestClientProperties properties;
 
     @Test
     public void createIndexStudent(){
@@ -32,6 +40,8 @@ public class ESTest {
         student.setAge(18);
 
         IndexQuery indexQuery = new IndexQueryBuilder().withObject(student).build();
-        esTemplate.index(indexQuery);
+        esTemplate.index(indexQuery, IndexCoordinates.of("stu"));
+
+        log.info(properties.getUris().toString());
     }
 }

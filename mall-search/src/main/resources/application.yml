@@ -5,7 +5,7 @@ spring:
         url: jdbc:mysql://localhost:3306/mall-dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
         username: root
         password: fx1212
-    data:
-        elasticsearch:
-            cluster-nodes: 192.168.156.138:9300,192.168.156.139:9300,192.168.156.140:9300
-            cluster-name: mall-es-cluster
+    elasticsearch:
+        rest:
+            uris: http://192.168.156.138:9200,http://192.168.156.139:9200,http://192.168.156.140:9200
+
