@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.IndexOperations;
+import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author : depers
@@ -61,5 +64,17 @@ public class ESTest {
     public void deleteIndexStudent(){
         IndexOperations indexOperations = elasticsearchOperations.indexOps(Student.class);
         indexOperations.delete();
+    }
+
+    @Test
+    public void updateStudentDoc(){
+        Map<String, Object> docMap = new HashMap<>();
+        docMap.put("name", "冯晓");
+        docMap.put("age", 19);
+        docMap.put("sign", "冯晓加油");
+
+        Document document = Document.from(docMap);
+        UpdateQuery updateQuery = UpdateQuery.builder("1").withDocument(document).build();
+        elasticsearchOperations.update(updateQuery, IndexCoordinates.of("student"));
     }
 }
