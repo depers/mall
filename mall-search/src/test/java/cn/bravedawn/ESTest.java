@@ -1,9 +1,12 @@
 package cn.bravedawn;
 
 import cn.bravedawn.es.pojo.Student;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,13 +14,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.UpdateQuery;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author : depers
@@ -66,6 +66,7 @@ public class ESTest {
         indexOperations.delete();
     }
 
+
     @Test
     public void updateStudentDoc(){
         Map<String, Object> docMap = new HashMap<>();
@@ -76,5 +77,46 @@ public class ESTest {
         Document document = Document.from(docMap);
         UpdateQuery updateQuery = UpdateQuery.builder("1").withDocument(document).build();
         elasticsearchOperations.update(updateQuery, IndexCoordinates.of("student"));
+    }
+
+
+    @Test
+    public void bulkInsertStudentDoc(){
+        List<IndexQuery> queryList = new ArrayList<>();
+
+        Student student = new Student();
+        student.setId(2L);
+        student.setName("王明");
+        student.setAge(18);
+        student.setMoney(18.8f);
+        student.setSign("i am spider man");
+        student.setDescription("I wish i am spider man");
+        queryList.add(new IndexQueryBuilder().withObject(student).build());
+
+        Student stu2 = new Student();
+        BeanUtils.copyProperties(student, stu2);
+        stu2.setId(3L);
+        stu2.setName("李静");
+        queryList.add(new IndexQueryBuilder().withObject(stu2).build());
+
+        Student stu3 = new Student();
+        BeanUtils.copyProperties(student, stu3);
+        stu3.setId(4L);
+        stu3.setName("赵四");
+        queryList.add(new IndexQueryBuilder().withObject(stu3).build());
+
+        List<String> ids = elasticsearchOperations.bulkIndex(queryList, IndexCoordinates.of("student"));
+
+        log.info("ids={}.", ids.toString());
+    }
+
+
+    @Test
+    public void searchStudentDoc(){
+
+
+//        Query query = new NativeSearchQueryBuilder()
+//                            .withQuery(QueryBuilders.matchQuery())
+//        elasticsearchOperations.search()
     }
 }
