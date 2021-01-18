@@ -1,7 +1,6 @@
 package cn.bravedawn;
 
 import cn.bravedawn.es.pojo.Student;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
@@ -10,14 +9,22 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.IndexOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author : depers
@@ -109,14 +116,36 @@ public class ESTest {
 
         log.info("ids={}.", ids.toString());
     }
+    
+    @Test
+    public void getStudentDoc(){
+        Student stu = elasticsearchOperations.get("1", Student.class);
+        log.info(stu.toString());
+    }
 
+    
+    @Test
+    public void deleteStudentDoc(){
+        String delete = elasticsearchOperations.delete("1", Student.class);
+        log.info(delete);
+    }
 
     @Test
     public void searchStudentDoc(){
 
+        Pageable pageable = PageRequest.of(0, 2);
 
-//        Query query = new NativeSearchQueryBuilder()
-//                            .withQuery(QueryBuilders.matchQuery())
-//        elasticsearchOperations.search()
+        Query query = new NativeSearchQueryBuilder()
+                            .withQuery(QueryBuilders.matchQuery("description", "save man"))
+                            .withPageable(pageable)
+                            .build();
+
+        SearchHits<Student> pagedStu = elasticsearchOperations.search(query, Student.class);
+
+        log.info("检索后的总数：{}.", pagedStu.getTotalHits());
+
+        List<SearchHit<Student>> stuList = pagedStu.getSearchHits();
+        stuList.forEach(studentSearchHit -> System.out.println(studentSearchHit.getContent()));
+
     }
 }

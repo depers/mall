@@ -80,4 +80,16 @@ public class Student {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", money=" + money +
+                ", sign='" + sign + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
