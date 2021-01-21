@@ -3,6 +3,10 @@ package cn.bravedawn;
 import cn.bravedawn.es.pojo.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
@@ -146,6 +150,58 @@ public class ESTest {
 
         List<SearchHit<Student>> stuList = pagedStu.getSearchHits();
         stuList.forEach(studentSearchHit -> System.out.println(studentSearchHit.getContent()));
+    }
 
+
+    @Test
+    public void highlightStudentDoc(){
+        String preTag = "<font color='red'>";
+        String postTag = "</font>";
+
+        Pageable pageable = PageRequest.of(0, 2);
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery("description", "save man"))
+                .withHighlightFields(new HighlightBuilder.Field("description")
+                                        .preTags(preTag)
+                                        .postTags(postTag))
+                .withPageable(pageable)
+                .build();
+
+        SearchHits<Student> pagedStu = elasticsearchOperations.search(query, Student.class);
+
+        log.info("检索后的总数：{}.", pagedStu.getTotalHits());
+
+        List<SearchHit<Student>> stuList = pagedStu.getSearchHits();
+
+        stuList.forEach(studentSearchHit -> System.out.println(studentSearchHit.getHighlightFields().get("description").get(0)));
+    }
+
+
+    @Test
+    public void sortStudentDoc(){
+        String preTag = "<font color='red'>";
+        String postTag = "</font>";
+
+        Pageable pageable = PageRequest.of(0, 10);
+        // 这里可以加多个排序条件
+        SortBuilder sortBuilder = new FieldSortBuilder("id")
+                                    .order(SortOrder.DESC);
+
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery("description", "save man"))
+                .withHighlightFields(new HighlightBuilder.Field("description")
+                        .preTags(preTag)
+                        .postTags(postTag))
+                .withPageable(pageable)
+                .withSort(sortBuilder)
+                .build();
+
+        SearchHits<Student> pagedStu = elasticsearchOperations.search(query, Student.class);
+
+        log.info("检索后的总数：{}.", pagedStu.getTotalHits());
+
+        List<SearchHit<Student>> stuList = pagedStu.getSearchHits();
+
+        stuList.forEach(studentSearchHit -> System.out.println(studentSearchHit.getContent()));
     }
 }
