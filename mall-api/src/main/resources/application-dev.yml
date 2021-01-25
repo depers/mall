@@ -24,3 +24,13 @@ spring:
 mybatis:
     configuration:
         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+############################################################
+#
+# fdfs 配置
+#
+############################################################
+fdfs:
+    connect-timeout: 30   # 连接的超时时间
+    so-timeout: 30        # 读取的超时时间
+    tracker-list: 192.168.156.135:22122   # tracker服务所在的ip地址和端口号
