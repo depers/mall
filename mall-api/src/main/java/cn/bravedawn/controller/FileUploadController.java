@@ -52,7 +52,7 @@ public class FileUploadController {
                 return JsonResult.ok(path);
             }
         }
-        return JsonResult.errorMsg("error");
+        return JsonResult.errorMsg("上传图片失败");
     }
 
 }
