@@ -7,6 +7,7 @@ package cn.bravedawn.service;
 public interface StuService {
 
     public void saveParent();
+
     public void saveChildren();
 
     void saveSelectStuInfo();
@@ -14,4 +15,6 @@ public interface StuService {
     void selectStuInfo();
 
     void updateSelectStuInfo();
+
+    public void saveChildrenAsync();
 }

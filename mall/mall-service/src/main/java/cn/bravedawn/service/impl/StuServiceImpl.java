@@ -27,7 +27,7 @@ public class StuServiceImpl implements StuService {
         stuMapper.insert(stu);
     }
 
-    //@Transactional(propagation = Propagation.NESTED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveChildren() {
         saveChild1();
 //        try {
@@ -36,6 +36,10 @@ public class StuServiceImpl implements StuService {
 //            throw new ArithmeticException("算错了");
 //        }
         saveChild2();
+    }
+
+    public void saveChildrenAsync() {
+        saveChild3();
     }
 
     @Override
@@ -80,5 +84,12 @@ public class StuServiceImpl implements StuService {
         stu2.setName("child-2");
         stu2.setAge(22);
         stuMapper.insert(stu2);
+    }
+
+    public void saveChild3() {
+        Stu stu1 = new Stu();
+        stu1.setName("child-3");
+        stu1.setAge(18);
+        stuMapper.insert(stu1);
     }
 }

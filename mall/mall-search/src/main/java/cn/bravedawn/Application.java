@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
  * @Author 冯晓
  * @Date 2019/12/26 20:12
  */
-@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {

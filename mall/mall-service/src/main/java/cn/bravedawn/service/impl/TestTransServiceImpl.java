@@ -42,6 +42,16 @@ public class TestTransServiceImpl implements TestTransService {
 
         stuService.saveParent();
         stuService.saveChildren();
+
+
+        // 测试其他线程
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                stuService.saveChildrenAsync();
+            }
+        });
+        t.start();
         try {
             int i = 1/0;
         } catch (Exception e) {
@@ -54,6 +64,8 @@ public class TestTransServiceImpl implements TestTransService {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+
+
 
 
     }
