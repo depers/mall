@@ -1,46 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" schema="Log4J-V2.0.xsd" monitorInterval="600" >
+<Configuration status="INFO" schema="Log4J-V2.0.xsd" monitorInterval="600">
     <Properties>
+        <!-- 声明属性-->
         <Property name="LOG_HOME">logs</Property>
         <property name="FILE_NAME">collector</property>
-        <property name="patternLayout">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}] [%level{length=5}] [%thread-%tid] [%logger] [%X{hostName}] [%X{ip}] [%X{applicationName}] [%F,%L,%C,%M] [%m] ## '%ex'%n</property>
+        <property name="patternLayout">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}] [%level{length=5}] [%thread-%tid] [%logger]
+            [%X{hostName}] [%X{ip}] [%X{applicationName}] [%F,%L,%C,%M] [%m] ## '%ex'%n
+        </property>
     </Properties>
     <Appenders>
+        <!-- Console：输出日志到控制台-->
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="${patternLayout}"/>
-        </Console>  
-        <RollingRandomAccessFile name="appAppender" fileName="${LOG_HOME}/app-${FILE_NAME}.log" filePattern="${LOG_HOME}/app-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log" >
-          <PatternLayout pattern="${patternLayout}" />
-          <Policies>
-              <TimeBasedTriggeringPolicy interval="1"/>
-              <SizeBasedTriggeringPolicy size="500MB"/>
-          </Policies>
-          <DefaultRolloverStrategy max="20"/>         
+        </Console>
+        <!-- RollingRandomAccessFile：输入日志到文件
+            name：Appender名称
+            fileName：日志写入文件名称
+            filePattern：归档日志文件名称 -->
+        <RollingRandomAccessFile name="appAppender" fileName="${LOG_HOME}/app-${FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/app-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${patternLayout}"/>
+            <!--Policies：触发日志写文件策略-->
+            <Policies>
+                <!--TimeBasedTriggeringPolicy按时间配置切分文件策略：以filePattern最后一位为基准进行推延计算的
+                    若一天进行一次日志归档，则filePattern为yyyy-MM-dd，interval为1；
+                    若一小时进行一次日志归档，则filePattern为yyyy-MM-dd-HH，interval为1；
+                    若一分钟，则yyyy-MM-dd-HH-mm，interval为1；
+                    若一秒钟，则yyyy-MM-dd-HH-mm-ss，interval为1；-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <!-- 日志文件大于500MB切分一次-->
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy：日志滚动归档策略;
+                max：指定日志最大计数数量，最多20个备份-->
+            <DefaultRolloverStrategy max="20"/>
         </RollingRandomAccessFile>
-        <RollingRandomAccessFile name="errorAppender" fileName="${LOG_HOME}/error-${FILE_NAME}.log" filePattern="${LOG_HOME}/error-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log" >
-          <PatternLayout pattern="${patternLayout}" />
-          <Filters>
-              <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
-          </Filters>              
-          <Policies>
-              <TimeBasedTriggeringPolicy interval="1"/>
-              <SizeBasedTriggeringPolicy size="500MB"/>
-          </Policies>
-          <DefaultRolloverStrategy max="20"/>         
-        </RollingRandomAccessFile>            
+        <RollingRandomAccessFile name="errorAppender" fileName="${LOG_HOME}/error-${FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/error-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Filters>
+                <!--ThresholdFilter：临界值过滤器，下面配置的意思是过滤掉warn级以下的日志-->
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
     </Appenders>
+    <!-- Loggers节点，常见的有两种：Root和Logger -->
     <Loggers>
         <!-- 业务相关 异步logger -->
+        <!--Logger：Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。
+            name：用来指定该Logger所适用的类或者类所在的包全路径，继承自Root节点。一般是项目包名或者框架的包名，比如：com.jourwon，org.springframework
+            level：日志输出级别，共有8个级别，按照从低到高为：All < Trace < Debug < Info < Warn < Error < Fatal < OFF
+            AppenderRef：Logger的子节点，用来指定该日志输出到哪个Appender，如果没有指定，就会默认继承自Root。如果指定了，那么会在指定的这个Appender和Root的Appender中都会输出，此时我们可以设置Logger的additivity="false"只在自定义的Appender中进行输出。
+        -->
         <AsyncLogger name="cn.bravedawn.*" level="info" includeLocation="true">
-          <AppenderRef ref="appAppender"/>
+            <AppenderRef ref="appAppender"/>
         </AsyncLogger>
         <AsyncLogger name="cn.bravedawn.*" level="info" includeLocation="true">
-          <AppenderRef ref="errorAppender"/>
-        </AsyncLogger>       
+            <AppenderRef ref="errorAppender"/>
+        </AsyncLogger>
+
+        <!--Root：每个配置都必须有一个根记录器Root
+            level：日志输出级别，共有8个级别，按照从低到高为：All < Trace < Debug < Info < Warn < Error < Fatal < OFF
+            AppenderRef：Root的子节点，用来指定该日志输出到哪个Appender.
+        -->
         <Root level="info">
             <Appender-Ref ref="CONSOLE"/>
             <Appender-Ref ref="appAppender"/>
             <AppenderRef ref="errorAppender"/>
-        </Root>         
+        </Root>
     </Loggers>
 </Configuration>

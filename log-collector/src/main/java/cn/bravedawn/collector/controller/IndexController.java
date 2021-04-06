@@ -1,5 +1,6 @@
 package cn.bravedawn.collector.controller;
 
+import cn.bravedawn.collector.util.InputMDC;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,5 +80,13 @@ public class IndexController {
             log.error("算术异常", e);
         }
         return "error";
+    }
+
+
+    @RequestMapping(value = "/mdc")
+    public String mdc() {
+        InputMDC.putMDC();
+        log.info("我是一条有mdc的info日志");
+        return "mdc";
     }
 }
