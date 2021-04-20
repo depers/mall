@@ -4,7 +4,7 @@ filebeat.inputs:
       - /usr/local/myapp/collector/logs/app-collector.log
   docutment_type: "app-log"  # 定义写入ES时的 _type值
   multiline:
-    parttern: '^\['  # 指定匹配的表达式（匹配以 [ 开头的字符串）
+    pattern: '^\['  # 指定匹配的表达式（匹配以 [ 开头的字符串）
     negate: true     # 是否匹配到
     match: after     # 不匹配的合并到上一行的末尾
     max_lines: 2000  # 合并的最大行数
@@ -19,7 +19,7 @@ filebeat.inputs:
     - /usr/local/myapp/collector/logs/error-collector.log
   docutment_type: "error-log"  # 定义写入ES时的 _type值
   multiline:
-    parttern: '^\['  # 指定匹配的表达式（匹配以 [ 开头的字符串）
+    pattern: '^\['  # 指定匹配的表达式（匹配以 [ 开头的字符串）
     negate: true     # 是否匹配到
     match: after     # 不匹配的合并到上一行的末尾
     max_lines: 2000
