@@ -43,21 +43,22 @@ public class TestTransServiceImpl implements TestTransService {
         stuService.saveParent();
         stuService.saveChildren();
 
+        int i = 1 / 0;
 
         // 测试其他线程
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                stuService.saveChildrenAsync();
-            }
-        });
-        t.start();
-        try {
-            int i = 1/0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("错了");
-        }
+//        Thread t = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                stuService.saveChildrenAsync();
+//            }
+//        });
+//        t.start();
+//        try {
+//            int i = 1/0;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("错了");
+//        }
         /*try {
             // save point
             stuService.saveChildren();

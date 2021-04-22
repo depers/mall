@@ -71,6 +71,17 @@ public class IndexController {
      * [算术异常]
      * ## ' java.lang.ArithmeticException: / by zero
      * 	at cn.bravedawn.collector.controller.IndexController.err(IndexController.java:68)
+     * -------------------------------------------
+     * \[%{NOTSPACE:currentDateTime}\]
+     * \[%{NOTSPACE:level}\]
+     * \[%{NOTSPACE:treadId}\]
+     * \[%{NOTSPACE:class}\]
+     * \[%{DATA:hostName}\]
+     * \[%{DATA:ip}\]
+     * \[%{DATA:applicationName}\]
+     * \[%{DATA:location}\]
+     * \[%{DATA:messageInfo}\]
+     * ## (\'\'|%{QUOTEDSTRING:throwable})
      */
     @RequestMapping(value = "/err")
     public String err() {
