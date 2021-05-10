@@ -12,9 +12,9 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="count" jdbcType="INTEGER" property="count" />
     <result column="product_desc" jdbcType="VARCHAR" property="productDesc" />
-    <result column="create_time" jdbcType="TIME" property="createTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-    <result column="update_time" jdbcType="TIME" property="updateTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -155,8 +155,8 @@
       create_user, update_time, update_user
       )
     values (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{count,jdbcType=INTEGER}, #{productDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIME}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIME}, #{updateUser,jdbcType=VARCHAR}
+      #{count,jdbcType=INTEGER}, #{productDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.bravedawn.demo.model.Product">
@@ -212,13 +212,13 @@
         #{productDesc,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIME},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUser != null">
         #{createUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIME},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
         #{updateUser,jdbcType=VARCHAR},
@@ -260,13 +260,13 @@
         product_desc = #{record.productDesc,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIME},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createUser != null">
         create_user = #{record.createUser,jdbcType=VARCHAR},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIME},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateUser != null">
         update_user = #{record.updateUser,jdbcType=VARCHAR},
@@ -288,9 +288,9 @@
       price = #{record.price,jdbcType=DECIMAL},
       count = #{record.count,jdbcType=INTEGER},
       product_desc = #{record.productDesc,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIME},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIME},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       update_user = #{record.updateUser,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -317,13 +317,13 @@
         product_desc = #{productDesc,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIME},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUser != null">
         create_user = #{createUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIME},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
         update_user = #{updateUser,jdbcType=VARCHAR},
@@ -342,9 +342,9 @@
       price = #{price,jdbcType=DECIMAL},
       count = #{count,jdbcType=INTEGER},
       product_desc = #{productDesc,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIME},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIME},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -352,7 +352,7 @@
       update product
       set count = count - #{purchaseProductNum,jdbcType=INTEGER},
       update_user = #{updateUser,jdbcType=VARCHAR},
-       update_time = #{updateTime,jdbcType=TIME}
+       update_time = #{updateTime,jdbcType=TIMESTAMP}
       where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

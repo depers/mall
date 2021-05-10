@@ -38,6 +38,11 @@ public class OrderService {
     private int purchaseProductNum = 1;
 
 
+    /**
+     * 数据库中有5个订单，商品库存变为了0
+     * @return
+     * @throws Exception
+     */
     @Transactional(rollbackFor = Exception.class)
     public Integer createOrderV1() throws Exception{
         Product product = productMapper.selectByPrimaryKey(purchaseProductId);
@@ -53,7 +58,7 @@ public class OrderService {
             throw new Exception("商品" + purchaseProductId + "仅剩" + currentCount + "件，无法购买");
         }
 
-        // 计算剩余库存
+        // 计算剩余库存，是放在程序中进行的 ---------------------------------
         Integer leftCount = currentCount - purchaseProductNum;
 
         // 更新库存
@@ -61,6 +66,105 @@ public class OrderService {
         product.setUpdateTime(new Date());
         product.setUpdateUser("user");
         productMapper.updateByPrimaryKey(product);
+        // ------------------------------------------------------------
+
+        Order order = new Order();
+        order.setOrderAmount(product.getPrice().multiply(new BigDecimal(purchaseProductNum)));
+        order.setOrderStatus(1);//待处理
+        order.setReceiverName("xxx");
+        order.setReceiverMobile("13311112222");
+        order.setCreateTime(new Date());
+        order.setCreateUser("xxx");
+        order.setUpdateTime(new Date());
+        order.setUpdateUser("xxx");
+        orderMapper.insertSelective(order);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrderId(order.getId());
+        orderItem.setProductId(product.getId());
+        orderItem.setPurchasePrice(product.getPrice());
+        orderItem.setPurchaseNum(purchaseProductNum);
+        orderItem.setCreateUser("xxx");
+        orderItem.setCreateTime(new Date());
+        orderItem.setUpdateTime(new Date());
+        orderItem.setUpdateUser("xxx");
+        orderItemMapper.insertSelective(orderItem);
+        return order.getId();
+    }
+
+
+    /**
+     * 利用数据库行锁来解决超卖现象
+     * 效果就是还是会生成5个订单，并且库存会减为-4
+     * @return
+     * @throws Exception
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Integer createOrderV2() throws Exception{
+        Product product = productMapper.selectByPrimaryKey(purchaseProductId);
+        if (product==null){
+            throw new Exception("购买商品：" + purchaseProductId + "不存在");
+        }
+
+        // 商品当前库存
+        Integer currentCount = product.getCount();
+
+        // 校验库存
+        if (purchaseProductNum > currentCount) {
+            throw new Exception("商品" + purchaseProductId + "仅剩" + currentCount + "件，无法购买");
+        }
+
+        // 计算剩余库存
+        productMapper.updateProductCount(purchaseProductNum, "xxx", new Date(), product.getId());
+
+        Order order = new Order();
+        order.setOrderAmount(product.getPrice().multiply(new BigDecimal(purchaseProductNum)));
+        order.setOrderStatus(1);//待处理
+        order.setReceiverName("xxx");
+        order.setReceiverMobile("13311112222");
+        order.setCreateTime(new Date());
+        order.setCreateUser("xxx");
+        order.setUpdateTime(new Date());
+        order.setUpdateUser("xxx");
+        orderMapper.insertSelective(order);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrderId(order.getId());
+        orderItem.setProductId(product.getId());
+        orderItem.setPurchasePrice(product.getPrice());
+        orderItem.setPurchaseNum(purchaseProductNum);
+        orderItem.setCreateUser("xxx");
+        orderItem.setCreateTime(new Date());
+        orderItem.setUpdateTime(new Date());
+        orderItem.setUpdateUser("xxx");
+        orderItemMapper.insertSelective(orderItem);
+        return order.getId();
+    }
+
+    /**
+     * 基于`Synchronized`锁解决超卖问题（最原始的锁）+ 声明式事务
+     * 效果还是会出现库存变为负数的情况，因为第一个线程获得并释放锁之后，事务并没有提交；
+     * 导致第二个线程查到的库存还是1，进而导致库存减为负数的现象
+     * @return
+     * @throws Exception
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public synchronized Integer createOrderV3() throws Exception{
+        Product product = productMapper.selectByPrimaryKey(purchaseProductId);
+        if (product==null){
+            throw new Exception("购买商品：" + purchaseProductId + "不存在");
+        }
+
+        // 商品当前库存
+        Integer currentCount = product.getCount();
+
+        // 校验库存
+        if (purchaseProductNum > currentCount) {
+            throw new Exception("商品" + purchaseProductId + "仅剩" + currentCount + "件，无法购买");
+        }
+
+        // 计算剩余库存
+        productMapper.updateProductCount(purchaseProductNum, "xxx", new Date(), product.getId());
 
         Order order = new Order();
         order.setOrderAmount(product.getPrice().multiply(new BigDecimal(purchaseProductNum)));
