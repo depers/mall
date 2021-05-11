@@ -36,8 +36,13 @@ public class DistributeDemoTest {
                 try {
                     // 让五个线程同步开始执行创建订单的操作
                     cyclicBarrier.await();
-                    Integer orderId = orderService.createOrderV1();
-                    System.out.println("订单id: " + orderId);
+//                    Integer orderId = orderService.createOrderV1();
+//                    Integer orderId = orderService.createOrderV2();
+//                    Integer orderId = orderService.createOrderV3();
+//                    Integer orderId = orderService.createOrderV4();
+//                    Integer orderId = orderService.createOrderV5();
+                    Integer orderId = orderService.createOrderV6();
+                    System.out.println(Thread.currentThread().getName() + " 订单id: " + orderId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
