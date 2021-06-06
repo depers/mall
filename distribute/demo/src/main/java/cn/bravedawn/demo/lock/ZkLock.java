@@ -62,6 +62,7 @@ public class ZkLock implements AutoCloseable, Watcher {
                 }
             }
 
+            // 这里加锁的原因在于，若同一台服务器同时有多个线程同时请求锁，就要在这里进行堵塞，不然都会直接返回true
             synchronized (this) {
                 wait();
             }
@@ -72,9 +73,6 @@ public class ZkLock implements AutoCloseable, Watcher {
         }
         return false;
     }
-
-
-
 
 
     @Override

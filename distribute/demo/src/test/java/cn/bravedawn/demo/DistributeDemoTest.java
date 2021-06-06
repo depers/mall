@@ -1,16 +1,19 @@
 package cn.bravedawn.demo;
 
 import cn.bravedawn.demo.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author : depers
@@ -20,6 +23,7 @@ import java.util.concurrent.Executors;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class DistributeDemoTest {
 
     @Autowired
@@ -55,5 +59,27 @@ public class DistributeDemoTest {
         // 主线程提前结束会导致数据库连接关闭，新开的五个线程就获取不到数据库连接了，效果就是什么都没做
         cdl.await();
         es.shutdown();
+    }
+
+
+    @Test
+    public void testCuratorLock(){
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.newClient("localhost:2181", retryPolicy);
+        client.start();
+        InterProcessMutex lock = new InterProcessMutex(client, "/order");
+        try {
+            if ( lock.acquire(30, TimeUnit.SECONDS) ) {
+                try  {
+                    log.info("我获得了锁！！！");
+                }
+                finally  {
+                    lock.release();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        client.close();
     }
 }
