@@ -20,11 +20,14 @@ public class SchedulerService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(cron = "0/5 * * * * ?")
     public void sendSms() {
         try (RedisLock redisLock = new RedisLock(redisTemplate, "autoSms", 30)){
             if (redisLock.getLock()) {
+                log.info("获取锁成功");
                 log.info("向138xxxxxxxx发送短信！");
+            } else {
+                log.info("获取锁失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
