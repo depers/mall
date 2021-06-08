@@ -9,6 +9,10 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -82,4 +86,26 @@ public class DistributeDemoTest {
         }
         client.close();
     }
+
+
+    @Test
+    public void testRedissonLock() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://localhost:6379");
+        RedissonClient redissonClient = Redisson.create(config);
+
+        RLock rLock = redissonClient.getLock("order");
+
+        try {
+            rLock.lock(30, TimeUnit.SECONDS);
+            log.info("我获得了锁！");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            log.info("我释放了锁！！");
+            rLock.unlock();
+        }
+
+    }
+
 }
