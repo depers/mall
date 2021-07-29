@@ -3,7 +3,9 @@ server:
 
 spring:
     datasource:                                           # 数据源的相关配置
-        url: jdbc:mysql://localhost:3306/mall-dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+        # url: jdbc:mysql://localhost:3306/mall-dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+        # 修改为 keepalived的虚拟地址 keepalived->haproxy->mycat->mysql
+        url: jdbc:mysql://192.168.156.161:6000/mall-dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
         password: fx1212
     redis:
     # 单机单实例

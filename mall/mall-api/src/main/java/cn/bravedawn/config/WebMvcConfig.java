@@ -65,7 +65,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/passport/*")
                 .excludePathPatterns("/myorders/deliver")
-                .excludePathPatterns("/orders/notifyMerchantOrderPaid");
+                .excludePathPatterns("/orders/notifyMerchantOrderPaid")
+                .excludePathPatterns("/getType");
 
         WebMvcConfigurer.super.addInterceptors(registry);
     }

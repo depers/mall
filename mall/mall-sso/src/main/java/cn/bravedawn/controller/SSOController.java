@@ -94,7 +94,7 @@ public class SSOController {
      *       目的：
      *           1. 登录后创建用户的全局会话                 -> uniqueToken
      *           2. 创建用户全局门票，用以表示在CAS端是否登录   -> userTicket
-     *           3. 创建用户的临时票据，用于会跳回传           -> tmpTicket
+     *           3. 创建用户的临时票据，用于回跳回传           -> tmpTicket
      *
      *       userTicket: 用于表示用户在CAS端的一个登录状态：已经登录
      *       tmpTicket: 用于颁发给用户进行一次性的验证的票据，有时效性
