@@ -1,11 +1,10 @@
 package com.imooc.controller.interceptor;
 
+import cn.bravedawn.utils.DateUtil;
+import cn.bravedawn.utils.JsonResult;
+import cn.bravedawn.utils.JsonUtils;
 import com.imooc.pojo.Users;
 import com.imooc.service.UserService;
-import com.imooc.utils.DateUtil;
-import com.imooc.utils.IMOOCJSONResult;
-import com.imooc.utils.JsonUtils;
-import com.imooc.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -37,7 +36,7 @@ public class PayCenterInterceptor implements HandlerInterceptor {
 			// 请求数据库查询用户是否存在
 			Users  user = userService.queryUserInfo(imoocUserId, password);
 			if (user == null) {
-				returnErrorResponse(response, new IMOOCJSONResult().errorTokenMsg("用户id或密码不正确！"));
+				returnErrorResponse(response, new JsonResult().errorTokenMsg("用户id或密码不正确！"));
 				return false;
 			}
 
@@ -46,7 +45,7 @@ public class PayCenterInterceptor implements HandlerInterceptor {
 
 			int days = DateUtil.daysBetween(nowDate, endDate);
 			if (days < 0) {
-				returnErrorResponse(response, new IMOOCJSONResult().errorTokenMsg("该账户授权访问日期已失效！"));
+				returnErrorResponse(response, new JsonResult().errorTokenMsg("该账户授权访问日期已失效！"));
 				return false;
 			}
 
@@ -57,7 +56,7 @@ public class PayCenterInterceptor implements HandlerInterceptor {
 			}*/
 
 		} else {
-			returnErrorResponse(response, new IMOOCJSONResult().errorTokenMsg("请在header中携带支付中心所需的用户id以及密码！"));
+			returnErrorResponse(response, new JsonResult().errorTokenMsg("请在header中携带支付中心所需的用户id以及密码！"));
 			return false;
 		}
 		
@@ -69,7 +68,7 @@ public class PayCenterInterceptor implements HandlerInterceptor {
 		return true;
 	}
 	
-	public void returnErrorResponse(HttpServletResponse response, IMOOCJSONResult result)
+	public void returnErrorResponse(HttpServletResponse response, JsonResult result)
 			throws IOException, UnsupportedEncodingException {
 		OutputStream out=null;
 		try{

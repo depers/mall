@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bravedawn.druid.dao.RoleMapper">
+
+    <resultMap type="role" id="roleMap">
+        <id column="id" property="id" javaType="long" jdbcType="BIGINT" />
+        <result column="role_name" property="roleName" javaType="string"
+                jdbcType="VARCHAR" />
+        <result column="note" property="note" javaType="string" />
+    </resultMap>
+    <select id="getRole" parameterType="long" resultMap="roleMap">
+        select
+        id,role_name,note from role where id=#{id}
+    </select>
+    <select id="findRole" parameterType="long" resultMap="roleMap">
+        select
+        id,role_name,note from role where role_name like CONCAT('%',#{roleName
+        javaType=string,
+        jdbcType=VARCHAR},'%')
+    </select>
+    <insert id="insertRole" parameterType="cn.bravedawn.druid.model.Role">
+        insert into
+        role(role_name,note, type) value(#{roleName},#{note}, #{type})
+    </insert>
+
+    <insert id="insertAndSelectKey" parameterType="cn.bravedawn.druid.model.Role">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        role(role_name,note, `type`) value(#{roleName},#{note}, #{type})
+    </insert>
+    <delete id="deleteRole" parameterType="long">
+        delete from role where
+        id=#{id}
+    </delete>
+
+</mapper>
