@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:sharding="http://shardingsphere.apache.org/schema/shardingsphere/sharding"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://shardingsphere.apache.org/schema/shardingsphere/sharding
+                        http://shardingsphere.apache.org/schema/shardingsphere/sharding/sharding.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:annotation-config />
+
+    <bean id="ds0" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.139:3306/sharding_orders_139?serverTimezone=Asia/Shanghai&amp;useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="fx1212" />
+    </bean>
+
+    <bean id="ds1" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.140:3306/sharding_orders_140?serverTimezone=Asia/Shanghai&amp;useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="fx1212" />
+    </bean>
+
+
+    <sharding:data-source id="shardingDataSource">
+        <sharding:sharding-rule data-source-names="ds0,ds1">
+            <sharding:table-rules>
+                <sharding:table-rule logic-table="orders" actual-data-nodes="ds$->{0..1}.orders_$->{1..2}"
+                                     database-strategy-ref="databaseStrategy" table-strategy-ref="tableStrategy" />
+            </sharding:table-rules>
+        </sharding:sharding-rule>
+    </sharding:data-source>
+
+
+    <sharding:inline-strategy id="databaseStrategy" sharding-column="user_id"
+                              algorithm-expression="ds$->{user_id % 2}"/>
+
+    <sharding:inline-strategy id="tableStrategy" sharding-column="id"
+                              algorithm-expression="orders_$->{id % 2 + 1}"/>
+
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="shardingDataSource"/>
+        <property name="mapperLocations" value="classpath*:/mapper/*.xml"/>
+    </bean>
+
+</beans>
