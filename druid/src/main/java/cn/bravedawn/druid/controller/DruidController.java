@@ -25,7 +25,12 @@ public class DruidController {
     @GetMapping("/selectKey")
     public String selectKey(){
         return String.valueOf(druidService.selectKey());
-
     }
+
+    @GetMapping("/add")
+    public String insert() {
+        return String.valueOf(druidService.add());
+    }
+
 
 }

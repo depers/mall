@@ -10,4 +10,6 @@ public interface DruidService {
 
 
     long selectKey();
+
+    int add();
 }
