@@ -97,13 +97,58 @@ public class DistributeDemoTest {
         RLock rLock = redissonClient.getLock("order");
 
         try {
+            log.info("请求锁------------");
             rLock.lock(30, TimeUnit.SECONDS);
+            Thread.sleep(60000);
             log.info("我获得了锁！");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             log.info("我释放了锁！！");
             rLock.unlock();
+        }
+
+    }
+
+    @Test
+    public void testRedissonLockNotTry() throws InterruptedException {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://localhost:6379");
+        RedissonClient redissonClient = Redisson.create(config);
+
+        RLock rLock = redissonClient.getLock("order");
+
+        log.info("请求锁------------");
+        rLock.lock(30, TimeUnit.SECONDS);
+        Thread.sleep(60000);
+        log.info("我获得了锁！");
+        rLock.unlock();
+        log.info("我释放了锁！！");
+
+    }
+
+    @Test
+    public void testRedissonTrylock() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://localhost:6379");
+        RedissonClient redissonClient = Redisson.create(config);
+
+        RLock rLock = redissonClient.getLock("order");
+
+        try {
+            log.info("请求锁------------");
+            boolean b = rLock.tryLock(10, 300, TimeUnit.SECONDS);
+            if (b) {
+                log.info("我获得了锁！");
+            } else {
+                log.info("我没有获得了锁！");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            log.info("我释放了锁！！");
+            // rLock.unlock();
         }
 
     }

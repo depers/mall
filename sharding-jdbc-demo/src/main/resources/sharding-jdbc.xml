@@ -17,34 +17,47 @@
 
     <bean id="ds0" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.139:3306/sharding_orders_139?serverTimezone=Asia/Shanghai&amp;useSSL=false" />
+        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.139:3306/sharding_orders_139?serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
         <property name="password" value="fx1212" />
     </bean>
 
     <bean id="ds1" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.140:3306/sharding_orders_140?serverTimezone=Asia/Shanghai&amp;useSSL=false" />
+        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.140:3306/sharding_orders_140?serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
         <property name="password" value="fx1212" />
     </bean>
 
 
-    <sharding:data-source id="shardingDataSource">
-        <sharding:sharding-rule data-source-names="ds0,ds1">
-            <sharding:table-rules>
-                <sharding:table-rule logic-table="orders" actual-data-nodes="ds$->{0..1}.orders_$->{1..2}"
-                                     database-strategy-ref="databaseStrategy" table-strategy-ref="tableStrategy" />
-            </sharding:table-rules>
-        </sharding:sharding-rule>
-    </sharding:data-source>
+<sharding:data-source id="shardingDataSource">
+    <sharding:sharding-rule data-source-names="ds0,ds1">
+        <sharding:table-rules>
+            <sharding:table-rule logic-table="orders" actual-data-nodes="ds$->{0..1}.orders_$->{1..2}"
+                                 database-strategy-ref="databaseStrategy" table-strategy-ref="OrdersTableStrategy" />
+            <sharding:table-rule logic-table="order_item" actual-data-nodes="ds$->{0..1}.order_item_$->{1..2}"/>
+        </sharding:table-rules>
+
+        <sharding:broadcast-table-rules>
+            <sharding:broadcast-table-rule table="area"/>
+        </sharding:broadcast-table-rules>
+
+        <sharding:binding-table-rules>
+            <sharding:binding-table-rule logic-tables="orders,order_item" />
+        </sharding:binding-table-rules>
+    </sharding:sharding-rule>
+</sharding:data-source>
 
 
     <sharding:inline-strategy id="databaseStrategy" sharding-column="user_id"
                               algorithm-expression="ds$->{user_id % 2}"/>
 
-    <sharding:inline-strategy id="tableStrategy" sharding-column="id"
-                              algorithm-expression="orders_$->{id % 2 + 1}"/>
+    <sharding:inline-strategy id="OrdersTableStrategy" sharding-column="order_id"
+                              algorithm-expression="orders_$->{order_id % 2 + 1}"/>
+
+
+<!--    <sharding:inline-strategy id="OrderItemTableStrategy" sharding-column="order_id"-->
+<!--                              algorithm-expression="order_item_$->{order_id % 2 + 1}"/>-->
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="shardingDataSource"/>
