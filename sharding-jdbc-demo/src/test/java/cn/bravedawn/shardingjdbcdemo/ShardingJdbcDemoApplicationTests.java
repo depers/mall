@@ -3,10 +3,7 @@ package cn.bravedawn.shardingjdbcdemo;
 import cn.bravedawn.shardingjdbcdemo.dao.AreaMapper;
 import cn.bravedawn.shardingjdbcdemo.dao.OrderItemMapper;
 import cn.bravedawn.shardingjdbcdemo.dao.OrdersMapper;
-import cn.bravedawn.shardingjdbcdemo.model.Area;
-import cn.bravedawn.shardingjdbcdemo.model.AreaExample;
-import cn.bravedawn.shardingjdbcdemo.model.OrderItem;
-import cn.bravedawn.shardingjdbcdemo.model.Orders;
+import cn.bravedawn.shardingjdbcdemo.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -67,8 +64,29 @@ class ShardingJdbcDemoApplicationTests {
 		orderItem.setOrderId(19);
 		orderItem.setProductName("MacBook Air 笔记本");
 		orderItem.setNum(1);
-		orderItem.setUserId(2);
+//		orderItem.setUserId(2);
 		orderItemMapper.insertSelective(orderItem);
+	}
+
+	@Test
+    public void testSelectOrderItem() {
+		List<OrderItem> orderItems = orderItemMapper.selectByOrderIdAndUserId(19);
+		orderItems.stream().forEach(o -> System.out.println(o));
+    }
+
+    @Test
+    public void testMsOrder() {
+		OrdersExample example = new OrdersExample();
+		example.createCriteria().andUserIdEqualTo(2).andOrderIdEqualTo(19);
+		List<Orders> ordersList = ordersMapper.selectByExample(example);
+
+		for (int i = 0; i < 10; i++) {
+			ordersList.forEach(o -> {
+				System.out.println("orderId=" + o.getOrderId());
+				System.out.println("userId=" + o.getUserId());
+				System.out.println("orderAmount=" + o.getOrderAmount());
+			});
+		}
 	}
 
 

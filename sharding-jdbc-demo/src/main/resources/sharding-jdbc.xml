@@ -5,10 +5,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:sharding="http://shardingsphere.apache.org/schema/shardingsphere/sharding"
+       xmlns:master-slave="http://shardingsphere.apache.org/schema/shardingsphere/masterslave"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://shardingsphere.apache.org/schema/shardingsphere/sharding
                         http://shardingsphere.apache.org/schema/shardingsphere/sharding/sharding.xsd
+                        http://shardingsphere.apache.org/schema/shardingsphere/masterslave
+                        http://shardingsphere.apache.org/schema/shardingsphere/masterslave/master-slave.xsd 
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context.xsd
                         http://www.springframework.org/schema/tx
@@ -22,20 +25,34 @@
         <property name="password" value="fx1212" />
     </bean>
 
-    <bean id="ds1" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+    <bean id="slave0" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://192.168.156.138:3306/sharding_orders_139?serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+        <property name="username" value="root" />
+        <property name="password" value="fx1212" />
+    </bean>
+
+    <bean id="ms1" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="jdbcUrl" value="jdbc:mysql://192.168.156.140:3306/sharding_orders_140?serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
         <property name="password" value="fx1212" />
     </bean>
 
+    <master-slave:load-balance-algorithm id="msStrategy" type="random" />
 
 <sharding:data-source id="shardingDataSource">
-    <sharding:sharding-rule data-source-names="ds0,ds1">
+    <sharding:sharding-rule data-source-names="ds0,slave0,ms1">
+        <sharding:master-slave-rules>
+            <sharding:master-slave-rule id="ms0" master-data-source-name="ds0" slave-data-source-names="slave0"
+                strategy-ref="msStrategy"/>
+        </sharding:master-slave-rules>
+
         <sharding:table-rules>
-            <sharding:table-rule logic-table="orders" actual-data-nodes="ds$->{0..1}.orders_$->{1..2}"
+            <sharding:table-rule logic-table="orders" actual-data-nodes="ms$->{0..1}.orders_$->{1..2}"
                                  database-strategy-ref="databaseStrategy" table-strategy-ref="OrdersTableStrategy" />
-            <sharding:table-rule logic-table="order_item" actual-data-nodes="ds$->{0..1}.order_item_$->{1..2}"/>
+            <sharding:table-rule logic-table="order_item" actual-data-nodes="ms$->{0..1}.order_item_$->{1..2}"
+                                 database-strategy-ref="databaseStrategy" table-strategy-ref="OrderItemTableStrategy"/>
         </sharding:table-rules>
 
         <sharding:broadcast-table-rules>
@@ -50,14 +67,13 @@
 
 
     <sharding:inline-strategy id="databaseStrategy" sharding-column="user_id"
-                              algorithm-expression="ds$->{user_id % 2}"/>
+                              algorithm-expression="ms$->{user_id % 2}"/>
 
     <sharding:inline-strategy id="OrdersTableStrategy" sharding-column="order_id"
                               algorithm-expression="orders_$->{order_id % 2 + 1}"/>
 
-
-<!--    <sharding:inline-strategy id="OrderItemTableStrategy" sharding-column="order_id"-->
-<!--                              algorithm-expression="order_item_$->{order_id % 2 + 1}"/>-->
+    <sharding:inline-strategy id="OrderItemTableStrategy" sharding-column="order_id"
+                              algorithm-expression="order_item_$->{order_id % 2 + 1}"/>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="shardingDataSource"/>
