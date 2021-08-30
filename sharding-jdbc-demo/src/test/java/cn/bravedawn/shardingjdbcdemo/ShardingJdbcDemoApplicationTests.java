@@ -31,7 +31,7 @@ class ShardingJdbcDemoApplicationTests {
 	public void insert(){
 		Orders orders = new Orders();
 
-		orders.setOrderId(19);
+		orders.setOrderId("19");
 		orders.setUserId(2);
 		orders.setOrderAmount(BigDecimal.TEN);
 		orders.setOrderStatus(0);
@@ -70,14 +70,14 @@ class ShardingJdbcDemoApplicationTests {
 
 	@Test
     public void testSelectOrderItem() {
-		List<OrderItem> orderItems = orderItemMapper.selectByOrderIdAndUserId(19);
+		List<OrderItem> orderItems = orderItemMapper.selectByOrderIdAndUserId("19");
 		orderItems.stream().forEach(o -> System.out.println(o));
     }
 
     @Test
     public void testMsOrder() {
 		OrdersExample example = new OrdersExample();
-		example.createCriteria().andUserIdEqualTo(2).andOrderIdEqualTo(19);
+		example.createCriteria().andUserIdEqualTo(2).andOrderIdEqualTo("19");
 		List<Orders> ordersList = ordersMapper.selectByExample(example);
 
 		for (int i = 0; i < 10; i++) {
@@ -87,6 +87,17 @@ class ShardingJdbcDemoApplicationTests {
 				System.out.println("orderAmount=" + o.getOrderAmount());
 			});
 		}
+	}
+
+
+	@Test
+	public void insertByCustomOrderIdInsert(){
+		Orders orders = new Orders();
+		orders.setUserId(2);
+		orders.setOrderAmount(BigDecimal.TEN);
+		orders.setOrderStatus(0);
+
+		ordersMapper.insertSelective(orders);
 	}
 
 

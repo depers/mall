@@ -208,4 +208,12 @@
       user_id = #{userId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByOrderIdAndUserId" parameterType="string" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from
+        order_item
+    where order_id = #{orderId}
+  </select>
 </mapper>

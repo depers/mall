@@ -56,18 +56,18 @@
 		</dependency>
 
 		<!-- for spring namespace -->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.shardingsphere</groupId>-->
-<!--			<artifactId>sharding-jdbc-spring-namespace</artifactId>-->
-<!--			<version>${sharding-sphere.version}</version>-->
-<!--		</dependency>-->
-
-		<!-- for spring boot -->
 		<dependency>
 			<groupId>org.apache.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+			<artifactId>sharding-jdbc-spring-namespace</artifactId>
 			<version>${sharding-sphere.version}</version>
 		</dependency>
+
+		<!-- for spring boot -->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.shardingsphere</groupId>-->
+<!--			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
+<!--			<version>${sharding-sphere.version}</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
