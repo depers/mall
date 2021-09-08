@@ -31,7 +31,7 @@ class ShardingJdbcDemoApplicationTests {
 	public void insert(){
 		Orders orders = new Orders();
 
-		orders.setOrderId("19");
+		orders.setOrderId(19L);
 		orders.setUserId(2);
 		orders.setOrderAmount(BigDecimal.TEN);
 		orders.setOrderStatus(0);
@@ -77,7 +77,7 @@ class ShardingJdbcDemoApplicationTests {
     @Test
     public void testMsOrder() {
 		OrdersExample example = new OrdersExample();
-		example.createCriteria().andUserIdEqualTo(2).andOrderIdEqualTo("19");
+		example.createCriteria().andUserIdEqualTo(2).andOrderIdEqualTo(19L);
 		List<Orders> ordersList = ordersMapper.selectByExample(example);
 
 		for (int i = 0; i < 10; i++) {

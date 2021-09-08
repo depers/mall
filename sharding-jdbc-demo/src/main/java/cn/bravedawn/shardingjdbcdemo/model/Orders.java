@@ -3,7 +3,7 @@ package cn.bravedawn.shardingjdbcdemo.model;
 import java.math.BigDecimal;
 
 public class Orders {
-    private String orderId;
+    private Long orderId;
 
     private BigDecimal orderAmount;
 
@@ -11,12 +11,12 @@ public class Orders {
 
     private Integer userId;
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public BigDecimal getOrderAmount() {

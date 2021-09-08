@@ -44,7 +44,7 @@
         </javaClientGenerator>
 
         <table schema="sharding_orders_139" tableName="orders_1" domainObjectName="Orders" />
-        <table schema="sharding_orders_139" tableName="area" domainObjectName="Area" />
-        <table schema="sharding_orders_139" tableName="order_item_1" domainObjectName="OrderItem" />
+<!--        <table schema="sharding_orders_139" tableName="area" domainObjectName="Area" />-->
+<!--        <table schema="sharding_orders_139" tableName="order_item_1" domainObjectName="OrderItem" />-->
     </context>
 </generatorConfiguration>

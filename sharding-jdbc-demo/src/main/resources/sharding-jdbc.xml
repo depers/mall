@@ -6,6 +6,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:sharding="http://shardingsphere.apache.org/schema/shardingsphere/sharding"
        xmlns:master-slave="http://shardingsphere.apache.org/schema/shardingsphere/masterslave"
+       xmlns:bean="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://shardingsphere.apache.org/schema/shardingsphere/sharding
@@ -15,7 +16,7 @@
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context.xsd
                         http://www.springframework.org/schema/tx
-                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+                        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <context:annotation-config />
 
     <bean id="ds0" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -51,7 +52,7 @@
             <sharding:table-rules>
                 <sharding:table-rule logic-table="orders" actual-data-nodes="ms$->{0..1}.orders_$->{1..2}"
                                      database-strategy-ref="databaseStrategy" table-strategy-ref="standard"
-                                     key-generator-ref="uuid"/>
+                                     key-generator-ref="snowflake"/>
 
                 <sharding:table-rule logic-table="order_item" actual-data-nodes="ms$->{0..1}.order_item_$->{1..2}"
                                      database-strategy-ref="databaseStrategy" table-strategy-ref="OrderItemTableStrategy"/>
@@ -67,7 +68,15 @@
         </sharding:sharding-rule>
     </sharding:data-source>
 
-    <sharding:key-generator id="uuid" column="order_id" type="UUID"/>
+    <sharding:key-generator id="snowflake" column="order_id" type="SNOWFLAKE" props-ref="snow"/>
+
+    <bean:properties id="snow">
+        <!--worker.id：工作机器id，取值范围在0到1024
+            max.tolerate.time.difference.milliseconds：最大容忍回调时间，单位ms
+         -->
+        <prop key="worker.id">678</prop>
+        <prop key="max.tolerate.time.difference.milliseconds">10</prop>
+    </bean:properties>
 
     <bean id="uuidSharding" class="cn.bravedawn.shardingjdbcdemo.sharding.UuidSharding"/>
 
