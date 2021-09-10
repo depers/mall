@@ -43,8 +43,9 @@ public class HelloController {
     }
 
     @GetMapping("getType")
-    public HashMap getType(HttpServletRequest request, HttpServletResponse response){
+    public HashMap getType(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
         HashMap map = new HashMap();
+        Thread.sleep(10000);
         map.put("name", "全渠道");
         response.setContentType("application/json;charset=UTF-8");
         return map;
