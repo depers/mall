@@ -6,7 +6,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -23,7 +22,7 @@ import java.net.SocketTimeoutException;
  */
 
 @Slf4j
-public class TimeoutExample {
+public class TimeoutMergeCatchExample {
 
     public static void main(String[] args) throws IOException {
         log.info("request start-------------------");
@@ -41,16 +40,12 @@ public class TimeoutExample {
         CloseableHttpResponse response1 = null;
 
         try {
+            int i = 1/0;
             response1 = httpclient.execute(httpGet);
+        } catch (SocketTimeoutException | ConnectException e) {
+            log.error("---TimeoutException={}", e.getMessage(), e);
         } catch (Throwable t) {
-            if (t instanceof SocketTimeoutException) {
-                log.error("---SocketTimeoutException={}", t.getMessage(), t);
-            } else if (t instanceof ConnectException) {
-                log.error("---ConnectTimeoutException={}", t.getMessage(), t);
-            } else {
-                log.error("---other exception ", t);
-            }
-
+            log.error("---other exception ", t);
         }
 
         try {
