@@ -17,7 +17,7 @@ public class XaServiceTest {
     private XaService xaService;
 
     @Test
-    public void testInsert() {
+    public void testInsert() throws InterruptedException {
         xaService.testXa();
 
     }

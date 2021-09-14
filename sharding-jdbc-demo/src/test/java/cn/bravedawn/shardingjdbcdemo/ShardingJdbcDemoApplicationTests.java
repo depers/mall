@@ -4,9 +4,12 @@ import cn.bravedawn.shardingjdbcdemo.dao.AreaMapper;
 import cn.bravedawn.shardingjdbcdemo.dao.OrderItemMapper;
 import cn.bravedawn.shardingjdbcdemo.dao.OrdersMapper;
 import cn.bravedawn.shardingjdbcdemo.model.*;
+import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -100,6 +103,43 @@ class ShardingJdbcDemoApplicationTests {
 		ordersMapper.insertSelective(orders);
 	}
 
+
+	@Test
+	@Transactional
+	public void testDistributedTransaction(){
+		Orders orders = new Orders();
+		orders.setUserId(1);
+		orders.setOrderAmount(BigDecimal.TEN);
+		orders.setOrderStatus(0);
+		ordersMapper.insertSelective(orders);
+
+
+		Orders orders2 = new Orders();
+		orders2.setUserId(2);
+		orders2.setOrderAmount(BigDecimal.TEN);
+		orders2.setOrderStatus(0);
+		ordersMapper.insertSelective(orders2);
+	}
+
+	@Test
+	@Transactional
+	@ShardingTransactionType(TransactionType.XA)
+	public void testDistributedTransactionThrow(){
+		Orders orders = new Orders();
+		orders.setUserId(1);
+		orders.setOrderAmount(BigDecimal.TEN);
+		orders.setOrderStatus(0);
+		ordersMapper.insertSelective(orders);
+
+		int i = 1/0;
+
+		Orders orders2 = new Orders();
+		orders2.setUserId(2);
+		orders2.setOrderAmount(BigDecimal.TEN);
+		orders2.setOrderStatus(0);
+		ordersMapper.insertSelective(orders2);
+
+	}
 
 
 }
