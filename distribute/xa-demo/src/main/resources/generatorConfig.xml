@@ -21,7 +21,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.156.139:3306/xa-139"
+                        connectionURL="jdbc:mysql://192.168.156.140:3306/xa-140"
                         userId="root"
                         password="fx1212">
             <property name="nullCatalogMeansCurrent" value="true"/>
@@ -37,16 +37,16 @@
             <property name="suppressAllComments" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="."  targetProject="./src/main/resources/mapper/db139">
+        <sqlMapGenerator targetPackage="."  targetProject="./src/main/resources/mapper/db140">
             <property name="enableSubPackages" value="true" />
             <property name="suppressAllComments" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.bravedawn.xademo.dao.db139"  targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.bravedawn.xademo.dao.db140"  targetProject="./src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="suppressAllComments" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user" domainObjectName="User" />
+        <table tableName="orders" domainObjectName="Orders" />
     </context>
 </generatorConfiguration>
