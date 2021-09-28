@@ -12,8 +12,10 @@ public interface HttpClient {
     int before();
 
 
-    default void send() {
-        before();
+    default int send() {
+        int result = before();
+        System.out.println("------------HttpClient-----------result=" + result);
+        return result + 1;
     }
 
 }
