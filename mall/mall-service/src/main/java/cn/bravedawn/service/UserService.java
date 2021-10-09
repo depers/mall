@@ -26,4 +26,10 @@ public interface UserService {
      * 检索用户名和密码是否匹配，用于登录
      */
     Users queryUserForLogin(String username, String password);
+
+    /**
+     * 前端获取操作token
+     * @return
+     */
+    String getOperatorToken();
 }

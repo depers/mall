@@ -5,8 +5,11 @@ import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -36,7 +39,7 @@ public class ServiceLogAspect {
      * @return
      * @throws Throwable
      */
-    @Around("execution(* cn.bravedawn.service.impl..*.*(..))")
+    @Around("execution(* cn.bravedawn.controller..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
 
         log.info("====== 开始执行 {}.{} ======",
@@ -45,6 +48,9 @@ public class ServiceLogAspect {
 
         // 记录开始时间
         long begin = System.currentTimeMillis();
+
+        // 幂等性校验
+        CheckIdempotent(joinPoint);
 
         // 执行目标 service
         Object result = joinPoint.proceed();
@@ -62,6 +68,12 @@ public class ServiceLogAspect {
         }
 
         return result;
+    }
+
+    private void CheckIdempotent(ProceedingJoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+
+
     }
 
 }

@@ -1,20 +1,24 @@
 package cn.bravedawn.service.impl;
 
 import cn.bravedawn.bo.UserBO;
+import cn.bravedawn.enums.RedisKeyEnum;
 import cn.bravedawn.enums.Sex;
 import cn.bravedawn.mapper.UsersMapper;
 import cn.bravedawn.pojo.Users;
 import cn.bravedawn.service.UserService;
 import cn.bravedawn.utils.DateUtil;
 import cn.bravedawn.utils.MD5Utils;
+import cn.bravedawn.utils.RedisOperator;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @Author 冯晓
@@ -28,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private Sid sid;
+
+    @Autowired
+    private RedisOperator redisOperator;
+
 
     private static final String USER_FACE = "http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png";
 
@@ -85,5 +93,13 @@ public class UserServiceImpl implements UserService {
         Users result = usersMapper.selectOneByExample(userExample);
 
         return result;
+    }
+
+    @Override
+    public String getOperatorToken() {
+        String token = UUID.randomUUID().toString();
+        String key = String.format(RedisKeyEnum.IDEMPOTENT_TOKEN_KEY.getKey(), token);
+        redisOperator.set(key, "1", RedisKeyEnum.IDEMPOTENT_TOKEN_KEY.getExpireTime());
+        return token;
     }
 }

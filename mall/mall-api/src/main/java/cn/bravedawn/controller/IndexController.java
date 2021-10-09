@@ -5,6 +5,7 @@ import cn.bravedawn.pojo.Carousel;
 import cn.bravedawn.pojo.Category;
 import cn.bravedawn.service.CarouselService;
 import cn.bravedawn.service.CategoryService;
+import cn.bravedawn.service.UserService;
 import cn.bravedawn.utils.JsonResult;
 import cn.bravedawn.utils.JsonUtils;
 import cn.bravedawn.utils.RedisOperator;
@@ -41,6 +42,9 @@ public class IndexController {
 
     @Autowired
     private RedisOperator redisOperator;
+
+    @Autowired
+    private UserService userService;
 
     @ApiOperation(value = "获取首页轮播图列表", notes = "获取首页轮播图列表", httpMethod = "GET")
     @GetMapping("/carousel")
@@ -134,5 +138,12 @@ public class IndexController {
 
         List<NewItemsVO> list = categoryService.getSixNewItemsLazy(rootCatId);
         return JsonResult.ok(list);
+    }
+
+
+    @ApiOperation(value = "前端幂等性控制获取token", notes = "前端幂等性控制获取token", httpMethod = "GET")
+    @GetMapping("token")
+    public JsonResult getToken() {
+        return JsonResult.ok(userService.getOperatorToken());
     }
 }
