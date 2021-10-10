@@ -1,5 +1,6 @@
 package cn.bravedawn.controller;
 
+import cn.bravedawn.annotation.CheckIdempotent;
 import cn.bravedawn.bo.ShopcartBO;
 import cn.bravedawn.bo.SubmitOrderBO;
 import cn.bravedawn.enums.OrderStatusEnum;
@@ -47,6 +48,7 @@ public class OrderController extends BaseController{
     @Autowired
     private RedisOperator redisOperator;
 
+    @CheckIdempotent
     @ApiOperation(value = "用户下单", notes = "用户下单", httpMethod = "POST")
     @PostMapping("/create")
     public JsonResult create(@RequestBody SubmitOrderBO submitOrderBO,

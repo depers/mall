@@ -8,7 +8,7 @@ package cn.bravedawn.enums;
  */
 public enum RedisKeyEnum {
 
-    IDEMPOTENT_TOKEN_KEY("mall:redis:idempotent:token_{}", 60),
+    IDEMPOTENT_TOKEN_KEY("mall:redis:idempotent:token_%s", 60),
     ;
 
     private String key;

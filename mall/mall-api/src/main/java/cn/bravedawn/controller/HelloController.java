@@ -1,5 +1,6 @@
 package cn.bravedawn.controller;
 
+import cn.bravedawn.annotation.CheckIdempotent;
 import cn.bravedawn.mapper.StuMapperCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,6 +43,7 @@ public class HelloController {
         return "OK";
     }
 
+    @CheckIdempotent
     @GetMapping("getType")
     public HashMap getType(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
         HashMap map = new HashMap();
@@ -50,6 +52,8 @@ public class HelloController {
         response.setContentType("application/json;charset=UTF-8");
         return map;
     }
+
+
 
 
 }

@@ -8,5 +8,7 @@ package cn.bravedawn.constant;
  */
 public class MallConstant {
 
+    public final static String NONE_MEAN_REDIS_VALUE = "1";
+
 
 }

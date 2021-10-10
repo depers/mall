@@ -1,21 +1,34 @@
 package cn.bravedawn.aspect;
 
 
+import cn.bravedawn.annotation.CheckIdempotent;
+import cn.bravedawn.constant.MallConstant;
+import cn.bravedawn.enums.ExceptionEnum;
+import cn.bravedawn.enums.RedisKeyEnum;
+import cn.bravedawn.exception.BaseRunTimeException;
+import cn.bravedawn.utils.HttpUtils;
+import cn.bravedawn.utils.RedisOperator;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.Joinpoint;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 @Slf4j
 public class ServiceLogAspect {
+
+
+    @Autowired
+    private RedisOperator redisOperator;
 
     /**
      * AOP通知：
@@ -70,9 +83,31 @@ public class ServiceLogAspect {
         return result;
     }
 
-    private void CheckIdempotent(ProceedingJoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
+    /**
+     * 幂等性校验
+     * @param joinPoint
+     */
+    private void CheckIdempotent(ProceedingJoinPoint joinPoint) {
+        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
+        CheckIdempotent checkidempotent = ms.getMethod().getAnnotation(CheckIdempotent.class);
+        if (checkidempotent == null) {
+            return;
+        }
+
+        String headerName = checkidempotent.value();
+        if (StringUtils.isEmpty(headerName)) {
+            throw new IllegalArgumentException("CheckIdempotent value is empty.");
+        }
+
+        String headerValue = HttpUtils.getHttpHeaderValue(headerName);
+        String key = String.format(RedisKeyEnum.IDEMPOTENT_TOKEN_KEY.getKey(), headerValue);
+        String value = redisOperator.get(key);
+        if (StringUtils.isNotEmpty(value)) {
+            throw new BaseRunTimeException(ExceptionEnum.IDEMPOTENT_EXCEPTION);
+        } else {
+            redisOperator.set(key, MallConstant.NONE_MEAN_REDIS_VALUE, RedisKeyEnum.IDEMPOTENT_TOKEN_KEY.getExpireTime());
+        }
 
     }
 
