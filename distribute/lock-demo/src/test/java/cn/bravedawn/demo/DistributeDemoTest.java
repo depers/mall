@@ -97,10 +97,12 @@ public class DistributeDemoTest {
         RLock rLock = redissonClient.getLock("order");
 
         try {
-            log.info("请求锁------------");
-            rLock.lock(30, TimeUnit.SECONDS);
-            Thread.sleep(60000);
+            log.info("请求锁, count={}, name={}", rLock.getHoldCount(), rLock.getName());
+            rLock.lock(60, TimeUnit.SECONDS);
             log.info("我获得了锁！");
+
+            Thread.sleep(20000);
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -110,6 +112,10 @@ public class DistributeDemoTest {
 
     }
 
+    /**
+     * 测试时先执行testRedissonLock方法，然后再启动该方法
+     * redisson trylock方法是阻塞的，如果拿不到锁他就会等待waittime，如果waittime时间到了还没获取到锁就放弃了
+     */
     @Test
     public void testRedissonLockNotTry() throws InterruptedException {
         Config config = new Config();
@@ -117,16 +123,21 @@ public class DistributeDemoTest {
         RedissonClient redissonClient = Redisson.create(config);
 
         RLock rLock = redissonClient.getLock("order");
+        log.info("请求锁, count={}, name={}", rLock.getHoldCount(), rLock.getName());
 
-        log.info("请求锁------------");
         rLock.lock(30, TimeUnit.SECONDS);
-        Thread.sleep(60000);
         log.info("我获得了锁！");
+
+        Thread.sleep(10000);
         rLock.unlock();
         log.info("我释放了锁！！");
 
     }
 
+    /**
+     * 测试时先执行testRedissonLock方法，然后再启动该方法
+     * redisson trylock方法是非阻塞的，如果拿不到锁他就会等待waittime，如果waittime时间到了还没获取到锁就放弃了
+     */
     @Test
     public void testRedissonTrylock() {
         Config config = new Config();
