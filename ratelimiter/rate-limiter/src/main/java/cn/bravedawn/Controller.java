@@ -3,6 +3,7 @@ package cn.bravedawn;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
@@ -67,4 +68,14 @@ public class Controller {
         log.info("Nginx success");
         return "success";
     }
+
+    @GetMapping("/nginx-conn")
+    public String nginxConn(@RequestParam(defaultValue = "0") int secs) {
+        try {
+            Thread.sleep(1000 * secs);
+        } catch (Exception e) {
+        }
+        return "success";
+    }
+
 }
