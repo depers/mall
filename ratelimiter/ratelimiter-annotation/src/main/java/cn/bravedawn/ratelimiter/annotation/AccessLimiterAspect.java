@@ -57,7 +57,7 @@ public class AccessLimiterAspect {
         // 如果没设置methodkey, 从调用方法签名生成自动一个key
         if (!StringUtils.hasText(key)) {
             Class[] type = method.getParameterTypes();
-            key = method.getClass() + method.getName();
+            key = method.getDeclaringClass() + "." + method.getName();
 
             String paramTypes = Arrays.stream(type)
                     .map(Class::getName)

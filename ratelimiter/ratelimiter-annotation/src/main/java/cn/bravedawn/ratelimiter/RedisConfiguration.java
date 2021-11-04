@@ -15,8 +15,8 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 public class RedisConfiguration {
 
     @Bean
-    public DefaultRedisScript<Boolean> loadRedisScript() {
-        DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript();
+    public DefaultRedisScript loadRedisScript() {
+        DefaultRedisScript redisScript = new DefaultRedisScript();
         redisScript.setLocation(new ClassPathResource("ratelimiter.lua"));
         redisScript.setResultType(Boolean.class);
         return redisScript;
