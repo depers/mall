@@ -1,4 +1,4 @@
-package cn.bravedawn.jackson.example;
+package cn.bravedawn.jackson.example.ignorenullfiled;
 
 import cn.bravedawn.jackson.dto.Item;
 import cn.bravedawn.jackson.dto.User;

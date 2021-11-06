@@ -1,6 +1,6 @@
 package cn.bravedawn.jackson.dto;
 
-import cn.bravedawn.jackson.example.ItemSerializer;
+import cn.bravedawn.jackson.example.ignorenullfiled.ItemSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
