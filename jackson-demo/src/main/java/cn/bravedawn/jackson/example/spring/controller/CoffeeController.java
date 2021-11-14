@@ -26,4 +26,19 @@ public class CoffeeController {
                 .setName(name);
     }
 
+    /**
+     * 校验@RequestParam(required=true)的处理情况
+     * @param brand
+     * @param name
+     * @return
+     */
+    @GetMapping("/v2/coffee")
+    public Coffee getCoffeeV2(@RequestParam(required = false) String brand,
+                              @RequestParam String name) {
+        return new Coffee()
+                .setBrand(brand)
+                .setDate(LocalDateTime.now())
+                .setName(name);
+    }
+
 }
