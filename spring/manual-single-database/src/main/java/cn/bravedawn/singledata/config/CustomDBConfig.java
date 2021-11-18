@@ -1,12 +1,17 @@
 package cn.bravedawn.singledata.config;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -26,19 +31,25 @@ import java.io.IOException;
 public class CustomDBConfig {
 
 
+    @Autowired
+    private Environment env;
+
     // 声明数据源
     @Bean
-    @ConfigurationProperties("spring.datasource.single")
     public DataSource singleDataSource() {
-        return new MysqlDataSource();
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setUser(env.getProperty("spring.datasource.single.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.single.password"));
+        dataSource.setUrl(env.getProperty("spring.datasource.single.url"));
+        return dataSource;
     }
 
     @Bean
-    public SqlSessionFactoryBean customFactory(@Qualifier("singleDataSource") DataSource dataSource) throws IOException {
+    public SqlSessionFactory customFactory(@Qualifier("singleDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("mybatis/mapper/*.xml"));
-        return bean;
+        return bean.getObject();
     }
 
     @Bean
