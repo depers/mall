@@ -8,7 +8,8 @@
     <artifactId>spring-cloud-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>eurake/eurake-server</module>
+        <module>eureka/eureka-server</module>
+        <module>eureka/eureka-client</module>
     </modules>
     <packaging>pom</packaging>
 
