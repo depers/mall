@@ -3,7 +3,7 @@ package cn.bravedawn.springcloud;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author : depers
@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @date : Created in 2021/11/24 21:53
  */
 @SpringBootApplication
-@EnableEurekaClient
+@EnableDiscoveryClient
 public class EurekaClientApplication {
 
     public static void main(String[] args) {
