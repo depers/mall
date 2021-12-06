@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
  * @description:
  * @date : Created in 2021/11/26 7:36
  */
+
 @Configuration
 @Import({ DogConfig.class, CatConfig.class })
 public class MammalConfiguration {
