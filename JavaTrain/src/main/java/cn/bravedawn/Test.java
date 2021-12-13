@@ -14,15 +14,21 @@ public class Test {
     private static final String USER_DIR = "user.dir";
 
 
+    //public static void main(String[] args) {
+    //    System.out.println(System.getProperty(USER_DIR));
+    //
+    //    System.out.println(Charset.defaultCharset());
+    //
+    //    System.out.println(Charset.availableCharsets().toString());
+    //
+    //    System.out.println(StandardCharsets.UTF_8);
+    //
+    //    System.out.println(Charset.forName("UTF-8"));
+    //}
+
+
     public static void main(String[] args) {
-        System.out.println(System.getProperty(USER_DIR));
-
-        System.out.println(Charset.defaultCharset());
-
-        System.out.println(Charset.availableCharsets().toString());
-
-        System.out.println(StandardCharsets.UTF_8);
-
-        System.out.println(Charset.forName("UTF-8"));
+        byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        System.out.println(iv.length);
     }
 }

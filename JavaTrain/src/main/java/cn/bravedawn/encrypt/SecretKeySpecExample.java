@@ -6,7 +6,7 @@ public class SecretKeySpecExample {
 
 
     public static void main(String[] args) {
-        SecretKeySpec
+        //SecretKeySpec
     }
 
 }
