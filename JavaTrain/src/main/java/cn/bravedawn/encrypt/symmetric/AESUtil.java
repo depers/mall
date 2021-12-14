@@ -110,8 +110,8 @@ public class AESUtil {
         String content = "hello world";
 
         String enStr = aesEncrypt(content, key);
-        String deStr = aesDecrypt(enStr, key);
         System.out.println(enStr);
+        String deStr = aesDecrypt(enStr, key);
         System.out.println(deStr);
 
     }
