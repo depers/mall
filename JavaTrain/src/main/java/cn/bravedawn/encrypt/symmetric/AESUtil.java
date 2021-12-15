@@ -19,6 +19,10 @@ import java.util.Base64;
 public class AESUtil {
 
     /**
+     * 这个工具类不推荐使用
+     */
+
+    /**
      * 加密
      * @param content 加密内容
      * @param encryptKey 密钥

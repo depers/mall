@@ -27,12 +27,12 @@ public class Base4Example {
 
         Base64.Encoder encoder = Base64.getEncoder();
         String encodeStrA = encoder.encodeToString(text.getBytes(StandardCharsets.UTF_8));
-        log.info("basic Base64 encode: {}.", encodeStrA);
+        log.info("textByte: {}, basic Base64 encode: {}.", text.getBytes(StandardCharsets.UTF_8), encodeStrA);
 
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] decodeByteArr = decoder.decode(encodeStrA);
         String decodeStrA = new String(decodeByteArr, StandardCharsets.UTF_8);
-        log.info("basic Base64 decode: {}.", decodeStrA);
+        log.info("textByte: {}, basic Base64 decode: {}.", decodeByteArr, decodeStrA);
     }
 
     public static void urlSafeRun(){

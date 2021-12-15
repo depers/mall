@@ -2,6 +2,7 @@ package cn.bravedawn;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 /**
  * @author : depers
@@ -28,7 +29,6 @@ public class Test {
 
 
     public static void main(String[] args) {
-        byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        System.out.println(iv.length);
+        System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
     }
 }
