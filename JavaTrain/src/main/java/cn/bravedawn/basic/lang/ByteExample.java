@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.type;
+package cn.bravedawn.basic.lang;
 
 public class ByteExample {
 
