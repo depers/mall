@@ -1,5 +1,6 @@
-package cn.bravedawn.importannotation.animal;
+package cn.bravedawn.importannotation.method3;
 
+import cn.bravedawn.importannotation.animal.Loin;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;

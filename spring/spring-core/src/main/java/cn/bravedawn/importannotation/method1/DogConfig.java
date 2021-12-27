@@ -1,5 +1,6 @@
-package cn.bravedawn.importannotation.animal;
+package cn.bravedawn.importannotation.method1;
 
+import cn.bravedawn.importannotation.animal.Dog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

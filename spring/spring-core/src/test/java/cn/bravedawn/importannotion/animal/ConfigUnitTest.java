@@ -1,6 +1,10 @@
 package cn.bravedawn.importannotion.animal;
 
 import cn.bravedawn.importannotation.animal.*;
+import cn.bravedawn.importannotation.animal.Cat;
+import cn.bravedawn.importannotation.method1.CatConfig;
+import cn.bravedawn.importannotation.animal.Dog;
+import cn.bravedawn.importannotation.method1.DogConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

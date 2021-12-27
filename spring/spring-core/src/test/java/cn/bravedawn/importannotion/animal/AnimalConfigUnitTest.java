@@ -1,7 +1,7 @@
 package cn.bravedawn.importannotion.animal;
 
 
-import cn.bravedawn.importannotation.animal.AnimalConfiguration;
+import cn.bravedawn.importannotation.method1.AnimalConfiguration;
 import cn.bravedawn.importannotation.animal.Bird;
 import cn.bravedawn.importannotation.animal.Cat;
 import cn.bravedawn.importannotation.animal.Dog;

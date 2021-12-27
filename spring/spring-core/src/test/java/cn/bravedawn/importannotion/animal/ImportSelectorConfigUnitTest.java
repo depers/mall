@@ -2,6 +2,8 @@ package cn.bravedawn.importannotion.animal;
 
 
 import cn.bravedawn.importannotation.animal.*;
+import cn.bravedawn.importannotation.method2.Horse;
+import cn.bravedawn.importannotation.method2.ImportSelectorConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

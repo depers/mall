@@ -1,4 +1,4 @@
-package cn.bravedawn.importannotation.animal;
+package cn.bravedawn.importannotation.method3;
 
 import org.springframework.context.annotation.Import;
 

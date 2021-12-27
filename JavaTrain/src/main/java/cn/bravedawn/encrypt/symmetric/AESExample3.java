@@ -25,9 +25,9 @@ public class AESExample3 {
 
     /**
      * 加密
-     * @param plainText
-     * @param key
-     * @param iv
+     * @param plainText 明文
+     * @param key 密钥
+     * @param iv 随机值
      * @return
      * @throws NoSuchPaddingException
      * @throws NoSuchAlgorithmException
@@ -48,8 +48,8 @@ public class AESExample3 {
 
     /**
      * 解密
-     * @param cipherText
-     * @param key
+     * @param cipherText 密文
+     * @param key 密钥
      * @return
      * @throws NoSuchPaddingException
      * @throws NoSuchAlgorithmException
