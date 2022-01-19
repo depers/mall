@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomSpringEventListener implements ApplicationListener<CustomSpringEvent> {
 
-    private final Logger log = LogManager.getLogger(CustomSpringEventListener.class);
+    private static final Logger log = LogManager.getLogger(CustomSpringEventListener.class);
 
     @Override
     public void onApplicationEvent(CustomSpringEvent event) {

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomSpringEventPublisher {
 
-    private final Logger log = LogManager.getLogger(CustomSpringEventPublisher.class);
+    private static final Logger log = LogManager.getLogger(CustomSpringEventPublisher.class);
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;

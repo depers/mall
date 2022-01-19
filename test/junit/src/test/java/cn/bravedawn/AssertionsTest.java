@@ -90,4 +90,10 @@ public class AssertionsTest {
 
     }
 
+
+    @Test
+    void testassertThrows() {
+        Assertions.assertThrows()
+    }
+
 }

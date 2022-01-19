@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="root"/>
+        <property name="password" value="fx1212"/>
+    </properties>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- <setting name="aggressiveLazyLoading" value="false"/> -->
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="role" type="cn.bravedawn.pojo.Role"/>
+    </typeAliases>
+
+<!--    <typeHandlers>-->
+<!--        <typeHandler jdbcType="VARCHAR" javaType="string" handler="org.apache.ibatis.rcode.typehandler.MyStringHandler"/>-->
+<!--    </typeHandlers>-->
+
+    <!--https://pagehelper.github.io/docs/howtouse/-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+    <!-- 定义数据库的信息，默认使用development数据库构建环境 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 定义映射器 -->
+    <mappers>
+        <package name="cn.bravedawn.mapper" />
+    </mappers>
+
+</configuration>

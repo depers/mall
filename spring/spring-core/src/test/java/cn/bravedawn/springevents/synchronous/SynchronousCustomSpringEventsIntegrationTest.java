@@ -1,6 +1,5 @@
 package cn.bravedawn.springevents.synchronous;
 
-import cn.bravedawn.importannotation.method1.MammalConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

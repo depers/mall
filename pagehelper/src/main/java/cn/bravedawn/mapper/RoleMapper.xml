@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bravedawn.mapper.RoleMapper">
+
+    <resultMap type="role" id="roleMap">
+        <id column="id" property="id" javaType="long" jdbcType="BIGINT" />
+        <result column="role_name" property="roleName" javaType="string" jdbcType="VARCHAR" />
+        <result column="note" property="note" javaType="string" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="columns">
+        id, role_name, note
+    </sql>
+
+    <select id="selectListByRoleName" parameterType="string" resultMap="roleMap">
+        select
+            <include refid="columns"/>
+        from
+            role
+        where
+            role_name = #{roleName}
+    </select>
+
+
+</mapper>
