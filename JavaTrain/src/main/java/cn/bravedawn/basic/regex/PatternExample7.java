@@ -12,6 +12,10 @@ import java.util.regex.Pattern;
  */
 public class PatternExample7 {
 
+    /**
+     * 编写一个简单的模板引擎，利用正则表达式实现这个功能
+     */
+
     public static void main(String[] args) {
         String s = "Hello, ${name}! You are learning ${lang}!";
         var map = new HashMap<String, String>();
