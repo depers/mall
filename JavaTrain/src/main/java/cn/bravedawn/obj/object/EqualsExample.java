@@ -1,4 +1,4 @@
-package cn.bravedawn.obj;
+package cn.bravedawn.obj.object;
 
 import java.util.Objects;
 

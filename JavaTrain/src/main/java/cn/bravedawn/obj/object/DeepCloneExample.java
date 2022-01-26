@@ -1,21 +1,22 @@
-package cn.bravedawn.obj;
+package cn.bravedawn.obj.object;
 
 import java.util.Arrays;
 
 /**
  * @author : depers
  * @program : JavaTrain
- * @date : Created in 2022/1/21 17:21
+ * @date : Created in 2022/1/21 17:35
  */
-public class ShallowCloneExample implements Cloneable{
+public class DeepCloneExample implements Cloneable {
 
     /**
-     * 拷贝对象和原始对象的属性的引用类型引用的是同一个对象。
+     * 拷贝对象和原始对象的属性的引用类型引用是不同对象
      */
+
 
     private int[] arr;
 
-    public ShallowCloneExample() {
+    public DeepCloneExample() {
         arr = new int[10];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = i;
@@ -34,18 +35,23 @@ public class ShallowCloneExample implements Cloneable{
         System.out.println(Arrays.toString(this.arr));
     }
 
+
     @Override
-    protected ShallowCloneExample clone() throws CloneNotSupportedException {
-        return (ShallowCloneExample) super.clone();
+    protected DeepCloneExample clone() throws CloneNotSupportedException {
+        DeepCloneExample result = (DeepCloneExample) super.clone();
+        // 手动翻写arr对象
+        result.arr = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result.arr[i] = arr[i];
+        }
+        return result;
     }
 
-
     public static void main(String[] args) {
-        ShallowCloneExample e1 = new ShallowCloneExample();
-        ShallowCloneExample e2 = null;
+        DeepCloneExample e1 = new DeepCloneExample();
+        DeepCloneExample e2 = null;
 
         try {
-            // 克隆后e1和e2是两个实例变量其实引用的是不同的对象引用
             e2 = e1.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -69,7 +75,8 @@ public class ShallowCloneExample implements Cloneable{
         System.out.println(e1.hashCode() == e2.hashCode()); // false
 
         System.out.println("打印对象的属性");
-        System.out.println(e1.arr.equals(e2.arr)); // true
-        System.out.println(e1.arr.hashCode() == e2.arr.hashCode()); // true
+        System.out.println(e1.arr.equals(e2.arr)); // false
+        System.out.println(e1.arr.hashCode() == e2.arr.hashCode()); // false
     }
+
 }

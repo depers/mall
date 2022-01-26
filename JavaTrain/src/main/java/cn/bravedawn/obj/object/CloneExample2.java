@@ -1,4 +1,4 @@
-package cn.bravedawn.obj;
+package cn.bravedawn.obj.object;
 
 /**
  * @author : depers
@@ -19,7 +19,7 @@ public class CloneExample2 {
         try {
             CloneExample2 e2 = e1.clone();
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace(); // java.lang.CloneNotSupportedException: cn.bravedawn.obj.CloneExample2
+            e.printStackTrace(); // java.lang.CloneNotSupportedException: cn.bravedawn.obj.object.CloneExample2
         }
     }
 
