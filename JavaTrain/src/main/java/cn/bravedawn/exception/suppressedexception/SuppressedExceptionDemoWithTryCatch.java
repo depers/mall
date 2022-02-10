@@ -1,4 +1,4 @@
-package cn.bravedawn.exception;
+package cn.bravedawn.exception.suppressedexception;
 
 import static java.lang.System.err;
 
