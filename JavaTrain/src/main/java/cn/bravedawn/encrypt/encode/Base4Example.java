@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.base64;
+package cn.bravedawn.encrypt.encode;
 
 import lombok.extern.slf4j.Slf4j;
 

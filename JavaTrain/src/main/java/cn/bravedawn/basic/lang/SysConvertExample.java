@@ -15,7 +15,7 @@ public class SysConvertExample {
         // 36进制
         System.out.println(Integer.toString(100, 36));
 
-        // 16进制
+        // 16进制，以0x开始的数据表示16进制
         System.out.println(Integer.toHexString(100));
         System.out.println(Integer.toString(100, 16));
 
