@@ -35,6 +35,7 @@ public class Base4Example {
         log.info("textByte: {}, basic Base64 decode: {}.", decodeByteArr, decodeStrA);
     }
 
+    // urlSafe中将base64索引表中的62(+)和63(/)替换成了62(-)和63(_)。具体可以参考RFC 4648
     public static void urlSafeRun(){
         String text = "哈哈haha123!/+";
 

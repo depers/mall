@@ -1,4 +1,4 @@
-package cn.bravedawn.encrypt;
+package cn.bravedawn.encrypt.asymmetric;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

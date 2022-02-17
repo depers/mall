@@ -1,4 +1,4 @@
-package cn.bravedawn.encrypt;
+package cn.bravedawn.encrypt.asymmetric;
 
 import javax.crypto.Cipher;
 import java.security.*;
@@ -124,7 +124,7 @@ public class RSACoder {
 
     /**
      * 解密<br>
-     * 用私钥解密
+     * 用公钥解密
      *
      * @param data
      * @param key
