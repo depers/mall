@@ -94,6 +94,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.build.sourceDirectory}</directory>
+                <includes>
+                    <include>**/*.keystore</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 
