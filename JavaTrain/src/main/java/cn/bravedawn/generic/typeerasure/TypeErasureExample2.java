@@ -13,10 +13,10 @@ public class TypeErasureExample2 {
         Class c1 = p1.getClass();
         Class c2 = p2.getClass();
 
-        System.out.println(c1);
-        System.out.println(c2);
+        System.out.println(c1); // class cn.bravedawn.generic.typeerasure.Pair
+        System.out.println(c2); // class cn.bravedawn.generic.typeerasure.Pair
 
-        System.out.println(c1 == c2);
-        System.out.println(c1 == Pair.class);
+        System.out.println(c1 == c2); // true
+        System.out.println(c1 == Pair.class); // true
     }
 }
