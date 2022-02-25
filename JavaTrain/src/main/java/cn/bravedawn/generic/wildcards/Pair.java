@@ -1,4 +1,4 @@
-package cn.bravedawn.generic.border;
+package cn.bravedawn.generic.wildcards;
 
 public class Pair<T> {
 
