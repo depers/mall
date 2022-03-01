@@ -1,4 +1,4 @@
-package cn.bravedawn.generic.wildcards.upperbounds;
+package cn.bravedawn.generic.wildcards.upperbounds.v1;
 
 /**
  * @author : depers

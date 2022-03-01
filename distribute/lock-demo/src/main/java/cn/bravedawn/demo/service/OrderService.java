@@ -49,7 +49,7 @@ public class OrderService {
 
 
     /**
-     * 数据库中有5个订单，商品库存变为了0
+     * 五个人同时下单，存库为1，五人下单后数据库中有5个订单，商品库存变为了0
      * @return
      * @throws Exception
      */
@@ -104,8 +104,8 @@ public class OrderService {
 
 
     /**
-     * 利用数据库行锁来解决超卖现象
-     * 效果就是还是会生成5个订单，并且库存会减为-4
+     * 利用数据库update行锁来解决超卖现象
+     * 五个人同时下单，存库为1，五个人下单后效果就是还是会生成5个订单，并且库存会减为-4
      * @return
      * @throws Exception
      */
@@ -150,6 +150,7 @@ public class OrderService {
         orderItemMapper.insertSelective(orderItem);
         return order.getId();
     }
+
 
     /**
      * 基于`Synchronized`锁解决超卖问题（最原始的锁）+ 声明式事务
