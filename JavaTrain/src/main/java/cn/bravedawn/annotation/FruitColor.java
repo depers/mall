@@ -7,5 +7,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface FruitColor {
 
-    public enum Color{BLUE, RED, BLACK}
+    public enum Color{BLUE, RED, BLACK};
+
+    Color fruitColor() default Color.BLUE;
 }
