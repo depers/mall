@@ -1,4 +1,4 @@
-package cn.bravedawn.annotation;
+package cn.bravedawn.annotation.fruitexample;
 
 import java.lang.annotation.*;
 
