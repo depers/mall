@@ -5,6 +5,10 @@ import java.util.ServiceLoader;
 
 public class Test {
 
+    /**
+     * ServiceLoader.load(Search.class)在加载某接口时，会去META-INF/services下找接口的全限定名文件，再根据里面的内容加载相应的实现类
+     */
+
 
     public static void main(String[] args) {
 
