@@ -7,9 +7,7 @@ import java.sql.SQLException;
 public class JdbcDriverManagerExample {
 
     /**
-     * 在这个例子中，我在maven中引入了
-     * @param args
-     * @throws SQLException
+     * 在这个例子中，我在maven中引入了mysql,h2和postgresql，在SPI加载驱动的时候这三个包中对java.sql.Driver的实现类都会被实例化
      */
 
 

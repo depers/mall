@@ -78,16 +78,25 @@
             <version>1.68</version>
         </dependency>
 
+        <!--SPI测试JDBC DriverManage添加的包-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
         </dependency>
 
+        <!--SPI测试JDBC DriverManage添加的包-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.12.jre7</version>
+        </dependency>
+
+        <!--SPI测试Common-Logging添加的包-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
         </dependency>
 
     </dependencies>
