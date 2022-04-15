@@ -12,6 +12,7 @@ public class StringExample3 {
         String str = "abcdefg";
 
         System.out.println(str.equals("123"));
+        System.out.println(str.equals(null));
         System.out.println(str.equalsIgnoreCase("123"));
 
         System.out.println(str.contains("a"));
