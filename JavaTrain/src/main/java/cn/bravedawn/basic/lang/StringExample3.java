@@ -26,5 +26,8 @@ public class StringExample3 {
         System.out.println(str.concat("123"));
 
         System.out.println(String.join("-", "java", "is", "cool"));
+
+        // 返回字符串索引下表字母的ascII十进制码值
+        System.out.println(str.codePointAt(0));
     }
 }

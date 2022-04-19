@@ -31,5 +31,19 @@ public class SysConvertExample {
         System.out.println("二进制：" + Integer.toBinaryString(100));
         System.out.println("反码：" + Integer.toBinaryString(~100));
         System.out.println("补码：" + Integer.toBinaryString(-100));
+
+        // 将16进制转换为10进制
+        System.out.println("将16进制转换为10进制：" + decToHex("0x10000"));
+    }
+
+
+    public static int decToHex(String val) {
+        if (val.startsWith("0x") || val.startsWith("0X")) {
+            val = val.substring(2);
+        }
+
+        return Integer.parseInt(val, 16);
+
+
     }
 }
