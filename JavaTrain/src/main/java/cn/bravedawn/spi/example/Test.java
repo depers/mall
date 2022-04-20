@@ -22,6 +22,8 @@ public class Test {
      * 7.java.util.ServiceLoader.LazyClassPathLookupIterator#parseLine(java.net.URL, java.io.BufferedReader, int, java.util.Set)
      * ---2022年4月19日
      *
+     * 4.java.util.ServiceLoader.LazyClassPathLookupIterator#hasNextService()
+     *
      */
 
 
