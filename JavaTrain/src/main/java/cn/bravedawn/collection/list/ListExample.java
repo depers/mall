@@ -1,24 +1,21 @@
 package cn.bravedawn.collection.list;
 
-import com.google.common.collect.Lists;
-
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class ListExample {
 
+
+    /**
+     * List的创建
+     */
+
     public static void main(String[] args) {
-        Set<Integer> set = new HashSet<>();
-        set.add(1);
-        set.add(2);
-        set.add(3);
+        List list = new ArrayList();
 
-        System.out.println(Arrays.toString(new Set[]{set}));
+        List list2 = new LinkedList();
 
-        List<Integer> list = Lists.newArrayList(set);
-
-        System.out.println(list.toString());
+        List list3 = List.of(1, 2, 4);
     }
 }

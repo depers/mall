@@ -1,6 +1,7 @@
 package cn.bravedawn.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,12 +9,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author : depers
+ * @author : fengx9
  * @program : servlet-demo
- * @description: simple servlet page
- * @date : Created in 2021/11/14 17:46
+ * @date : Created in 2022/04/22 11:23 AM
  */
-public class MyFirstServlet extends HttpServlet {
+
+@WebServlet(name = "MySecondServlet", urlPatterns = {"/MySecondServlet"})
+public class MySecondServlet extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,10 +27,10 @@ public class MyFirstServlet extends HttpServlet {
             // write some content
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>MyFirstServlet</title>");
+            out.println("<title>MySecondServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h2>Servlet MyFirstServlet at " + req.getContextPath() + "</h2>");
+            out.println("<h2>Servlet MySecondServlet at " + req.getContextPath() + "</h2>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -36,8 +39,9 @@ public class MyFirstServlet extends HttpServlet {
     }
 
 
+    // 返回一个String类型的字符串，其中包括了关于Servlet的信息，例如，作者、版本和版权。该方法返回的应该是纯文本字符串，而不是任何类型的标记。
     @Override
     public String getServletInfo() {
-        return "MyFirstServlet";
+        return "MySecondServlet";
     }
 }
