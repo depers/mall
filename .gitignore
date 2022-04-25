@@ -40,10 +40,9 @@ target/
 *.ipr
 *.iml
 *.iws
+**/out/
 
 # system ignore
 .DS_Store
 Thumbs.db
 
-
-/out/
