@@ -1,0 +1,230 @@
+Classfile /E:/code/mall/JavaTrain/src/main/java/cn/bravedawn/collection/list/ListExample2.class
+  Last modified Apr 25, 2022; size 1253 bytes
+  SHA-256 checksum 984c6c3aab38deb86f55d263e503ba3c0305b6b4db7bde2ed63a4802f106d8a6
+  Compiled from "ListExample2.java"
+public class cn.bravedawn.collection.list.ListExample2
+  minor version: 0
+  major version: 61
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #8                          // cn/bravedawn/collection/list/ListExample2
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 5, attributes: 1
+Constant pool:
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
+   #2 = Class              #4             // java/lang/Object
+   #3 = NameAndType        #5:#6          // "<init>":()V
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = Methodref          #8.#9          // cn/bravedawn/collection/list/ListExample2.func1:()V
+   #8 = Class              #10            // cn/bravedawn/collection/list/ListExample2
+   #9 = NameAndType        #11:#6         // func1:()V
+  #10 = Utf8               cn/bravedawn/collection/list/ListExample2
+  #11 = Utf8               func1
+  #12 = Methodref          #8.#13         // cn/bravedawn/collection/list/ListExample2.func2:()V
+  #13 = NameAndType        #14:#6         // func2:()V
+  #14 = Utf8               func2
+  #15 = Methodref          #8.#16         // cn/bravedawn/collection/list/ListExample2.func3:()V
+  #16 = NameAndType        #17:#6         // func3:()V
+  #17 = Utf8               func3
+  #18 = String             #19            // apple
+  #19 = Utf8               apple
+  #20 = String             #21            // pear
+  #21 = Utf8               pear
+  #22 = String             #23            // banana
+  #23 = Utf8               banana
+  #24 = InterfaceMethodref #25.#26        // java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+  #25 = Class              #27            // java/util/List
+  #26 = NameAndType        #28:#29        // of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+  #27 = Utf8               java/util/List
+  #28 = Utf8               of
+  #29 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+  #30 = InterfaceMethodref #25.#31        // java/util/List.size:()I
+  #31 = NameAndType        #32:#33        // size:()I
+  #32 = Utf8               size
+  #33 = Utf8               ()I
+  #34 = InterfaceMethodref #25.#35        // java/util/List.get:(I)Ljava/lang/Object;
+  #35 = NameAndType        #36:#37        // get:(I)Ljava/lang/Object;
+  #36 = Utf8               get
+  #37 = Utf8               (I)Ljava/lang/Object;
+  #38 = Class              #39            // java/lang/String
+  #39 = Utf8               java/lang/String
+  #40 = Fieldref           #41.#42        // java/lang/System.out:Ljava/io/PrintStream;
+  #41 = Class              #43            // java/lang/System
+  #42 = NameAndType        #44:#45        // out:Ljava/io/PrintStream;
+  #43 = Utf8               java/lang/System
+  #44 = Utf8               out
+  #45 = Utf8               Ljava/io/PrintStream;
+  #46 = Methodref          #47.#48        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #47 = Class              #49            // java/io/PrintStream
+  #48 = NameAndType        #50:#51        // println:(Ljava/lang/String;)V
+  #49 = Utf8               java/io/PrintStream
+  #50 = Utf8               println
+  #51 = Utf8               (Ljava/lang/String;)V
+  #52 = InterfaceMethodref #25.#53        // java/util/List.iterator:()Ljava/util/Iterator;
+  #53 = NameAndType        #54:#55        // iterator:()Ljava/util/Iterator;
+  #54 = Utf8               iterator
+  #55 = Utf8               ()Ljava/util/Iterator;
+  #56 = InterfaceMethodref #57.#58        // java/util/Iterator.hasNext:()Z
+  #57 = Class              #59            // java/util/Iterator
+  #58 = NameAndType        #60:#61        // hasNext:()Z
+  #59 = Utf8               java/util/Iterator
+  #60 = Utf8               hasNext
+  #61 = Utf8               ()Z
+  #62 = InterfaceMethodref #57.#63        // java/util/Iterator.next:()Ljava/lang/Object;
+  #63 = NameAndType        #64:#65        // next:()Ljava/lang/Object;
+  #64 = Utf8               next
+  #65 = Utf8               ()Ljava/lang/Object;
+  #66 = Utf8               Code
+  #67 = Utf8               LineNumberTable
+  #68 = Utf8               main
+  #69 = Utf8               ([Ljava/lang/String;)V
+  #70 = Utf8               StackMapTable
+  #71 = Utf8               SourceFile
+  #72 = Utf8               ListExample2.java
+{
+  public cn.bravedawn.collection.list.ListExample2();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 11: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=0, locals=1, args_size=1
+         0: invokestatic  #7                  // Method func1:()V
+         3: invokestatic  #12                 // Method func2:()V
+         6: invokestatic  #15                 // Method func3:()V
+         9: return
+      LineNumberTable:
+        line 20: 0
+        line 22: 3
+        line 24: 6
+        line 25: 9
+
+  static void func1();
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=0
+         0: ldc           #18                 // String apple
+         2: ldc           #20                 // String pear
+         4: ldc           #22                 // String banana
+         6: invokestatic  #24                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+         9: astore_0
+        10: iconst_0
+        11: istore_1
+        12: iload_1
+        13: aload_0
+        14: invokeinterface #30,  1           // InterfaceMethod java/util/List.size:()I
+        19: if_icmpge     46
+        22: aload_0
+        23: iload_1
+        24: invokeinterface #34,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+        29: checkcast     #38                 // class java/lang/String
+        32: astore_2
+        33: getstatic     #40                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        36: aload_2
+        37: invokevirtual #46                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        40: iinc          1, 1
+        43: goto          12
+        46: return
+      LineNumberTable:
+        line 33: 0
+        line 34: 10
+        line 35: 22
+        line 36: 33
+        line 34: 40
+        line 38: 46
+      StackMapTable: number_of_entries = 2
+        frame_type = 253 /* append */
+          offset_delta = 12
+          locals = [ class java/util/List, int ]
+        frame_type = 250 /* chop */
+          offset_delta = 33
+
+  static void func2();
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=0
+         0: ldc           #18                 // String apple
+         2: ldc           #20                 // String pear
+         4: ldc           #22                 // String banana
+         6: invokestatic  #24                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+         9: astore_0
+        10: aload_0
+        11: invokeinterface #52,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        16: astore_1
+        17: aload_1
+        18: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        23: ifeq          46
+        26: aload_1
+        27: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        32: checkcast     #38                 // class java/lang/String
+        35: astore_2
+        36: getstatic     #40                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        39: aload_2
+        40: invokevirtual #46                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        43: goto          17
+        46: return
+      LineNumberTable:
+        line 45: 0
+        line 46: 10
+        line 47: 26
+        line 48: 36
+        line 49: 43
+        line 50: 46
+      StackMapTable: number_of_entries = 2
+        frame_type = 253 /* append */
+          offset_delta = 17
+          locals = [ class java/util/List, class java/util/Iterator ]
+        frame_type = 250 /* chop */
+          offset_delta = 28
+
+  static void func3();
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=3, args_size=0
+         0: ldc           #18                 // String apple
+         2: ldc           #20                 // String pear
+         4: ldc           #22                 // String banana
+         6: invokestatic  #24                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+         9: astore_0
+        10: aload_0
+        11: invokeinterface #52,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        16: astore_1
+        17: aload_1
+        18: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        23: ifeq          46
+        26: aload_1
+        27: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        32: checkcast     #38                 // class java/lang/String
+        35: astore_2
+        36: getstatic     #40                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        39: aload_2
+        40: invokevirtual #46                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        43: goto          17
+        46: return
+      LineNumberTable:
+        line 56: 0
+        line 57: 10
+        line 58: 36
+        line 59: 43
+        line 60: 46
+      StackMapTable: number_of_entries = 2
+        frame_type = 253 /* append */
+          offset_delta = 17
+          locals = [ class java/util/List, class java/util/Iterator ]
+        frame_type = 250 /* chop */
+          offset_delta = 28
+}
+SourceFile: "ListExample2.java"
