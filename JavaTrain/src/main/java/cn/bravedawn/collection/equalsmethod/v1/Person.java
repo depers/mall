@@ -1,4 +1,4 @@
-package cn.bravedawn.collection.equalsmethod;
+package cn.bravedawn.collection.equalsmethod.v1;
 
 /**
  * @author : fengx9
