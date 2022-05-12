@@ -9,6 +9,10 @@ import java.util.List;
  */
 public class EqualsExample {
 
+    /**
+     * list的contains里面是通过元素对象的equals方法进行判断的，所以需要元素对象的equals进行覆写
+     */
+
 
     public static void main(String[] args) {
         List<Person> list = List.of(
@@ -17,6 +21,6 @@ public class EqualsExample {
                 new Person("Bob")
         );
 
-        System.out.println(list.contains(new Person("Bob")));
+        System.out.println(list.contains(new Person("Bob"))); // false
     }
 }

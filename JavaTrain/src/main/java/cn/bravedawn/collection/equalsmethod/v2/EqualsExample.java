@@ -18,5 +18,6 @@ public class EqualsExample {
         );
 
         System.out.println(list.contains(new Person("Bob")));
+        System.out.println(list.indexOf(new Person("Xiao Hong")));
     }
 }
