@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang;
+package cn.bravedawn.basic.lang.string;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class StringExample2 {
 
 
     /**
-     * 截取字符串
+     * 删除索引位置的字符
      */
 
     public static void main(String[] args) {
