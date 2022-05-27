@@ -15,6 +15,11 @@ import java.io.PrintWriter;
  */
 public class MyFirstServlet extends HttpServlet {
 
+    /**
+     * 编写第一个Servlet示例
+     * link: https://howtodoinjava.com/java/servlets/complete-java-servlets-tutorial/#write_simple_servlet
+     */
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");

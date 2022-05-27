@@ -17,7 +17,11 @@ import java.io.PrintWriter;
 @WebServlet(name = "MySecondServlet", urlPatterns = {"/MySecondServlet"})
 public class MySecondServlet extends HttpServlet {
 
-
+    /**
+     * 使用 @WebServlet注解声明取代 web.xml的配置
+     * https://howtodoinjava.com/java/servlets/complete-java-servlets-tutorial/#webservlet_annotation
+     *
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");

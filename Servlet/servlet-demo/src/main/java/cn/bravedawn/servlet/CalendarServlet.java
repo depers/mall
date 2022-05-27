@@ -19,6 +19,11 @@ import java.util.Map;
 @WebServlet(name = "CalendarServlet", urlPatterns = {"/CalendarServlet"})
 public class CalendarServlet extends HttpServlet {
 
+    /**
+     * 在Servlet响应中返回动态内容
+     * https://howtodoinjava.com/java/servlets/complete-java-servlets-tutorial/#write_dynamic_content
+     */
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

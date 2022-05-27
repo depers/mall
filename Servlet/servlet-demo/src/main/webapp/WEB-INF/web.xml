@@ -5,17 +5,20 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <welcome-file-list>
-        <welcome-file>/MyFirstServlet</welcome-file>
-    </welcome-file-list>
+    <listener>
+        <listener-class>cn.bravedawn.servlet.listener.TempServletContextListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>MyFirstServlet</servlet-name>
         <servlet-class>cn.bravedawn.servlet.MyFirstServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>MyFirstServlet</servlet-name>
         <url-pattern>/MyFirstServlet</url-pattern>
     </servlet-mapping>
+    
+
 
 </web-app>
