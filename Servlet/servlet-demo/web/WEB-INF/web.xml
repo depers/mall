@@ -3,10 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <display-name>LoginExample</display-name>
-    <welcome-file-list>
-        <welcome-file>login.html</welcome-file>
-    </welcome-file-list>
+<!--    <display-name>LoginExample</display-name>-->
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>login.html</welcome-file>-->
+<!--    </welcome-file-list>-->
+
+<!--    <display-name>ServletCookieExample</display-name>-->
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>loginSession.html</welcome-file>-->
+<!--    </welcome-file-list>-->
+
+        <display-name>ServletHttpSessionExample</display-name>
+        <welcome-file-list>
+            <welcome-file>LoginHttpSession.html</welcome-file>
+        </welcome-file-list>
 
     <context-param>
         <param-name>dbURL</param-name>
