@@ -1,4 +1,4 @@
-package cn.bravedawn.servlet.session.sessionbyhttpsession;
+package cn.bravedawn.servlet.session.httpsession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class LogoutHttpSessionServlet extends HttpServlet {
             }
         }
 
-        // invalidate the session if exists
+        // invalidate the session if exists，这个方法false的意思是说不会创建新的HttpSession
         HttpSession session = request.getSession(false);
         System.out.println("User=" + session.getAttribute("user"));
         if (session != null) {

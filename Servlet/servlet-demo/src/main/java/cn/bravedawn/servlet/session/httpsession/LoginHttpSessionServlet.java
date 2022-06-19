@@ -1,4 +1,4 @@
-package cn.bravedawn.servlet.session.sessionbyhttpsession;
+package cn.bravedawn.servlet.session.httpsession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +28,7 @@ public class LoginHttpSessionServlet extends HttpServlet {
             HttpSession session = request.getSession();
             // 设置会话属性
             session.setAttribute("user", "我叫冯晓");
+            // setting session to expiry in 30 mins
             session.setMaxInactiveInterval(30 * 60);
 
             Cookie userNameCookie = new Cookie("user", user);

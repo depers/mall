@@ -1,4 +1,4 @@
-package cn.bravedawn.servlet.session.sessionbycookies;
+package cn.bravedawn.servlet.session.cookies;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

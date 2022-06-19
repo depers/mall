@@ -13,9 +13,14 @@
 <!--        <welcome-file>loginSession.html</welcome-file>-->
 <!--    </welcome-file-list>-->
 
-        <display-name>ServletHttpSessionExample</display-name>
+<!--        <display-name>ServletHttpSessionExample</display-name>-->
+<!--        <welcome-file-list>-->
+<!--            <welcome-file>LoginHttpSession.html</welcome-file>-->
+<!--        </welcome-file-list>-->
+
+        <display-name>ServletUrlWritingExample</display-name>
         <welcome-file-list>
-            <welcome-file>LoginHttpSession.html</welcome-file>
+            <welcome-file>LoginUrlWriting.html</welcome-file>
         </welcome-file-list>
 
     <context-param>
