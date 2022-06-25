@@ -13,7 +13,7 @@ import java.util.Enumeration;
  * @date : Created in 2022/6/21 21:53
  */
 
-@WebFilter("/RequestLoggingFilter")
+//@WebFilter("/RequestLoggingFilter")
 public class RequestLoggingFilter implements Filter {
 
     private ServletContext context;
@@ -26,23 +26,25 @@ public class RequestLoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        this.context.log("-----------------[RequestLoggingFilter]-----------------start");
         HttpServletRequest req = (HttpServletRequest) request;
         Enumeration<String> params = req.getParameterNames();
         while (params.hasMoreElements()) {
             String name = params.nextElement();
             String value = request.getParameter(name);
-            this.context.log(req.getRemoteAddr() + "--Request Params--{" + name + "=" + value + "}");
-
-            Cookie[] cookies = req.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    this.context.log(req.getRemoteAddr() + "--Cookie--{" + cookie.getName() + "," + cookie.getValue() + "}");
-                }
-            }
-
-            // pass the request along the filter chain
-            chain.doFilter(request, response);
+            this.context.log("[RequestLoggingFilter] " + req.getRemoteAddr() + "--Request Params--{" + name + "=" + value + "}");
         }
+
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                this.context.log("[RequestLoggingFilter] " + req.getRemoteAddr() + "--Cookie--{" + cookie.getName() + "," + cookie.getValue() + "}");
+            }
+        }
+
+        // pass the request along the filter chain
+        chain.doFilter(request, response);
+        this.context.log("-----------------[RequestLoggingFilter]-----------------end");
     }
 
     @Override

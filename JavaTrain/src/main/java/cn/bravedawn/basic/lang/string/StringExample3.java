@@ -8,6 +8,10 @@ package cn.bravedawn.basic.lang.string;
  */
 public class StringExample3 {
 
+    /**
+     * 基础字符串操作
+     */
+
     public static void main(String[] args) {
         String str = "abcdefg";
 

@@ -15,7 +15,8 @@
 <%
     // allow access only if session exists
     String user = null;
-    // 我们使用会话属性来验证用户是否已经登录
+    // 当使用JSP资源时，容器会自动为其创建会话，我们无法检查会话是否为空来确认用户是否通过了登录页面，
+    // 所以我们使用会话属性来验证请求。我们使用会话属性来验证用户是否已经登录
     if (session.getAttribute("user") == null) {
         response.sendRedirect("LoginHttpSession.html");
     } else {

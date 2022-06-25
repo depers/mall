@@ -1,7 +1,6 @@
 package cn.bravedawn.other.hutool.bean;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.mysql.cj.util.DataTypeUtil;
 
 /**
  * @author : depers

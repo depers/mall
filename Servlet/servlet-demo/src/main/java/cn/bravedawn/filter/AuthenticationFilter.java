@@ -13,7 +13,7 @@ import java.io.IOException;
  * @date : Created in 2022/6/21 22:05
  */
 
-@WebFilter("/AuthenticationFilter")
+//@WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
     private ServletContext context;
@@ -26,21 +26,23 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        this.context.log("-----------------[AuthenticationFilter]-----------------start");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        this.context.log("Request Resource--" + uri);
+        this.context.log("[AuthenticationFilter] Request Resource--" + uri);
 
         HttpSession session = req.getSession(false);
 
-        if (session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet"))) {
-            this.context.log("Unauthorized access request");
+        if (session == null && !(uri.endsWith("html") || uri.endsWith("LoginFilterServlet"))) {
+            this.context.log("[AuthenticationFilter] Unauthorized access request");
             res.sendRedirect("LoginFilter.html");
         } else {
             // pass the request along the filter chain
             chain.doFilter(request, response);
         }
+        this.context.log("-----------------[AuthenticationFilter]-----------------end");
     }
 
     @Override
