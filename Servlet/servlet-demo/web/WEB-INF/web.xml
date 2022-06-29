@@ -35,6 +35,10 @@
     <filter>
         <filter-name>RequestLoggingFilter</filter-name>
         <filter-class>cn.bravedawn.filter.RequestLoggingFilter</filter-class>
+        <init-param>
+            <param-name>test</param-name>
+            <param-value>testValue</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
