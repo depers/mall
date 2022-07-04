@@ -33,6 +33,7 @@ public class ListExample3 {
         System.out.println(list);
     }
 
+    // of方法声明的List是只读的，不能进行修改，否则就会报UnsupportedOperationException
     static void func3() {
         Integer[] array = { 1, 2, 3 };
         List<Integer> list = List.of(array);
