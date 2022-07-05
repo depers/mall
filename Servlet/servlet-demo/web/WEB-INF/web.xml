@@ -27,10 +27,21 @@
     <!--     <welcome-file>LoginUrlWriting.html</welcome-file> -->
     <!-- </welcome-file-list> -->
 
-    <display-name>ServletFilterExample</display-name>
+    <!-- Servlet中的过滤器 -->
+    <!-- <display-name>ServletFilterExample</display-name> -->
+    <!-- <welcome-file-list> -->
+    <!--     <welcome-file>LoginFilter.html</welcome-file> -->
+    <!-- </welcome-file-list> -->
+
+    <!-- 配置文件上传的目录作为上下文的参数，并配置欢迎页面 -->
+    <display-name>ServletFileUploadDownloadExample</display-name>
     <welcome-file-list>
-        <welcome-file>LoginFilter.html</welcome-file>
+        <welcome-file>upload.html</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>tempfile.dir</param-name>
+        <param-value>tmpfiles</param-value>
+    </context-param>
 
     <!-- <filter> -->
     <!--     <filter-name>RequestLoggingFilter</filter-name> -->

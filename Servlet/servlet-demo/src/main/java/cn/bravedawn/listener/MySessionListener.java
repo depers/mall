@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSessionListener;
  * @program : servlet-demo
  * @date : Created in 2022/05/27 4:52 PM
  */
-@WebListener
+//@WebListener
 public class MySessionListener implements HttpSessionListener {
 
     /**
