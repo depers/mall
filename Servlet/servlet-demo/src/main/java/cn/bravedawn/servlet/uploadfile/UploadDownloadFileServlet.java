@@ -1,5 +1,6 @@
 package cn.bravedawn.servlet.uploadfile;
 
+import cn.bravedawn.util.StringUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,7 +35,6 @@ public class UploadDownloadFileServlet extends HttpServlet {
         File filesDir = (File) getServletContext().getAttribute("FILES_DIR_FILE");
         fileItemFactory.setRepository(filesDir);
         this.uploader = new ServletFileUpload(fileItemFactory);
-        this.uploader.setHeaderEncoding("UTF-8");
     }
 
 
@@ -67,6 +68,7 @@ public class UploadDownloadFileServlet extends HttpServlet {
         os.flush();
         os.close();
         is.close();
+        response.setCharacterEncoding("utf-8");
         getServletContext().log("File downloaded at client successfully");
     }
 
@@ -77,7 +79,8 @@ public class UploadDownloadFileServlet extends HttpServlet {
             throw new ServletException("Content type is not multipart/form-data");
         }
 
-        response.setContentType("text/html");
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.write("<html><head></head><body>");
 
@@ -86,10 +89,12 @@ public class UploadDownloadFileServlet extends HttpServlet {
             Iterator<FileItem> fileItemIterator = fileItemList.iterator();
             while (fileItemIterator.hasNext()) {
                 FileItem fileItem = fileItemIterator.next();
-                String fileName = new String(fileItem.getName().getBytes("ISO8859_1"), "UTF-8");
-                
+                String fileName = fileItem.getName();
+                getServletContext().log("file Encode = " + StringUtil.getEncode(fileName));
+
+
                 getServletContext().log("FieldName = " + fileItem.getFieldName());
-                getServletContext().log("FileName = " + fileName);
+                getServletContext().log("FileName = "  +  fileName);
                 getServletContext().log("ContextType = " + fileItem.getContentType());
                 getServletContext().log("Size in bytes = " + fileItem.getSize());
 
