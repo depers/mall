@@ -96,4 +96,18 @@
         <url-pattern>/MyFirstServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- Servlet异常处理，location也支持配置jsp页面-->
+    <!-- <error-page> -->
+    <!--     <error-code>404</error-code> -->
+    <!--     <location>/AppExceptionHandler</location> -->
+    <!-- </error-page> -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/AppExceptionHandler</location>
+    </error-page>
+
 </web-app>

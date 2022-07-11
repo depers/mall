@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,7 +57,10 @@ public class UploadDownloadFileServlet extends HttpServlet {
         String mimeType = context.getMimeType(file.getAbsolutePath());
         response.setContentType(mimeType != null ? mimeType : "application/octet-stream");
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+        fileName = URLEncoder.encode(fileName, "utf-8");
+        // 这里是重点
+        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''" + fileName);
+        response.setCharacterEncoding("utf-8");
 
         ServletOutputStream os = response.getOutputStream();
         byte[] bufferData = new byte[1024];
@@ -68,7 +71,6 @@ public class UploadDownloadFileServlet extends HttpServlet {
         os.flush();
         os.close();
         is.close();
-        response.setCharacterEncoding("utf-8");
         getServletContext().log("File downloaded at client successfully");
     }
 
@@ -79,8 +81,10 @@ public class UploadDownloadFileServlet extends HttpServlet {
             throw new ServletException("Content type is not multipart/form-data");
         }
 
+        // 下面这两句的编码设置很重要
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+
         PrintWriter out = response.getWriter();
         out.write("<html><head></head><body>");
 
