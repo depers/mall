@@ -13,7 +13,7 @@ import java.io.PrintWriter;
  * @program : ServletDBLog4jExample
  * @date : Created in 2022/7/12 22:58
  */
-@WebServlet("/AppErrorHandler")
+@WebServlet(name = "errorHandler", urlPatterns = "/AppErrorHandler")
 public class AppErrorHandler extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

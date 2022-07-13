@@ -26,9 +26,9 @@ public class AppContextListener implements ServletContextListener{
         ServletContext ctx = sce.getServletContext();
 
         // initialize DB Connection
-        String dbUrl = ctx.getInitParameter("");
-        String user = ctx.getInitParameter("");
-        String pwd = ctx.getInitParameter("");
+        String dbUrl = ctx.getInitParameter("dbURL");
+        String user = ctx.getInitParameter("dbUser");
+        String pwd = ctx.getInitParameter("dbPassword");
 
         try {
             DBConnectionManager connectionManager = new DBConnectionManager(dbUrl, user, pwd);

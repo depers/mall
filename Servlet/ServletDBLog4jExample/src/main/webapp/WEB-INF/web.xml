@@ -37,7 +37,7 @@
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.journaldev.servlet.filters.AuthenticationFilter</filter-class>
+        <filter-class>cn.bravedawn.servlet.filter.AuthenticationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
