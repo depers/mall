@@ -40,7 +40,7 @@ public class AppContextListener implements ServletContextListener{
             e.printStackTrace();
         }
 
-        String log4jConfig = ctx.getInitParameter("");
+        String log4jConfig = ctx.getInitParameter("log4j-config");
         if (log4jConfig == null) {
             System.err.println("No log4j-config init param, initializing log4j with BasicConfigurator");
             BasicConfigurator.configure();

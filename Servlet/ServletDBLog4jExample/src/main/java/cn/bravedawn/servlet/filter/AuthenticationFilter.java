@@ -28,10 +28,13 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        if(session == null && !(uri.endsWith("html") || uri.endsWith("Login") || uri.endsWith("Register"))){
+        if(session == null && !(uri.endsWith("html") || uri.endsWith("login") || uri.endsWith("register"))){
             log.error("Unauthorized access request");
             res.sendRedirect("login.html");
         }else{
+            // 设置编码
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             // pass the request along the filter chain
             chain.doFilter(request, response);
         }
