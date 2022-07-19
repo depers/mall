@@ -18,6 +18,7 @@ public class FileLocationContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        // rootPath指的就是本地Tomcat的地址：D:\program_file\apache-tomcat-8.5.37
         String rootPath = System.getProperty("catalina.home");
         ServletContext ctx = sce.getServletContext();
         String relativePath = ctx.getInitParameter("tempfile.dir");
