@@ -35,7 +35,7 @@ public class JDBCDataSourceExample extends HttpServlet {
             rs = stmt.executeQuery("select id, name, email, country, password from users");
 
             PrintWriter out = response.getWriter();
-            response.setContentType("text/html");
+            response.setContentType("text/html;charset=utf-8");
             out.print("<html><body><h2>Employee Details</h2>");
             out.print("<table border=\"1\" cellspacing=10 cellpadding=5>");
             out.print("<th>Employee ID</th>");

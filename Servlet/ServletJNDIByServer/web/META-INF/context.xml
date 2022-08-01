@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <!-- ResourceLink的global属性必须与GlobalNamingResources中Resource的name属性必须一致 -->
+    <ResourceLink name="jdbc/server/userDB"
+                  global="sharedDataSource"
+                  auth="Container"
+                  type="javax.sql.DataSource" />
+
+</Context>
