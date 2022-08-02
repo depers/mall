@@ -1,6 +1,8 @@
 package cn.bravedawn.basic.dateandtime.javatime;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,13 +23,15 @@ public class BestPractice {
         // Date -> Instant:
         Date date = new Date();
         Instant ins1 = date.toInstant();
+        LocalDateTime ldt = LocalDateTime.ofInstant(ins1, ZoneId.of("Asia/Shanghai"));
+        System.out.println(ldt);
 
 
         // Calendar -> Instant -> ZonedDateTime:
         Calendar calendar = Calendar.getInstance();
         Instant ins2 = calendar.toInstant();
         ZonedDateTime zdt = ins2.atZone(calendar.getTimeZone().toZoneId());
-
+        System.out.println(zdt);
 
     }
 }
