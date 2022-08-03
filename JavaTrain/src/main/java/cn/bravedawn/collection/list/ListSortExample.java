@@ -21,10 +21,12 @@ public class ListSortExample {
         list.add(employee2);
 
         System.out.println(list);
+        System.out.println("----------------------------------");
 
-        list.sort(Comparator.comparing(Employee::getDate));
+        list.sort(Comparator.comparing(Employee::getDate)); // 升序
         System.out.println(list);
-        list.sort(Comparator.comparing(Employee::getDate).reversed());
+        System.out.println("----------------------------------");
+        list.sort(Comparator.comparing(Employee::getDate).reversed()); // 降序
         System.out.println(list);
     }
 }

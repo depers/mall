@@ -9,6 +9,8 @@ public class Plate<T>{
 
     T item;
 
+    public Plate() {}
+
     public Plate(T t) {
         this.item = t;
     }
