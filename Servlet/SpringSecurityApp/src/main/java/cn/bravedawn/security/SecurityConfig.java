@@ -17,7 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+        /**
+         * 配置三种认证方式
+         */
         // in-memory authentication
         //auth.inMemoryAuthentication().withUser("pankaj").password("pankaj123").roles("USER");
 
