@@ -22,6 +22,7 @@ public class FinallyExample {
             System.out.println("进入了finally字句中");
         }
 
+        System.out.println("到这里了");
         return 0;
     }
 }

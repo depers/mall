@@ -7,7 +7,7 @@ import java.util.List;
 public class ListExample5 {
 
     /**
-     * list
+     * list的切分操作
      */
 
 

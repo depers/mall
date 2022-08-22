@@ -17,7 +17,7 @@ public class BigDecimalExample {
      */
 
     public static void main(String[] args) {
-        System.out.println(new BigDecimal("1.2").equals(new BigDecimal("1.20")));
-        System.out.println(new BigDecimal("1.2").compareTo(new BigDecimal("1.20")) == 0);
+        System.out.println(new BigDecimal("1.2").equals(new BigDecimal("1.20")));           // false
+        System.out.println(new BigDecimal("1.2").compareTo(new BigDecimal("1.20")) == 0);   // true
     }
 }

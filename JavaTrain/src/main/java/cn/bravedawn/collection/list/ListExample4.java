@@ -16,7 +16,7 @@ public class ListExample4 {
     /**
      * 从下面的实验可以看出，使用Iterator.remove方法，可以同步移除list里面的元素
      * 这里还有一个要点：使用Iterator.remove的方法，在声明list的时候：
-     *    不能这样写：List<String> list = Arrays.asList("1212", "apple", "1313");
+     *    不能这样写：List<String> list = Arrays.asList("1212", "apple", "1313");，这样声明在iterator.remove()时会报错，报UnsupportedOperationException
      *    需要这样写：List<String> list = new ArrayList<>(Arrays.asList("1212", "apple", "1313"));
      */
 
@@ -31,7 +31,7 @@ public class ListExample4 {
         // System.out.println(list3 instanceof ArrayList<String>); //true
 
 
-        Iterator<String> iterator = list.iterator();
+        Iterator<String> iterator = list2.iterator();
 
         while (iterator.hasNext()) {
             if (iterator.next().equals("apple")) {

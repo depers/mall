@@ -10,12 +10,16 @@ import java.util.Arrays;
  */
 public class AnyMatchExample {
 
+    /**
+     * 判断条件里面，任意一个元素成功，就返回true
+     */
+
 
     public static void main(String[] args) {
         String payMethodsStr = "1,4";
         String[] payMethods = payMethodsStr.split(",");
-        boolean b = Arrays.stream(payMethods).anyMatch(method -> method.equals(4));
+        boolean b = Arrays.stream(payMethods).anyMatch(str -> str.equals("4"));
 
-        System.out.println(b);
+        System.out.println(b); // true
     }
 }

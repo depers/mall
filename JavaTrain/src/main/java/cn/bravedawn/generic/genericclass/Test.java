@@ -29,6 +29,6 @@ public class Test {
 
 
         // 泛型类型使用instanceof操作
-        System.out.println(genericInteger instanceof Generic<Integer>);
+        System.out.println(genericInteger instanceof Generic<Integer>); // true
     }
 }

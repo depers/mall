@@ -1,11 +1,6 @@
-package cn.bravedawn.generic.wildcards.lowerbounds.v3;
+package cn.bravedawn.generic.wildcards.upperbounds.v2;
 
-/**
- * @author : depers
- * @program : JavaTrain
- * @date : Created in 2022/8/3 22:26
- */
-public class Pair<T>{
+public class Pair <T>{
 
     private T first;
     private T last;
@@ -18,14 +13,16 @@ public class Pair<T>{
     public T getFirst() {
         return first;
     }
+
     public T getLast() {
         return last;
     }
+
     public void setFirst(T first) {
         this.first = first;
     }
+
     public void setLast(T last) {
         this.last = last;
     }
-
 }

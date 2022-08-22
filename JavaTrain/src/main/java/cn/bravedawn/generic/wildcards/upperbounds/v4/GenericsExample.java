@@ -1,4 +1,4 @@
-package cn.bravedawn.generic.wildcards.upperbounds.v2;
+package cn.bravedawn.generic.wildcards.upperbounds.v4;
 
 import java.util.Arrays;
 import java.util.List;

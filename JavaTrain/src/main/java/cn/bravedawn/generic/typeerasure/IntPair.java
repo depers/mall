@@ -24,7 +24,7 @@ public class IntPair extends Pair<Integer>{
             Type[] types = pt.getActualTypeArguments();
             Type firstType = types[0];
             Class<?> typeClass = (Class<?>) firstType;
-            System.out.println(typeClass);
+            System.out.println(typeClass); // class java.lang.Integer
         }
     }
 }
