@@ -1,7 +1,6 @@
-package cn.bravedawn.io;
+package cn.bravedawn.io.file;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 
 public class FileExample {
