@@ -50,7 +50,7 @@ public class ListExample2 {
     }
 
     /**
-     * 通过for each循环来做
+     * 通过for each循环来做，Java优化后还是使用iterator来做的
      */
     static void func3() {
         List<String> list = List.of("apple", "pear", "banana");
