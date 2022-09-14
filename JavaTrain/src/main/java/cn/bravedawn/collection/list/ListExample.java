@@ -1,6 +1,7 @@
 package cn.bravedawn.collection.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,5 +18,7 @@ public class ListExample {
         List list2 = new LinkedList();
 
         List list3 = List.of(1, 2, 4);
+
+        List list4 = Arrays.asList(1, 2, 4);
     }
 }
