@@ -16,7 +16,7 @@ public class CopyOnWriteArrayListExample2 {
 
     public static void main(String[] args) {
 
-        // 不能再迭代是移除元素，否则就会报错 UnsupportedOperationException
+        // 不能再迭代遍历时移除元素，否则就会报错 UnsupportedOperationException
         CopyOnWriteArrayList<Integer> numbers = new CopyOnWriteArrayList<>(new Integer[]{1, 3, 5, 8});
         Iterator<Integer> iterator = numbers.iterator();
         while (iterator.hasNext()) {
