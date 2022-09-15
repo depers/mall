@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class CopyOnWriteArrayListExample {
 
     /**
-     * 在插入元素时遍历CopyOnWriteArrayList，不影响之前创建的迭代器
+     * 在遍历CopyOnWriteArrayList时插入元素，不影响之前创建的迭代器
      */
 
     public static void main(String[] args) {
