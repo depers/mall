@@ -8,10 +8,18 @@ package cn.bravedawn.basic.lang;
  */
 public class StringBufferExample {
 
+    /**
+     * StringBuffer的使用
+     */
+
     public static void main(String[] args) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("a");
         stringBuffer.append("b");
+
+        // 删除最后一个字符
+        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        System.out.println(stringBuffer);
 
     }
 }

@@ -23,7 +23,7 @@ public class EnumExample2 {
         Color[] arr = Color.values();
         System.out.println(Arrays.toString(arr)); // [RED, BLUE, GREEN]
 
-        //
+        // 根据枚举名称解析枚举
         Color val = Color.valueOf("RED");
         System.out.println(val); // RED
     }
