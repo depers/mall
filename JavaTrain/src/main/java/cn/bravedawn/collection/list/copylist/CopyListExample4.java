@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CopyListExample4 {
 
     /**
-     * 拷贝列表中的元素到另一个列表：第四种方法是适用Java8 stream，他除了拷贝外还提供了skip()和filter()等功能
+     * 拷贝列表中的元素到另一个列表：第四种方法是使用Java8 stream，他除了拷贝外还提供了skip()和filter()等功能
      */
 
     public static void main(String[] args) {

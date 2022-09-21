@@ -20,14 +20,14 @@ public class RemoveDuplicateExample {
 
     public static void main(String[] args) {
 
-        // 使用HashSet实现，它是一个无序集合，移除重复元素之后的listWithoutDuplicates顺序可能和原始的listWithDuplicates顺序不同
+        // 使用HashSet实现，它是一个无序集合，移除重复元素之后列表的顺序可能和原列表元素顺序不同
         List<Integer> listWithDuplicates = Lists.newArrayList(5, 0, 3, 1, 2, 3, 0, 0);
         List<Integer> listWithoutDuplicates = new ArrayList<>(new HashSet<>(listWithDuplicates));
 
         System.out.println(listWithDuplicates); // [5, 0, 3, 1, 2, 3, 0, 0]
         System.out.println(listWithoutDuplicates); // [0, 1, 2, 3, 5]
 
-        // 使用LinkedList保证移除重复元素后的列表listWithoutDuplicates的元素顺序与listWithDuplicates顺序相同
+        // 使用LinkedHashSet保证移除重复元素后列表的元素顺序与原列表元素顺序相同
         List<Integer> listWithoutDuplicates2 = new ArrayList<>(new LinkedHashSet<>(listWithDuplicates));
         System.out.println(listWithoutDuplicates2); // [5, 0, 3, 1, 2]
 

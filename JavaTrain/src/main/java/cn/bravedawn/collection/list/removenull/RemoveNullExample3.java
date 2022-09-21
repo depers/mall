@@ -15,7 +15,6 @@ public class RemoveNullExample3 {
 
     /**
      * 使用Apache commons Collections 移除null元素，会直接修改原列表
-     * @param args
      */
 
     public static void main(String[] args) {

@@ -11,6 +11,10 @@ import java.util.List;
  */
 public class AddMultipleItemsExample3 {
 
+    /**
+     * 使用Java8 Stream forEachOrdered()
+     */
+
     public static void main(String[] args) {
         Plant p1 = new Plant("杜鹃", "red");
         Plant p2 = new Plant("玫瑰", "yellow");
@@ -19,7 +23,7 @@ public class AddMultipleItemsExample3 {
 
         List<Plant> source = new ArrayList<>(Arrays.asList(p1, p2));
         List<Plant> target = new ArrayList<>();
-        // 这个方法会保证source列表的顺序，轮流去执行添加曹组
+        // 这个方法会保证source列表的顺序，轮流去执行添加操作
         source.stream().forEachOrdered(target::add);
         System.out.println(target);
 

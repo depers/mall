@@ -14,7 +14,6 @@ public class SplitListToSubListsExample4 {
 
     /**
      * 使用Apache commons Collections分区，分区（子列表）是原始集合的子列表视图，这意味着原始集合中的更改将反映在分区中
-     * @param args
      */
 
     public static void main(String[] args) {

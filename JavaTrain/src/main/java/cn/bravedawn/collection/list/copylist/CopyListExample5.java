@@ -11,7 +11,7 @@ import java.util.List;
 public class CopyListExample5 {
 
     /**
-     * 拷贝列表中的元素到另一个列表：第五种方法是适用Java10提供的List.copyOf()方法
+     * 拷贝列表中的元素到另一个列表：第五种方法是使用Java10提供的List.copyOf()方法
      */
 
 
