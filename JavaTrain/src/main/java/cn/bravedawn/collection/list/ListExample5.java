@@ -17,6 +17,7 @@ public class ListExample5 {
         int totalSize = list.size();
 
         System.out.println(list.subList(0, 0)); // []
+        System.out.println(list.subList(1, 1)); // []
         System.out.println(list.subList(0, 0).isEmpty()); // true
         System.out.println(list.subList(0, 0) == null); // false
         System.out.println(list.subList(0, 2)); // [1, 2]
