@@ -1,4 +1,4 @@
-package cn.bravedawn.collection.map;
+package cn.bravedawn.collection.map.hashmap.java8;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,14 +6,13 @@ import java.util.Map;
 /**
  * @author : depers
  * @program : JavaTrain
- * @date : Created in 2022/5/12 20:40
+ * @date : Created in 2022/9/28 21:22
  */
-public class MapExample2 {
+public class ForEachExample2 {
 
     /**
-     * Map的遍历：通过循环遍历Map实例的entrySet()方法返回的Set集合
+     * 使用Java8之前的方法遍历map
      */
-
 
     public static void main(String[] args) {
         Map<String, Integer> map = new HashMap<>();
@@ -24,7 +23,15 @@ public class MapExample2 {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
-            System.out.println(key + " = " + value);
+            System.out.println("key: " + key + ", value: " + value);
         }
+
+
+        /**
+         * 输出：
+         * key: banana, value: 789
+         * key: apple, value: 123
+         * key: pear, value: 456
+         */
     }
 }
