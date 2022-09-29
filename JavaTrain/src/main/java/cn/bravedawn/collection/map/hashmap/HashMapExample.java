@@ -18,8 +18,10 @@ public class HashMapExample {
         // 1.put方法
         Product eBike = new Product("E-Bike", "A bike with a battery");
         Product roadBike = new Product("Road bike", "A bike for competition");
-        productsByName.put(eBike.getName(), eBike);
-        productsByName.put(roadBike.getName(), roadBike);
+        Product bike1 = productsByName.put(eBike.getName(), eBike);
+        Product bike2 = productsByName.put(roadBike.getName(), roadBike);
+        System.out.println(bike1); // null
+        System.out.println(bike2); // null
 
         // 2.get方法
         Product nextPurchase = productsByName.get("E-Bike");
@@ -29,11 +31,12 @@ public class HashMapExample {
         Product noExist = productsByName.get("Car");
         System.out.println(noExist); // null
 
-        // 如果第二次插入一个相同key的一个值，我们获取到的这个key的值为第二次插入的，也就是说第二次的插入会覆盖第一次的
+        // 如果第二次插入一个相同key的一个值，put方法会返回之前已经存在的value值
+        // 我们再次通过key获取到的这个value值为第二次插入的，也就是说第二次的插入会覆盖第一次的
         Product newEBike = new Product("E-Bike", "A bike with a better battery");
-        productsByName.put(newEBike.getName(), newEBike);
+        Product newBike = productsByName.put(newEBike.getName(), newEBike);
+        System.out.println(newBike); // Product{name='E-Bike', description='A bike with a battery', tags=null}
         System.out.println(productsByName.get("E-Bike")); // Product{name='E-Bike', description='A bike with a better battery', tags=null}
-
 
         // 3.HashMap允许我们使用null作为key
         Product defaultProduct = new Product("Chocolate", "At least buy chocolate");
