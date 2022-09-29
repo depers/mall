@@ -9,7 +9,6 @@ public class AndExample {
 
     /**
      * 由下面的案例我们可知，奇数和1做与运算是等于1的，偶数与1做与运算是等于0的
-     * @param args
      */
 
 

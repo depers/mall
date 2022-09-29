@@ -1,12 +1,13 @@
 package cn.bravedawn.collection.map.hashmap;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * @author : depers
- * @program : JavaTrain
- * @date : Created in 2022/9/28 20:39
+ * PC: SPDB
+ * author: fengx9
+ * create time: 2022/9/29 9:06
  */
 public class Product {
 
@@ -21,6 +22,7 @@ public class Product {
     public Product(String name, String description) {
         this.name = name;
         this.description = description;
+        this.tags = new ArrayList<>();
     }
 
     public Product addTagsOfOtherProduct(Product product) {

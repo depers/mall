@@ -2,20 +2,21 @@ package cn.bravedawn.collection.map.hashmap.java8;
 
 import cn.bravedawn.collection.map.hashmap.Product;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * PC: SPDB
  * author: fengx9
- * create time: 2022/9/29 9:06
+ * create time: 2022/9/29 12:54
  */
-public class MergeExample {
+public class ComputeExample {
 
     /**
-     * 这个方法的作用就是 针对于这个key的value进行合并操作，如果这个映射不存在的话就会添加一个新值
+     * 用指定的key去计算value
+     * 值得注意的是 merge()和compute()非常相似
+     * compute()接受两个参数：键和重新映射的BiFunction
+     * merge()接受三个参数：键、添加到映射中的默认值和用于重新映射的BiFunction
      */
 
     public static void main(String[] args) {
@@ -27,7 +28,14 @@ public class MergeExample {
 
         Product eBike2 = new Product("E-Bike", "A bike with a battery");
         eBike2.getTags().add("sport");
-        productsByName.merge("E-Bike", eBike2, Product::addTagsOfOtherProduct);
+
+        productsByName.compute("E-Bike", (k, v) -> {
+            if (v != null) {
+                return v.addTagsOfOtherProduct(eBike2);
+            } else {
+                return eBike2;
+            }
+        });
         System.out.println(productsByName); // {E-Bike=Product{name='E-Bike', description='A bike with a battery', tags=[weekend, sport]}}
     }
 }
