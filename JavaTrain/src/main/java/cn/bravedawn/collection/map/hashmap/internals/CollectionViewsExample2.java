@@ -1,4 +1,4 @@
-package cn.bravedawn.collection.map.hashmap.underthehood;
+package cn.bravedawn.collection.map.hashmap.internals;
 
 import java.util.Collection;
 import java.util.HashMap;

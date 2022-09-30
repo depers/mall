@@ -11,6 +11,12 @@ import java.util.Map;
  */
 public class FailFastExample {
 
+    /**
+     * Fail fast迭代器
+     * 在迭代器创建之后，结构被除迭代器自己的remove()方法之外的任何方法修改时。
+     * 这里我们使用了map的put()方法
+     */
+
     public static void main(String[] args) {
         Map<String,String> premiumPhone = new HashMap<String,String>();
         premiumPhone.put("Apple", "iPhone");
@@ -19,7 +25,7 @@ public class FailFastExample {
 
         Iterator iterator = premiumPhone.keySet().iterator();
         while (iterator.hasNext()) {
-            System.out.println(premiumPhone.get(iterator.next()));
+            System.out.println(premiumPhone.get(iterator.next())); // java.util.ConcurrentModificationException
             premiumPhone.put("Sony", "Xperia Z");
         }
     }
