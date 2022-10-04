@@ -23,6 +23,18 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.twelvemonkeys.common</groupId>
+            <artifactId>common-io</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+
 
     </dependencies>
 

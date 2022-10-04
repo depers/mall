@@ -1,10 +1,12 @@
 package cn.bravedawn.listener;
 
 import cn.bravedawn.db.DBConnectionManager;
+import cn.bravedawn.servlet.MyAddServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 /**
@@ -13,7 +15,7 @@ import javax.servlet.annotation.WebListener;
  * @date : Created in 2022/05/27 4:52 PM
  */
 
-//@WebListener
+@WebListener
 public class AppContextListener implements ServletContextListener {
 
     /**
@@ -33,6 +35,10 @@ public class AppContextListener implements ServletContextListener {
         DBConnectionManager dbManager = new DBConnectionManager(jdbcUrl, username, password);
         ctx.setAttribute("DBManager", dbManager);
         System.out.println("Database connection initialized for Application.");
+
+        // 注册一个Servlet到ServletContext
+        ServletRegistration.Dynamic myAddServlet = ctx.addServlet("MyAddServlet", MyAddServlet.class);
+        myAddServlet.addMapping("/MyAddServlet");
 
     }
 
