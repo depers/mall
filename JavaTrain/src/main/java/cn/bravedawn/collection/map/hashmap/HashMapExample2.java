@@ -1,9 +1,9 @@
-package cn.bravedawn.collection.map;
+package cn.bravedawn.collection.map.hashmap;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapExample3 {
+public class HashMapExample2 {
 
     /**
      * map中对key做比较也是通过equals实现的，这一点和list是一样的

@@ -10,6 +10,10 @@ import java.util.Map;
  */
 public class HashMapExample {
 
+    /**
+     * HashMap的基本操作
+     */
+
 
     public static void main(String[] args) {
         // 声明一个HashMap实例
