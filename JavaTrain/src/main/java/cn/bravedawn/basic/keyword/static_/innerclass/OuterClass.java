@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.keyword.staticp.innerclass;
+package cn.bravedawn.basic.keyword.static_.innerclass;
 
 /**
  * @author : depers

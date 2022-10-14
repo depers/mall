@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.keyword.finalp;
+package cn.bravedawn.basic.keyword.final_;
 
 /**
  * @author : depers

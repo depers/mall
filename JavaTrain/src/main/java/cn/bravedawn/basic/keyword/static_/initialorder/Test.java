@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.keyword.staticp.initialorder;
+package cn.bravedawn.basic.keyword.static_.initialorder;
 
 /**
  * @author : depers
