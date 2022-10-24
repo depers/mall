@@ -5,7 +5,7 @@ package cn.bravedawn.basic.random;
  * @program : JavaTrain
  * @date : Created in 2022/9/14 20:57
  */
-public class RandomExample {
+public class MathGenerateRandomNum {
 
     /**
      * 使用Math.random()生成随机数

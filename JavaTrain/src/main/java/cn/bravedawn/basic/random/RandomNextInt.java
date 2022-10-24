@@ -7,7 +7,7 @@ import java.util.Random;
  * @program : JavaTrain
  * @date : Created in 2022/9/14 21:07
  */
-public class RandomExample2 {
+public class RandomNextInt {
 
     /**
      * 使用Random.next()生成随机数
