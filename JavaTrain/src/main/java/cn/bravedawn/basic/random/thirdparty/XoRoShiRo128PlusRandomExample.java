@@ -11,7 +11,6 @@ public class XoRoShiRo128PlusRandomExample {
 
     /**
      * 这是最快的随机数生成器实现之一。它是由米兰大学信息科学系开发的
-     *
      */
 
     public static void main(String[] args) {
