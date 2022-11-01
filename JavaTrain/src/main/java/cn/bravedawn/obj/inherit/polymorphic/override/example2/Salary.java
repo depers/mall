@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.polymorphic;
+package cn.bravedawn.obj.inherit.polymorphic.override.example2;
 
 public class Salary extends Income{
 

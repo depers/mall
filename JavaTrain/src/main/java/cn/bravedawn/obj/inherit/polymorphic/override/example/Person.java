@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.polymorphic.override;
+package cn.bravedawn.obj.inherit.polymorphic.override.example;
 
 public class Person {
 
