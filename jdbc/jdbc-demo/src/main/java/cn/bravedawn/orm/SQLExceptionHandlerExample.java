@@ -7,8 +7,5 @@ package cn.bravedawn.orm;
  */
 public class SQLExceptionHandlerExample {
 
-    /**
-     * projects\stage-0\user-platform\user-web\src\main\java\
-     * org\geektimes\projects\user\repository\DatabaseUserRepository.java
-     */
+
 }
