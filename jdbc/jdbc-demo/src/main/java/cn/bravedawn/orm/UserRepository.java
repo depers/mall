@@ -1,7 +1,10 @@
 package cn.bravedawn.orm;
 
-import cn.bravedawn.domain.User;
+import cn.bravedawn.pojo.Role;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -12,6 +15,6 @@ import java.util.Collection;
 public interface UserRepository {
 
 
-    Collection<User> getAll();
+    Collection<Role> getAll() throws Throwable;
 
 }

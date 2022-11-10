@@ -1,6 +1,7 @@
 package cn.bravedawn.pojo;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author : depers
@@ -17,7 +18,7 @@ public class Role {
 
     private String note;
 
-    private LocalDateTime insertTime;
+    private Date insertTime;
 
     public Integer getId() {
         return id;
@@ -51,11 +52,11 @@ public class Role {
         this.note = note;
     }
 
-    public LocalDateTime getInsertTime() {
+    public Date getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(LocalDateTime insertTime) {
+    public void setInsertTime(Date insertTime) {
         this.insertTime = insertTime;
     }
 

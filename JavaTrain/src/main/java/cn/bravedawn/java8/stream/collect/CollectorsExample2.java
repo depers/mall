@@ -1,4 +1,4 @@
-package cn.bravedawn.java8.stream;
+package cn.bravedawn.java8.stream.collect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,16 @@ import java.util.stream.Collectors;
  * create time: 2022/8/31 17:11
  */
 public class CollectorsExample2 {
+
+    /**
+     * 查找不为数字的list元素
+     *
+     * 这里涉及的知识点有
+     * 1. String.chars()
+     * 2. filter()
+     * 3. allMatch()
+     * 4. collect()
+     */
 
 
     public static void main(String[] args) {

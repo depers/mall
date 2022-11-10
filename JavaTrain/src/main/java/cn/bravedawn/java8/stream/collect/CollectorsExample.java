@@ -1,4 +1,4 @@
-package cn.bravedawn.java8.stream;
+package cn.bravedawn.java8.stream.collect;
 
 
 import java.util.List;

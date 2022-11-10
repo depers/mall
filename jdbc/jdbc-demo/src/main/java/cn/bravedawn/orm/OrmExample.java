@@ -20,6 +20,8 @@ public class OrmExample {
 
     /**
      * 数据类型与 ResultSet 方法名映射
+     *
+     * 下面的这段程序演示了 执行查询sql，将结果通过反射映射到实体对象中
      */
     static Map<Class, String> typeMethodMappings = new HashMap<>();
 
@@ -89,6 +91,10 @@ public class OrmExample {
 
     }
 
+
+    /**
+     * 这个动作的意义是 通过对象的属性映射出数据库字段名称，例如通过 userAddress属性获取数据库字段 user_address
+     */
     private static String mapColumnLabel(String fieldName) {
         return fieldName;
     }
