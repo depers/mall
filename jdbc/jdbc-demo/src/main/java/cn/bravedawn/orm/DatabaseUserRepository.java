@@ -2,6 +2,7 @@ package cn.bravedawn.orm;
 
 import cn.bravedawn.domain.User;
 import cn.bravedawn.pojo.Role;
+import com.google.common.base.CaseFormat;
 import com.mysql.jdbc.CacheAdapter;
 
 import java.beans.BeanInfo;
@@ -23,6 +24,11 @@ import static org.apache.commons.lang.ClassUtils.wrapperToPrimitive;
  * @date : Created in 2022/11/6 20:32
  */
 public class DatabaseUserRepository implements UserRepository{
+
+
+    /**
+     * 在下面的这段代码中，演示了如何通过Java对象映射成数据库字段，并将查询参数放置到sql中，实现查询
+     */
 
     private static Logger logger = Logger.getLogger(DatabaseUserRepository.class.getName());
     private static Map<Class, String> preparedStatementMethodMappings = new HashMap();
@@ -59,7 +65,7 @@ public class DatabaseUserRepository implements UserRepository{
             Method method = PreparedStatement.class.getMethod(methodName, int.class, wrapperType);
 
             // 将参数值替换成查询语句中的?
-            method.invoke(preparedStatement, i + 1, args);
+            method.invoke(preparedStatement, i + 1, arg);
         }
 
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -112,7 +118,8 @@ public class DatabaseUserRepository implements UserRepository{
     }
 
     private static String mapColumnLabel(String fieldName) {
-        return fieldName;
+        String columnName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, fieldName);
+        return columnName;
     }
 
 

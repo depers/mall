@@ -1,10 +1,9 @@
-package cn.bravedawn.obj.inherit.downcasting;
+package cn.bravedawn.obj.inherit.instanceof_;
 
 public class InstanceofExample2 {
 
     /**
-     *
-     * @param args
+     * Java 14 带来了新版的 instanceof 操作，将参数类型检查和绑局部变量类型合并到了一起
      */
 
     public static void main(String[] args) {
