@@ -23,6 +23,10 @@ public class HashSetExample {
         System.out.println(addFlag); // true
         System.out.println(addFlag2); // false
 
+        // 添加null元素
+        hashset.add(null);
+        System.out.println(hashset);
+
         // 检查一个元素是否存在
         boolean exist = hashset.contains("a");
         System.out.println(exist); // true
