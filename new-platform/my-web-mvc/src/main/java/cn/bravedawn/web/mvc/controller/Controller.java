@@ -1,6 +1,8 @@
 package cn.bravedawn.web.mvc.controller;
 
 /**
+ * 标记接口
+ *
  * @author : depers
  * @program : new-platform
  * @description:

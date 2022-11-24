@@ -3,13 +3,13 @@
     <parent>
         <artifactId>new-platform</artifactId>
         <groupId>cn.bravedawn</groupId>
-        <version>v1-SNAPSHOT</version>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>user-web</artifactId>
     <packaging>jar</packaging>
-
     <name>user-web</name>
     <url>http://maven.apache.org</url>
 
@@ -21,13 +21,20 @@
         <dependency>
             <groupId>cn.bravedawn</groupId>
             <artifactId>my-web-mvc</artifactId>
-            <version>${version}</version>
+            <version>${revision}</version>
         </dependency>
+
         <dependency>
             <groupId>cn.bravedawn</groupId>
-            <artifactId>my-web-mvc</artifactId>
-            <version>v1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>my-web-data</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

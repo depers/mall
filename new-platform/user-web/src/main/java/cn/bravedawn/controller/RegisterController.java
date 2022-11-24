@@ -1,6 +1,12 @@
 package cn.bravedawn.controller;
 
 import cn.bravedawn.web.mvc.controller.Controller;
+import cn.bravedawn.web.mvc.controller.PageController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 
 /**
  * @author : depers
@@ -9,6 +15,16 @@ import cn.bravedawn.web.mvc.controller.Controller;
  * @date : Created in 2022/11/22 22:29
  */
 
-@Path
-public class RegisterController implements Controller {
+@Path("app")
+public class RegisterController implements PageController {
+
+
+    @POST
+    @Path("register")
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+        // 数据库相关逻辑
+        return "register_success.jsp";
+    }
+
 }
