@@ -1,5 +1,6 @@
 package cn.bravedawn.collection.list.copylist;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,5 +30,6 @@ public class CopyListExample5 {
         // 不允许给定的集合为null
         List<Integer> copy3 = List.copyOf(null); // java.lang.NullPointerException
         System.out.println(copy);
+
     }
 }

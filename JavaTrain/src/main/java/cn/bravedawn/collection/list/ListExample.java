@@ -17,8 +17,10 @@ public class ListExample {
 
         List list2 = new LinkedList();
 
+        // 返回一个不可改变列表
         List list3 = List.of(1, 2, 4);
 
+        // java.util.Arrays.ArrayList，而非java.util.ArrayList
         List list4 = Arrays.asList(1, 2, 4);
     }
 }

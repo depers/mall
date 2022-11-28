@@ -1,5 +1,6 @@
 package cn.bravedawn.collection.list.copylist;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,5 +30,28 @@ public class CopyListExample3 {
         List<Integer> dest2 = Arrays.asList(4, 5, 6, 7, 8, 9, 10);
         Collections.copy(dest2, source2);
         System.out.println("dest2 = " + dest2); // [1, 2, 3, 7, 8, 9, 10]
+
+
+        //-----------------------------------------------------------
+
+        /**
+         * 若复制的目标list的size小于0会报下面的错误
+         */
+
+        Plant p1 = new Plant("杜鹃", "red");
+        Plant p2 = new Plant("玫瑰", "yellow");
+        Plant p3 = new Plant("月季", "pink");
+        List<Plant> plantList = new ArrayList<>();
+        plantList.add(p1);
+        plantList.add(p2);
+        plantList.add(p3);
+        System.out.println("plants = " + plantList);
+
+        // 使用addAll()方法进行复制
+        List<Plant> plantsCopy = new ArrayList<>(3);
+        Collections.copy(plantsCopy, plantList); // java.lang.IndexOutOfBoundsException: Source does not fit in dest
+        System.out.println("plantsCopy = " + plantsCopy);
+
+
     }
 }

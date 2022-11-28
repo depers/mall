@@ -1,11 +1,11 @@
-package cn.bravedawn.collection.list.copylist;
+package cn.bravedawn.collection.list.copylist.clonemethod;
 
 /**
  * PC: SPDB
  * author: fengx9
  * create time: 2022/9/19 11:10
  */
-public class Plant {
+public class Plant implements Cloneable{
 
     private String name;
     private String color;
@@ -39,4 +39,8 @@ public class Plant {
                 '}';
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Plant(name, color);
+    }
 }
