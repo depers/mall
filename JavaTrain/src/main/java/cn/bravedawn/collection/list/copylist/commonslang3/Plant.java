@@ -1,5 +1,6 @@
-package cn.bravedawn.collection.list.copylist.clonemethod;
+package cn.bravedawn.collection.list.copylist.commonslang3;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * author: fengx9
  * create time: 2022/9/19 11:10
  */
-public class Plant implements Cloneable{
+public class Plant implements Serializable {
 
     private String name;
     private String color;
@@ -52,8 +53,5 @@ public class Plant implements Cloneable{
                 '}';
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new Plant(name, color, florescence);
-    }
+
 }

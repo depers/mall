@@ -1,5 +1,6 @@
-package cn.bravedawn.collection.list.copylist.clonemethod;
+package cn.bravedawn.collection.list.copylist.commonslang3;
 
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,29 +9,27 @@ import java.util.List;
 /**
  * @author : depers
  * @program : JavaTrain
- * @date : Created in 2022/11/28 21:51
+ * @date : Created in 2022/11/29 13:03
  */
-public class CopyListForCloneMethod {
+public class CommonsLang3Clone {
 
     /**
-     * 通过覆盖可变类的clone方法实现，即深拷贝实现list的复制
+     * 使用Apache Commons Lang等第三方库提供的clone方法（深拷贝）实现List的复制
      */
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-        Date now = new Date();
-        Plant p1 = new Plant("杜鹃", "red", now);
-        Plant p2 = new Plant("玫瑰", "yellow", now);
-        Plant p3 = new Plant("月季", "pink", now);
+    public static void main(String[] args) {
+        Plant p1 = new Plant("杜鹃", "red", new Date());
+        Plant p2 = new Plant("玫瑰", "yellow", new Date());
+        Plant p3 = new Plant("月季", "pink", new Date());
         List<Plant> plantList = new ArrayList<>();
         plantList.add(p1);
         plantList.add(p2);
         plantList.add(p3);
         System.out.println("plants = " + plantList);
 
-
         List<Plant> plantsCopy = new ArrayList<>();
         for (Plant plant : plantList) {
-            plantsCopy.add((Plant) plant.clone());
+            plantsCopy.add(SerializationUtils.clone(plant));
         }
         System.out.println("plantsCopy = " + plantsCopy);
 
