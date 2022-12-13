@@ -10,6 +10,10 @@ import feign.codec.ErrorDecoder;
  * @date : Created in 2022/12/6 19:16
  */
 public class CustomErrorDecoder implements ErrorDecoder {
+
+    /**
+     * 自定义解码器
+     */
     public Exception decode(String s, Response response) {
         return null;
     }
