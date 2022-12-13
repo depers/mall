@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang;
+package cn.bravedawn.basic.lang.array;
 
 import java.util.Arrays;
 
@@ -7,10 +7,10 @@ import java.util.Arrays;
  * @program : JavaTrain
  * @date : Created in 2022/1/13 11:34
  */
-public class ArrayExample4 {
+public class ArrayExample3 {
 
     /**
-     * 二位数组的长度是行数
+     * 二位数组中，每一行的数组的长度并不要求相同
      */
 
     public static void main(String[] args) {
@@ -20,7 +20,6 @@ public class ArrayExample4 {
                 {7, 8, 9}
         };
 
-        System.out.println(ns.length);
-        System.out.println(ns[0].length);
+        System.out.println(Arrays.deepToString(ns));
     }
 }
