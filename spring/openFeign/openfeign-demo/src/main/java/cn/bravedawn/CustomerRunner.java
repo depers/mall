@@ -23,6 +23,6 @@ public class CustomerRunner implements ApplicationRunner {
 
 
     public void run(ApplicationArguments args) throws Exception {
-        log.info(jsonPlaceHolderClient.getPosts().toString());
+        log.info(jsonPlaceHolderClient.getPostById(1l).toString());
     }
 }
