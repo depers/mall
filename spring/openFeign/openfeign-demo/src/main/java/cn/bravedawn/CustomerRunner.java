@@ -1,6 +1,8 @@
 package cn.bravedawn;
 
 import cn.bravedawn.client.JSONPlaceHolderClient;
+import cn.bravedawn.client.UserClient;
+import cn.bravedawn.model.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -21,8 +23,20 @@ public class CustomerRunner implements ApplicationRunner {
     @Autowired
     private JSONPlaceHolderClient jsonPlaceHolderClient;
 
+    @Autowired
+    private UserClient userClient;
+
 
     public void run(ApplicationArguments args) throws Exception {
-        log.info(jsonPlaceHolderClient.getPostById(1l).toString());
+        testRegister();
+    }
+
+    private void testRegister() {
+        Post post = new Post("17393164120", Long.MAX_VALUE,
+                "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto");
+
+        log.info(userClient.register(post).toString());
+
     }
 }
