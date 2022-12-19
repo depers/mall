@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.object;
+package cn.bravedawn.obj.object.clone;
 
 /**
  * @author : depers
