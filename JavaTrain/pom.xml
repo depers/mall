@@ -42,11 +42,7 @@
             <version>16.0.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.4</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -72,11 +68,7 @@
             <version>${h2.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -124,6 +116,27 @@
             <version>3.6.1</version>
         </dependency>
 
+        <!-- Apache针对Java集合框架的增强  -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+
+        <!-- Apache针对Java核心类的增强，特别是String的操作方法-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
+
+        <!-- Apache针对操作Java Bean提供的工具-->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+
         <!-- Json -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -135,6 +148,12 @@
             <groupId>it.unimi.dsi</groupId>
             <artifactId>dsiutils</artifactId>
             <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.5</version>
         </dependency>
 
 

@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.object.clone.deep;
+package cn.bravedawn.obj.object.clone.deep.overrideclone;
 
 /**
  * @author : depers
@@ -44,9 +44,9 @@ public class Student implements Cloneable{
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        // 深复制
+        // 需要注意的是，super.clone()其实是浅拷贝，所以在重写User类的clone()方法时，address对象需要调用address.clone()重新赋值。
         Student student = (Student) super.clone();
-        student.setTeacher((Teacher) student.getTeacher().clone());
+        student.setTeacher((Teacher) this.getTeacher().clone());
         return student;
     }
 }

@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.object.clone.deep;
+package cn.bravedawn.obj.object.clone.shallow.basic;
 
 
 
@@ -32,10 +32,5 @@ public class Teacher implements Cloneable {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.object.clone.shallow;
+package cn.bravedawn.obj.object.clone.shallow.basic;
 
 /**
  * @author : depers

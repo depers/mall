@@ -1,16 +1,16 @@
-package cn.bravedawn.obj.object.clone.deep;
+package cn.bravedawn.obj.object.clone.shallow.basic;
 
 /**
  * @author : depers
  * @program : JavaTrain
  * @description:
- * @date : Created in 2022/12/19 21:21
+ * @date : Created in 2022/12/19 17:18
  */
-public class DeepCopy {
+public class ShallowCopy {
 
     /**
-     * 深拷贝
-     * 在下面的打印输出中可以看到teacher是不同的引用地址
+     * 浅拷贝
+     * 下面代码中学生的属性对象teacher最后引用的是同一对象
      */
 
     public static void main(String[] args) throws CloneNotSupportedException {

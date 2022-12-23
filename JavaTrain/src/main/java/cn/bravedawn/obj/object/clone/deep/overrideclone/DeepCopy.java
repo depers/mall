@@ -1,16 +1,18 @@
-package cn.bravedawn.obj.object.clone.shallow;
+package cn.bravedawn.obj.object.clone.deep.overrideclone;
 
 /**
  * @author : depers
  * @program : JavaTrain
  * @description:
- * @date : Created in 2022/12/19 17:18
+ * @date : Created in 2022/12/19 21:21
  */
-public class ShallowCopy {
+public class DeepCopy {
 
     /**
-     * 浅拷贝
-     * 下面代码中学生的属性对象teacher最后引用的是同一对象
+     * 深拷贝方法二：覆写clone方法
+     * Object父类有个clone()的拷贝方法，不过它是protected类型的，我们需要重写它并修改为public类型。
+     * 除此之外，子类还需要实现Cloneable接口来告诉JVM这个类是可以拷贝的。
+     * 在下面的打印输出中可以看到teacher是不同的引用地址
      */
 
     public static void main(String[] args) throws CloneNotSupportedException {
