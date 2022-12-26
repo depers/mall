@@ -64,7 +64,7 @@ public class DatabaseUserRepository implements UserRepository{
             String methodName = preparedStatementMethodMappings.get(argType);
             Method method = PreparedStatement.class.getMethod(methodName, int.class, wrapperType);
 
-            // 将参数值替换成查询语句中的?
+            // 用参数值替换查询语句中的?
             method.invoke(preparedStatement, i + 1, arg);
         }
 

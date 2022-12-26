@@ -9,5 +9,5 @@ public interface Repository<T> {
 
     T selectOne(String sql, Object ...args);
 
-    int insert(String sql, Object ...args);
+    int save(String sql, Object ...args);
 }

@@ -108,7 +108,6 @@ public class FrontControllerServlet extends HttpServlet {
                     PageController pageController = PageController.class.cast(controller);
                     String viewPath = pageController.execute(request, response);
 
-
                     ServletContext servletContext = request.getServletContext();
                     if (!viewPath.startsWith("/")) {
                         viewPath = "/" + viewPath;
