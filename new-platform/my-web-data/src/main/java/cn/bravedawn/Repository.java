@@ -1,5 +1,8 @@
 package cn.bravedawn;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * @author : depers
  * @program : new-platform
@@ -7,7 +10,7 @@ package cn.bravedawn;
  */
 public interface Repository<T> {
 
-    T selectOne(String sql, Object ...args);
+    T selectOne(T args) throws Exception;
 
-    int save(String sql, Object ...args);
+    int save(T args);
 }

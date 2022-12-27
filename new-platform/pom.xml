@@ -30,6 +30,7 @@
         <!-- 第三方开源依赖版本-->
         <commons-lang.version>2.6</commons-lang.version>
 
+        <guava.version>23.0</guava.version>
         <!-- Maven Plugins 版本 -->
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.source.version>3.2.1</maven.source.version>
@@ -73,6 +74,18 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.200</version>
             </dependency>
 
         </dependencies>
