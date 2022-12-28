@@ -12,5 +12,5 @@ public interface Repository<T> {
 
     T selectOne(T args) throws Exception;
 
-    int save(T args);
+    long save(T args) throws IntrospectionException, InvocationTargetException, IllegalAccessException, Exception;
 }

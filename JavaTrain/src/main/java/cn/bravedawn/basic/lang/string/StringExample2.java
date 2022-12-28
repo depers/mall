@@ -13,7 +13,7 @@ public class StringExample2 {
 
 
     /**
-     * 删除索引位置的字符
+     * 删除索引位置的字符，deleteCharAt(index)
      */
 
     public static void main(String[] args) {

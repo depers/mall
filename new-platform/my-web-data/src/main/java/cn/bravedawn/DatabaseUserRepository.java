@@ -4,18 +4,13 @@ import cn.bravedawn.entity.Member;
 import cn.bravedawn.util.MyStringUtils;
 
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +23,10 @@ public class DatabaseUserRepository implements Repository<Member> {
 
     private static final String BLANK_SPACE = " ";
     private static final String COMMA = ",";
+
+    private static final String QUOTATION_MARK = "'";
+
+    private static final String SET_SQL = " SET ";
     private static Map<Class, String> resultSetMethodMappings = new HashMap<>();
 
     static {
@@ -103,7 +102,6 @@ public class DatabaseUserRepository implements Repository<Member> {
             }
 
             return member;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,14 +110,60 @@ public class DatabaseUserRepository implements Repository<Member> {
 
 
     @Override
-    public int save(Member args) {
-        return 0;
+    public long save(Member args) throws Exception{
+        StringBuffer insertBuffer = new StringBuffer("INSERT INTO");
+        insertBuffer.append(BLANK_SPACE).append("public." + args.getClass().getSimpleName().toLowerCase()).append(SET_SQL);
+        BeanInfo beanInfo = Introspector.getBeanInfo(Member.class, Object.class);
+
+        for (PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
+            // 字段名
+            String fieldName = descriptor.getName();
+            // 字段类型
+            Class fieldType = descriptor.getPropertyType();
+            // 获取对象get方法
+            Method getMethod = descriptor.getReadMethod();
+
+            // 获取属性的值
+            Object value = getMethod.invoke(args);
+            if (value != null && MyStringUtils.isNotBlank(String.valueOf(value))) {
+                insertBuffer.append(MyStringUtils.mapColumnLabel(fieldName))
+                        .append(" = ").append(getValueFromType(value)).append(COMMA).append(BLANK_SPACE);
+            }
+        }
+
+        insertBuffer.deleteCharAt(insertBuffer.length() - 1).deleteCharAt(insertBuffer.length() - 1);
+
+        System.out.println(insertBuffer);
+
+        // 获取连接
+        Connection connection = DBConnectionManager.getConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeLargeUpdate(insertBuffer.toString());
+    }
+
+    /**
+     * 根据值的类型返回其在insert sql语句中的set值
+     * @param val 对象的属性值
+     * @return
+     */
+    private String getValueFromType(Object val) {
+        if (val instanceof String) {
+            return MyStringUtils.wrapperValue(String.valueOf(val), QUOTATION_MARK, QUOTATION_MARK);
+        } else {
+            return String.valueOf(val);
+        }
     }
 
 
     public static void main(String[] args) throws Exception {
         DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository();
-        Member member = databaseUserRepository.selectOne(new Member());
-        System.out.println(member);
+        // Member member = databaseUserRepository.selectOne(new Member());
+        // System.out.println(member);
+
+        Member m = new Member();
+        m.setUsername("fengxiao");
+        m.setPassword("fx1212");
+        m.setEmail("2368472130@qq.com");
+        databaseUserRepository.save(m);
     }
 }

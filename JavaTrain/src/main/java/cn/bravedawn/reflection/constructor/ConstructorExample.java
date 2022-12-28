@@ -3,7 +3,7 @@ package cn.bravedawn.reflection.constructor;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class ReflectionExample {
+public class ConstructorExample {
 
     /**
      * 通过反射中的Constructor创建一个实例
