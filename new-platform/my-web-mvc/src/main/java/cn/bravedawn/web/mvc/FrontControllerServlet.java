@@ -2,6 +2,8 @@ package cn.bravedawn.web.mvc;
 
 import cn.bravedawn.web.mvc.controller.Controller;
 import cn.bravedawn.web.mvc.controller.PageController;
+import cn.bravedawn.web.mvc.controller.RestController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.*;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.Path;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -41,6 +44,7 @@ public class FrontControllerServlet extends HttpServlet {
             Class<?> controllerClass = controller.getClass();
             Path pathFromClass = controllerClass.getAnnotation(Path.class);
             String requestPath = pathFromClass.value();
+            requestPath = requestPath.startsWith("/") ? requestPath : "/" + requestPath;
             Method[] publicMethods = controllerClass.getMethods();
 
             // 处理方法支持的Http方法集合
@@ -48,9 +52,12 @@ public class FrontControllerServlet extends HttpServlet {
                 Set<String> supportedHttpMethods = findSupportedHttpMethods(method);
                 Path pathFromMethod = method.getAnnotation(Path.class);
                 if (pathFromMethod != null) {
-                    requestPath += pathFromMethod.value();
+                    String methodRequestPath = pathFromMethod.value();
+                    methodRequestPath = methodRequestPath.startsWith("/") ? methodRequestPath : "/" + methodRequestPath;
+                    requestPath = requestPath + methodRequestPath;
+                    handleMethodInfoMapping.put(requestPath, new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
                 }
-                handleMethodInfoMapping.put(requestPath, new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
+
             }
             controllerMapping.put(requestPath, controller);
         }
@@ -84,6 +91,7 @@ public class FrontControllerServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String requestURI = request.getRequestURI();
+        System.out.println("requestURI-----------------------" + requestURI);
 
         String servletContextPath = request.getContextPath();
         String prefixPath = servletContextPath;
@@ -97,7 +105,7 @@ public class FrontControllerServlet extends HttpServlet {
             try{
                 if (handlerMethodInfo != null) {
                     String httpMethod = request.getMethod();
-                    if (handlerMethodInfo.getSupportedHttpMethods().contains(httpMethod)) {
+                    if (!handlerMethodInfo.getSupportedHttpMethods().contains(httpMethod)) {
                         // HTTP方法不支持
                         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                         return;
@@ -115,9 +123,18 @@ public class FrontControllerServlet extends HttpServlet {
                     RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(viewPath);
                     requestDispatcher.forward(request, response);
                     return;
+                } else if (controller instanceof RestController) {
+
+                    Object result = handlerMethodInfo.getHandlerMethod().invoke(controller, request, response);
+                    response.setContentType("application/json;charset=utf-8");
+                    PrintWriter writer = response.getWriter();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    writer.write(objectMapper.writeValueAsString(request));
+                    writer.close();
                 }
 
             } catch(Throwable throwable) {
+                throwable.printStackTrace();
                 if (throwable.getCause() instanceof IOException) {
                     throw (IOException) throwable.getCause();
                 } else {

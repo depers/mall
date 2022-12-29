@@ -12,6 +12,8 @@ public class StringSplitExample {
 
     public static void main(String[] args) {
         String str = "";
+        String str2 = "12";
         System.out.println(Arrays.toString(str.split(",")));
+        System.out.println(Arrays.toString(str2.split(",")));
     }
 }

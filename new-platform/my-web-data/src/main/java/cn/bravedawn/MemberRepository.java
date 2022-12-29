@@ -19,11 +19,10 @@ import java.util.Map;
  * @description:
  * @date : Created in 2022/12/26 21:50
  */
-public class DatabaseUserRepository implements Repository<Member> {
+public class MemberRepository implements Repository<Member> {
 
     private static final String BLANK_SPACE = " ";
     private static final String COMMA = ",";
-
     private static final String QUOTATION_MARK = "'";
 
     private static final String SET_SQL = " SET ";
@@ -156,7 +155,7 @@ public class DatabaseUserRepository implements Repository<Member> {
 
 
     public static void main(String[] args) throws Exception {
-        DatabaseUserRepository databaseUserRepository = new DatabaseUserRepository();
+        MemberRepository databaseUserRepository = new MemberRepository();
         // Member member = databaseUserRepository.selectOne(new Member());
         // System.out.println(member);
 

@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * @program : servlet-demo
  * @date : Created in 2022/05/27 5:02 PM
  */
-@WebServlet(name = "MyServlet", urlPatterns = {"/MyServlet"})
+@WebServlet(name = "MyServlet", urlPatterns = {"/MyServlet/my/a.html"})
 public class MyServlet extends HttpServlet {
 
     /**
@@ -24,6 +24,7 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ServletContext ctx = req.getServletContext();
         ctx.setAttribute("User", "fengxiao");
         String user = (String) ctx.getAttribute("User");

@@ -17,6 +17,10 @@ import java.util.Arrays;
 @Log4j
 public class StringExample6 {
 
+    /**
+     * String编码的讨论
+     */
+
 
     public static void main(String[] args) throws UnsupportedEncodingException {
         //获取系统默认编码
