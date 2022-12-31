@@ -21,6 +21,7 @@ public class DBConnectionManager {
      */
 
     public static Connection getConnection() throws Exception {
+        Class.forName("org.h2.Driver");
         String databaseURL = "jdbc:h2:/Users/depers/h2/data.h2;AUTO_SERVER=TRUE;MODE=MYSQL;DATABASE_TO_LOWER=TRUE;";
         Connection connection = DriverManager.getConnection(databaseURL, "root", "fx1212");
         return connection;

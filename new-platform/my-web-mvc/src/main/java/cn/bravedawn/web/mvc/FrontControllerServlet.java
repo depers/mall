@@ -129,7 +129,7 @@ public class FrontControllerServlet extends HttpServlet {
                     response.setContentType("application/json;charset=utf-8");
                     PrintWriter writer = response.getWriter();
                     ObjectMapper objectMapper = new ObjectMapper();
-                    writer.write(objectMapper.writeValueAsString(request));
+                    writer.write(objectMapper.writeValueAsString(result));
                     writer.close();
                 }
 

@@ -156,13 +156,13 @@ public class MemberRepository implements Repository<Member> {
 
     public static void main(String[] args) throws Exception {
         MemberRepository databaseUserRepository = new MemberRepository();
-        // Member member = databaseUserRepository.selectOne(new Member());
-        // System.out.println(member);
+        Member member = databaseUserRepository.selectOne(new Member());
+        System.out.println(member);
 
-        Member m = new Member();
-        m.setUsername("fengxiao");
-        m.setPassword("fx1212");
-        m.setEmail("2368472130@qq.com");
-        databaseUserRepository.save(m);
+        // Member m = new Member();
+        // m.setUsername("fengxiao");
+        // m.setPassword("fx1212");
+        // m.setEmail("2368472130@qq.com");
+        // databaseUserRepository.save(m);
     }
 }
