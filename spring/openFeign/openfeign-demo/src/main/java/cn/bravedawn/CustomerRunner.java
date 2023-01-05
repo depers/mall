@@ -28,7 +28,9 @@ public class CustomerRunner implements ApplicationRunner {
 
 
     public void run(ApplicationArguments args) throws Exception {
-        testRegister();
+        System.out.println("-----------------------------------------");
+        System.out.println(jsonPlaceHolderClient.getPostById(1l));
+        System.out.println("-----------------------------------------");
     }
 
     private void testRegister() {

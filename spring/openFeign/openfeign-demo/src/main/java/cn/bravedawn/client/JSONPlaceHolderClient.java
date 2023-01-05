@@ -16,8 +16,7 @@ import java.util.List;
  * @date : Created in 2022/12/5 12:08
  */
 @FeignClient(value = "jplaceholder",
-            url = "https://jsonplaceholder.typicode.com/",
-            configuration = ClientConfiguration.class)
+            url = "https://jsonplaceholder.typicode.com/")
 public interface JSONPlaceHolderClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
