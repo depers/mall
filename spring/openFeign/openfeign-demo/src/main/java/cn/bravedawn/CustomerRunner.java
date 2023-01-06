@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @date : Created in 2022/12/8 12:39
  */
 
-@Component
+// @Component
 @Slf4j
 public class CustomerRunner implements ApplicationRunner {
 
