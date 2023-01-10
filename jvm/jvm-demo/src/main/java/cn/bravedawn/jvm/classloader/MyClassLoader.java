@@ -35,10 +35,10 @@ public class MyClassLoader extends ClassLoader{
         InputStream in = null;
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        className = clsName.replace(".", "/");
+        clsName = clsName.replace(".", "/");
 
         try(out) {
-            in = new FileInputStream(new File("classes/" + className + ".class"));
+            in = new FileInputStream(new File("classes/" + clsName + ".class"));
             int a = 0;
             while ((a = in.read()) != -1) {
                 out.write(a);
