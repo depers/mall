@@ -47,10 +47,25 @@ public class CopyListExample3 {
         plantList.add(p3);
         System.out.println("plants = " + plantList);
 
-        // 使用addAll()方法进行复制
-        List<Plant> plantsCopy = new ArrayList<>(3);
-        Collections.copy(plantsCopy, plantList); // java.lang.IndexOutOfBoundsException: Source does not fit in dest
+        // 复制
+        List<Plant> plantsCopy = new ArrayList<>(Arrays.asList(new Plant[2])); // size = 2
+        // Collections.copy(plantsCopy, plantList); // java.lang.IndexOutOfBoundsException: Source does not fit in dest
         System.out.println("plantsCopy = " + plantsCopy);
+
+
+        //-----------------------------------------------------------
+
+        /**
+         * Collections.copy也是浅复制
+         */
+        List<Plant> plantsCopy2 = new ArrayList<>(Arrays.asList(new Plant[plantList.size()]));
+        System.out.println(plantsCopy2.size());
+        Collections.copy(plantsCopy2, plantList);
+        // 修改列表中一个元素的属性
+        plantsCopy2.get(1).setColor("white");
+        System.out.println("Modified plants = " + plantList);
+        System.out.println("Modified plantsCopy = " + plantsCopy2);
+
 
 
     }
