@@ -141,6 +141,9 @@ public class FrontControllerServlet extends HttpServlet {
                     throw new ServletException(throwable.getCause());
                 }
             }
+        } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
     }
 
