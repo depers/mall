@@ -26,6 +26,12 @@ public class MemberRepository implements Repository<Member> {
     private static final String QUOTATION_MARK = "'";
 
     private static final String SET_SQL = " SET ";
+
+    private static final String AND_SQL = "AND";
+
+    private static final String LEFT_BRACKET = "(";
+    private static final String RIGHT_BRACKET = ")";
+    private static final String INSERT_VALUES = "VALUES";
     private static Map<Class, String> resultSetMethodMappings = new HashMap<>();
 
     static {
@@ -42,7 +48,7 @@ public class MemberRepository implements Repository<Member> {
 
         // 准备sql
         StringBuffer selectBuffer = new StringBuffer("SELECT");
-        StringBuffer whereBuffer = new StringBuffer("WHERE");
+        StringBuffer whereBuffer = new StringBuffer(" WHERE");
         BeanInfo beanInfo = Introspector.getBeanInfo(Member.class, Object.class);
         Map<String, Object> columnMap = new HashMap<>();
         Map<String, Class> columnTypeMap = new HashMap<>();
@@ -65,25 +71,29 @@ public class MemberRepository implements Repository<Member> {
             selectBuffer.append(BLANK_SPACE).append(key).append(COMMA);
 
             if (entry.getValue() != null) {
-                String value = String.valueOf(entry.getValue());
-                whereBuffer.append(BLANK_SPACE).append(key).append("=").append(value);
+                whereBuffer.append(BLANK_SPACE).append(key).append("=").append(getValueFromType(entry.getValue()))
+                        .append(BLANK_SPACE).append(AND_SQL);
             }
         }
+
         selectBuffer.deleteCharAt(selectBuffer.length() - 1);
 
         // 最终sql
         String tableName = MyStringUtils.mapColumnLabel(Member.class.getSimpleName());
-        selectBuffer.append(BLANK_SPACE).append("FROM").append(BLANK_SPACE).append("public." + tableName);
-        if (whereBuffer.length() > 5) {
+        selectBuffer.append(BLANK_SPACE).append("FROM").append(BLANK_SPACE).append(tableName);
+        if (whereBuffer.length() > 6) {
             selectBuffer.append(whereBuffer);
         }
 
-        System.out.println("最终的sql：" + selectBuffer);
+        String resultSQL = selectBuffer.substring(0, selectBuffer.length() - 4);
+
+
+        System.out.println("最终的sql：" + resultSQL);
 
         Connection connection = DBConnectionManager.getConnection();
         Statement statement = connection.createStatement();
 
-        try(ResultSet resultSet = statement.executeQuery(selectBuffer.toString())) {
+        try(ResultSet resultSet = statement.executeQuery(resultSQL)) {
             if (resultSet.next()) {
                 for (Map.Entry<String, Class> entry : columnTypeMap.entrySet()) {
                     System.out.println(entry.toString());
@@ -98,9 +108,10 @@ public class MemberRepository implements Repository<Member> {
                     Method setterMethodFromMember = Member.class.getMethod(setterMethodName, entry.getValue());
                     setterMethodFromMember.invoke(member, resultValue);
                 }
+                return member;
             }
 
-            return member;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +122,9 @@ public class MemberRepository implements Repository<Member> {
     @Override
     public long save(Member args) throws Exception{
         StringBuffer insertBuffer = new StringBuffer("INSERT INTO");
-        insertBuffer.append(BLANK_SPACE).append("public." + args.getClass().getSimpleName().toLowerCase()).append(SET_SQL);
+        StringBuffer colBuffer = new StringBuffer();
+        StringBuffer valBuffer = new StringBuffer();
+        insertBuffer.append(BLANK_SPACE).append(args.getClass().getSimpleName().toLowerCase()).append(BLANK_SPACE);
         BeanInfo beanInfo = Introspector.getBeanInfo(Member.class, Object.class);
 
         for (PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
@@ -125,14 +138,16 @@ public class MemberRepository implements Repository<Member> {
             // 获取属性的值
             Object value = getMethod.invoke(args);
             if (value != null && MyStringUtils.isNotBlank(String.valueOf(value))) {
-                insertBuffer.append(MyStringUtils.mapColumnLabel(fieldName))
-                        .append(" = ").append(getValueFromType(value)).append(COMMA).append(BLANK_SPACE);
+                colBuffer.append(MyStringUtils.mapColumnLabel(fieldName)).append(COMMA);
+                valBuffer.append(getValueFromType(value)).append(COMMA);
             }
         }
+        colBuffer.deleteCharAt(colBuffer.length() - 1);
+        valBuffer.deleteCharAt(valBuffer.length() - 1);
 
-        insertBuffer.deleteCharAt(insertBuffer.length() - 1).deleteCharAt(insertBuffer.length() - 1);
-
-        System.out.println(insertBuffer);
+        String resultSQL = insertBuffer.append(LEFT_BRACKET).append(colBuffer).append(RIGHT_BRACKET)
+                        .append(INSERT_VALUES).append(LEFT_BRACKET).append(valBuffer).append(RIGHT_BRACKET).toString();
+        System.out.println("最终插入sql：" + resultSQL);
 
         // 获取连接
         Connection connection = DBConnectionManager.getConnection();
@@ -156,13 +171,19 @@ public class MemberRepository implements Repository<Member> {
 
     public static void main(String[] args) throws Exception {
         MemberRepository databaseUserRepository = new MemberRepository();
-        Member member = databaseUserRepository.selectOne(new Member());
-        System.out.println(member);
-
         // Member m = new Member();
         // m.setUsername("fengxiao");
         // m.setPassword("fx1212");
         // m.setEmail("2368472130@qq.com");
-        // databaseUserRepository.save(m);
+        // m.setId(1);
+        // Member member = databaseUserRepository.selectOne(m);
+        // System.out.println(member);
+
+        Member m = new Member();
+        m.setUsername("fengxiao");
+        m.setPassword("fx1212");
+        m.setEmail("2368472130@qq.com");
+        m.setId(1);
+        databaseUserRepository.save(m);
     }
 }
