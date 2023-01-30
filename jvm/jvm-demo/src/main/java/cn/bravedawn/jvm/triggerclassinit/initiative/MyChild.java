@@ -1,4 +1,4 @@
-package cn.bravedawn.jvm.triggerclassinit;
+package cn.bravedawn.jvm.triggerclassinit.initiative;
 
 /**
  * @author : depers
