@@ -17,9 +17,10 @@ public class LocalTimeExample2 {
         LocalTime localTime = LocalTime.of(19, 30, 0);
         LocalTime localTime2 = LocalTime.of(7, 30, 0);
         LocalTime now = LocalTime.of(0, 0, 0);
+        LocalTime now2 = LocalTime.of(20, 0, 0);
         System.out.println(now.getHour());
 
-        System.out.println(now.isAfter(localTime));
+        System.out.println(now2.isAfter(localTime));
         System.out.println(now.isBefore(localTime2));
     }
 }
