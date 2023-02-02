@@ -9,7 +9,7 @@ package cn.bravedawn.basic.lang.string;
 public class StringExample4 {
 
     /**
-     * 当且仅当 s.equals(t)为true，s.intern()=t.intern()也为true
+     * 对于任意两个字符串 s 和 t，当且仅当 s.equals(t) 为真时，s.intern() == t.intern() 也为真
      * 从字符串缓存池中返回已存在的equals方法为true的字符串引用
      */
 

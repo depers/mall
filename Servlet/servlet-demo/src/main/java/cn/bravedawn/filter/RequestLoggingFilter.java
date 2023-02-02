@@ -13,7 +13,7 @@ import java.util.Enumeration;
  * @date : Created in 2022/6/21 21:53
  */
 
-//@WebFilter("/RequestLoggingFilter")
+@WebFilter(filterName = "RequestLoggingFilter", urlPatterns = "/*")
 public class RequestLoggingFilter implements Filter {
 
     private ServletContext context;
