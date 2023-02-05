@@ -3,7 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    
+
+    <!-- 请确保这个 Listener 放置在首位 -->
+    <listener>
+        <listener-class>cn.bravedawn.listener.ComponentContextInitializerListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>cn.bravedawn.listener.TestingListener</listener-class>
+    </listener>
+
+
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
@@ -18,4 +28,25 @@
         <servlet-name>FrontControllerServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+   <resource-ref>
+       <description>DB Connection</description>
+       <!-- JNDI javax.naming.Name -->
+       <res-ref-name>jdbc/UserPlatformDB</res-ref-name>
+       <res-type>javax.sql.DataSource</res-type>
+       <res-auth>Container</res-auth>
+   </resource-ref>
+
+   <resource-env-ref>
+       <description>
+           Object factory for DBConnectionManager instances.
+       </description>
+       <resource-env-ref-name>
+           bean/DBConnectionManager
+       </resource-env-ref-name>
+       <resource-env-ref-type>
+           cn.bravedawn.sql.DBConnectionManager
+       </resource-env-ref-type>
+   </resource-env-ref>
 </web-app>
