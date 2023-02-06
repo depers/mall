@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Map;
  * @description:
  * @date : Created in 2022/12/26 21:50
  */
-public class MemberRepository implements Repository<Member> {
+public class MemberRepository implements Repository {
 
     private static final String BLANK_SPACE = " ";
     private static final String COMMA = ",";
@@ -42,7 +43,7 @@ public class MemberRepository implements Repository<Member> {
 
 
     @Override
-    public Member selectOne(Member args) throws Exception {
+    public <T> T selectOne(T args) throws Exception {
 
         Member member = new Member();
 
@@ -106,9 +107,9 @@ public class MemberRepository implements Repository<Member> {
                     // 获取Member的setter方法
                     String setterMethodName = "set" + MyStringUtils.capitalize(entry.getKey());
                     Method setterMethodFromMember = Member.class.getMethod(setterMethodName, entry.getValue());
-                    setterMethodFromMember.invoke(member, resultValue);
+                    setterMethodFromMember.invoke(args, resultValue);
                 }
-                return member;
+                return null;
             }
 
 
@@ -120,7 +121,7 @@ public class MemberRepository implements Repository<Member> {
 
 
     @Override
-    public long save(Member args) throws Exception{
+    public <T> long save(T args) throws Exception{
         StringBuffer insertBuffer = new StringBuffer("INSERT INTO");
         StringBuffer colBuffer = new StringBuffer();
         StringBuffer valBuffer = new StringBuffer();
@@ -153,6 +154,11 @@ public class MemberRepository implements Repository<Member> {
         Connection connection = DBConnectionManager.getConnection();
         Statement statement = connection.createStatement();
         return statement.executeLargeUpdate(insertBuffer.toString());
+    }
+
+    @Override
+    public <T> long batchSave(List<T> list) {
+        return 0;
     }
 
     /**

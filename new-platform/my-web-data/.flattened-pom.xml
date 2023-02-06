@@ -8,30 +8,22 @@
     <version>v1-SNAPSHOT</version>
   </parent>
   <groupId>cn.bravedawn</groupId>
-  <artifactId>my-web-mvc</artifactId>
+  <artifactId>my-web-data</artifactId>
   <version>v1-SNAPSHOT</version>
-  <name>My Web-MVC Framework ${revision}</name>
+  <name>My Web-Data Framework ${revision}</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.32</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

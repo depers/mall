@@ -18,14 +18,14 @@
     <!-- 资源或者组件类似于 Spring Bean -->
     <Resource name="jdbc/UserPlatformDB"
               type="javax.sql.DataSource" auth="Container"
-              description="Derby database for User Platform"
+              description="mysql"
               maxActive="100" maxIdle="30" maxWait="10000"
-              username="" password=""
-              driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-              url="jdbc:derby:db/user-platform;create=true"/>
+              username="root" password="fx1212"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://192.168.13.128:3306/jasper"/>
 
     <!-- FactoryBean -->
     <Resource name="bean/DBConnectionManager" auth="Container"
-              type="org.geektimes.projects.user.sql.DBConnectionManager"
+              type="cn.bravedawn.sql.DBConnectionManager"
               factory="org.apache.naming.factory.BeanFactory"/>
 </Context>

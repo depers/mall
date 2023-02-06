@@ -23,5 +23,9 @@ public class SecureRandomExample {
 
         int randomWithSecureRandomWithinARange = secureRandom.nextInt(max - min) + min;
         System.out.println(randomWithSecureRandomWithinARange);
+
+        SecureRandom secureRandom1 = new SecureRandom();
+        secureRandom1.setSeed("encryptKey".getBytes());
+        System.out.println(secureRandom1.nextInt());  // -1848323171
     }
 }

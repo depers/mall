@@ -4,7 +4,6 @@
         <groupId>cn.bravedawn</groupId>
         <artifactId>new-platform</artifactId>
         <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>My Web-MVC Framework ${revision}</name>

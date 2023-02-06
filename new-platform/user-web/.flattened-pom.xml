@@ -8,30 +8,27 @@
     <version>v1-SNAPSHOT</version>
   </parent>
   <groupId>cn.bravedawn</groupId>
-  <artifactId>my-web-mvc</artifactId>
+  <artifactId>user-web</artifactId>
   <version>v1-SNAPSHOT</version>
-  <name>My Web-MVC Framework ${revision}</name>
+  <name>user-web</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <dependency>
+      <groupId>cn.bravedawn</groupId>
+      <artifactId>my-web-mvc</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.bravedawn</groupId>
+      <artifactId>my-web-data</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

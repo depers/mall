@@ -10,17 +10,26 @@
         <welcome-file>/JDBCDataSourceExample</welcome-file>
     </welcome-file-list>
 
-    <!-- <resource-ref> -->
-    <!--     <description> -->
-    <!--         Resource reference to a factory for java.sql.Connection -->
-    <!--         instances that may be used for talking to a particular -->
-    <!--         database that is configured in the Context -->
-    <!--         configuration for the web application. -->
-    <!--     </description> -->
-    <!--     <res-ref-name>jdbc/userDB</res-ref-name> -->
-    <!--     <res-type>javax.sql.DataSource</res-type> -->
-    <!--     <res-auth>Container</res-auth> -->
-    <!-- </resource-ref> -->
+
+     <!--其实在web.xml中也不是必须要声明这个定义，但是在tomcat的文档里面写了
+
+     If a resource has been defined in a <Context> element it is not necessary for that resource to be
+     defined in /WEB-INF/web.xml. However, it is recommended to keep the entry in /WEB-INF/web.xml to
+     document the resource requirements for the web application.
+
+     -->
+
+     <resource-ref>
+         <description>
+             Resource reference to a factory for java.sql.Connection
+             instances that may be used for talking to a particular
+             database that is configured in the Context
+             configuration for the web application.
+         </description>
+         <res-ref-name>jdbc/userDB</res-ref-name>
+         <res-type>javax.sql.DataSource</res-type>
+         <res-auth>Container</res-auth>
+     </resource-ref>
 
 
 
