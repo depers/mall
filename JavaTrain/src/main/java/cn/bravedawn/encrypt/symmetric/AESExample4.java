@@ -79,6 +79,7 @@ public class AESExample4 {
      */
     public static IvParameterSpec generateIv() {
         byte[] iv = new byte[16];
+        // 生成用户指定数量的随机字节，随机字节会填充到这个数组中
         new SecureRandom().nextBytes(iv);
         return new IvParameterSpec(iv);
     }
@@ -124,6 +125,8 @@ public class AESExample4 {
 
         String cipherText = encryptPasswordBased(plainText, key, ivParameterSpec);
         String decryptedCipherText = decryptPasswordBased(cipherText, key);
+
+        System.out.println(cipherText);
 
         System.out.println(plainText.equals(decryptedCipherText));
     }
