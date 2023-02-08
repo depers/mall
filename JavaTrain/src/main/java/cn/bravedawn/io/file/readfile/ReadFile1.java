@@ -16,7 +16,10 @@ import java.util.stream.Stream;
 public class ReadFile1 {
 
     /**
-     * 方法一：使用Java 8 Files.lines()去读取文件，内部使用try-with-resources包装代码，无需过多操作
+     * 方法一：使用Java 8 Files.lines()去读取文件，内部使用try-with-resources包装代码，无需过多操作'
+     *
+     * 其中：foreach() 是进行遍历但不保证顺序
+     *      forEachOrdered()是进行遍历会保持顺序
      */
 
     public static void main(String[] args) throws IOException {

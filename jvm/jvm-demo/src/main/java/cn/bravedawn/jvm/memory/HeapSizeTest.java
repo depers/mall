@@ -13,7 +13,7 @@ import java.util.PrimitiveIterator;
 public class HeapSizeTest {
 
     /**
-     * JVM的内存容量
+     * 演示虚拟机堆大小相关配置的效果
      */
 
     private byte[] bs = new byte[1024 * 1025];
