@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
  * @description:
  * @date : Created in 2023/2/7 11:39
  */
-public class CreateFileJava8 {
+public class CreateFile1Java8 {
 
     /**
      * 方法一：使用Java8的Files.newBuffered创建文件，并写入内容

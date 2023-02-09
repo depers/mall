@@ -10,7 +10,7 @@ import java.io.IOException;
  * @description:
  * @date : Created in 2023/2/7 17:30
  */
-public class CreateNewFile {
+public class CreateFile4 {
 
     /**
      * 方式四：使用File.createNewFile()创建空文件，然后使用PrinterWriter写入内容

@@ -11,7 +11,7 @@ import java.nio.file.Paths;
  * @description:
  * @date : Created in 2023/2/7 13:24
  */
-public class CreateFileNio {
+public class CreateFile2Nio {
 
     /**
      * 方法二：Java7 Files.write()，会自动创建和补充文件内容

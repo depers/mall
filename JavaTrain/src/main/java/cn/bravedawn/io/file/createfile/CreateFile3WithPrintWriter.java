@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
  * @description:
  * @date : Created in 2023/2/7 17:26
  */
-public class CreateFileWithPrintWriter {
+public class CreateFile3WithPrintWriter {
 
 
     /**
