@@ -189,7 +189,7 @@ public class MemberRepository implements Repository {
         m.setUsername("fengxiao");
         m.setPassword("fx1212");
         m.setEmail("2368472130@qq.com");
-        m.setId(1);
+        m.setId(1l);
         databaseUserRepository.save(m);
     }
 }

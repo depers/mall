@@ -1,23 +1,36 @@
 package cn.bravedawn.entity;
 
+import javax.persistence.*;
+
 /**
  * @author : depers
  * @program : new-platform
  * @description:
  * @date : Created in 2022/12/27 21:06
  */
+
+@Entity
+@Table(name = "member")
 public class Member {
 
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column
     private String username;
+
+    @Column
     private String password;
+
+    @Column
     private String email;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
