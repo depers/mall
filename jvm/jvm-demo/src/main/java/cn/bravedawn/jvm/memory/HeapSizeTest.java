@@ -14,6 +14,8 @@ public class HeapSizeTest {
 
     /**
      * 演示虚拟机堆大小相关配置的效果
+     *
+     * JVM参数配置：-Xmx10m -Xms5m -Xmn3m -Xlog:gc* -XX:+HeapDumpOnOutOfMemoryError
      */
 
     private byte[] bs = new byte[1024 * 1025];

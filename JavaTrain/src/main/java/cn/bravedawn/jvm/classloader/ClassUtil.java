@@ -142,7 +142,7 @@ public class ClassUtil {
     }
 
     public static void main(String[] args) {
-        getClasses("org.apache.commons.lang.text").forEach((e) ->
+        getClasses("cn.bravedawn.jndi").forEach((e) ->
         {
             System.out.println(e);
         });

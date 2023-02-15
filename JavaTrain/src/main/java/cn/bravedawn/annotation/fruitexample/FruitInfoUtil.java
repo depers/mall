@@ -9,6 +9,10 @@ import java.lang.reflect.Field;
  */
 public class FruitInfoUtil {
 
+    /**
+     * 获取修饰字段的注解属性
+     */
+
 
     public static void getFruitInfo(Class<?> clazz) {
         String strFruitName = "水果名称：";

@@ -6,6 +6,10 @@ import java.lang.reflect.Parameter;
 
 public class AnnotationParametersUtil {
 
+    /**
+     * 获取修饰方法参数的注解属性
+     */
+
 
     public static void main(String[] args) throws NoSuchMethodException {
 
