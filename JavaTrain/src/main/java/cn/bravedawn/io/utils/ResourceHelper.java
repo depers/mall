@@ -15,8 +15,6 @@ public class ResourceHelper {
 
     /**
      * 获取resources下文件的路径
-     * @param filename
-     * @return
      */
 
     public static String getAbsoluteFilePath(String filename) {

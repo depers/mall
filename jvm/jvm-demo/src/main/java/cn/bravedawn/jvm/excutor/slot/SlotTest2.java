@@ -1,4 +1,4 @@
-package cn.bravedawn.jvm.excutor;
+package cn.bravedawn.jvm.excutor.slot;
 
 /**
  * @author : depers

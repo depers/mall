@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.math;
+package cn.bravedawn.basic.math.bigdecimal;
 
 import java.math.BigDecimal;
 
