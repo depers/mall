@@ -8,9 +8,13 @@ package cn.bravedawn.jvm.excutor.operandstack;
  */
 public class OperandStackTest {
 
+    /**
+     * 局部变量表中操作数栈的演示
+     */
+
     public int add(int a, int b) {
         int c = a + b;
-        return c;
+        return a + b + c;
     }
 
     public static void main(String[] args) {
