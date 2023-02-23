@@ -23,7 +23,7 @@ import static org.apache.commons.lang.ClassUtils.wrapperToPrimitive;
  * @program : jdbc-demo
  * @date : Created in 2022/11/6 20:32
  */
-public class DatabaseUserRepository implements UserRepository{
+public class DatabaseUserRepository {
 
 
     /**
@@ -123,7 +123,6 @@ public class DatabaseUserRepository implements UserRepository{
     }
 
 
-    @Override
     public Collection<Role> getAll() throws Throwable {
         String sql = "SELECT id, role_name, `type`, note, insert_time FROM `role` where type = ?";
         return getAll(sql, 2);
@@ -131,7 +130,7 @@ public class DatabaseUserRepository implements UserRepository{
 
 
     public static void main(String[] args) throws Throwable {
-        UserRepository userRepository = new DatabaseUserRepository();
+        DatabaseUserRepository userRepository = new DatabaseUserRepository();
         Collection<Role> roles = userRepository.getAll();
 
         System.out.println(roles);

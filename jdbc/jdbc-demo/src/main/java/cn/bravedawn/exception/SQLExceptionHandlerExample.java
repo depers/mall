@@ -1,14 +1,12 @@
 package cn.bravedawn.exception;
 
-import cn.bravedawn.orm.UserRepository;
+import cn.bravedawn.orm.JDBCRepository;
 import cn.bravedawn.pojo.Role;
 import com.google.common.base.CaseFormat;
 
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.Date;
@@ -24,7 +22,7 @@ import static org.apache.commons.lang.ClassUtils.wrapperToPrimitive;
  * @program : jdbc-demo
  * @date : Created in 2022/11/6 20:32
  */
-public class SQLExceptionHandlerExample implements UserRepository {
+public class SQLExceptionHandlerExample {
 
 
     /**
@@ -53,7 +51,6 @@ public class SQLExceptionHandlerExample implements UserRepository {
     }
 
 
-    @Override
     public Collection<Role> getAll()  {
         String sql = "SELECT id, role_name, `type`, note, insert_time FROM `role` where type = ?";
         return executeQuery(sql, resultSet -> {
@@ -152,7 +149,7 @@ public class SQLExceptionHandlerExample implements UserRepository {
 
 
     public static void main(String[] args) throws Throwable {
-        UserRepository userRepository = new SQLExceptionHandlerExample();
+        SQLExceptionHandlerExample userRepository = new SQLExceptionHandlerExample();
         Collection<Role> roles = userRepository.getAll();
 
         System.out.println(roles);
