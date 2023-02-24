@@ -14,10 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author : depers
@@ -35,7 +32,7 @@ public class JDBCRepositoryImpl<T> implements JDBCRepository<T> {
 
 
     private static Map<Class, String> resultSetMethodMappings = new HashMap<>();
-    private Map<Class, String> sqlCacheMap = new HashMap<>();
+    private Map<Class, Map<String, Class>> sqlCacheMap = new HashMap<>();
 
 
 
@@ -64,21 +61,29 @@ public class JDBCRepositoryImpl<T> implements JDBCRepository<T> {
             String tableName = mapColumnLabel(entityClass.getSimpleName());
 
             // ORM 映射核心思想：通过反射执行代码（性能相对开销大）
+            Map<String, Class> fieldsMap = new HashMap<>();
             for (PropertyDescriptor propertyDescriptor : beanInfo.getPropertyDescriptors()) {
                 String fieldName = propertyDescriptor.getName();
                 Class fieldType = propertyDescriptor.getPropertyType();
-                String methodName = resultSetMethodMappings.get(fieldType);
+                // 缓存对象字段名称和类型
+                fieldsMap.put(fieldName, fieldType);
 
                 // 若bean与数据库表字段存在映射关系，获取数据库字段名称
                 String columnLabel = mapColumnLabel(fieldName);
                 sql.append(columnLabel).append(SQL_COMMA).append(SQL_BLANK);
             }
 
+            // 构建SQL指令
             String fieldSql = sql.substring(0, sql.length() - 2);
             fieldSql = fieldSql + SQL_BLANK + SQL_FROM + tableName;
             System.out.println(fieldSql);
 
-            // 构建SQL指令
+            // 解析where条件
+            for (Object arg : args) {
+                // arg.getClass().ge
+            }
+
+
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
         } catch (Throwable e) {
