@@ -1,20 +1,22 @@
 package cn.bravedawn.orm;
 
 import cn.bravedawn.domain.User;
-import cn.bravedawn.pojo.Role;
 import com.google.common.base.CaseFormat;
 
 import javax.sql.DataSource;
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author : depers
@@ -29,6 +31,7 @@ public class JDBCRepositoryImpl<T> implements JDBCRepository<T> {
     private static final String SQL_COMMA = ",";
     private static final String SQL_WHERE = "WHERE ";
     private static final String SQL_FROM = "FROM ";
+    private static final String SQL_EQUALS = "=";
 
 
     private static Map<Class, String> resultSetMethodMappings = new HashMap<>();
@@ -79,9 +82,24 @@ public class JDBCRepositoryImpl<T> implements JDBCRepository<T> {
             System.out.println(fieldSql);
 
             // 解析where条件
-            for (Object arg : args) {
-                // arg.getClass().ge
+            Method selectListMethod = this.getClass().getMethod("selectList", Class.class, Object[].class);
+            Parameter[] parameters = selectListMethod.getParameters();
+            System.out.println(parameters.length);
+            for (int i = 1; i < parameters.length; i++) {
+                Parameter parameter = parameters[i];
+                Param annotation = parameter.getAnnotation(Param.class);
+                String column = "";
+                if (annotation != null) {
+                    column = annotation.value();
+                } else {
+                    throw new IllegalArgumentException();
+                }
+                System.out.println(args);
+                String value = String.valueOf(args[i]);
+                fieldSql = fieldSql + SQL_BLANK + SQL_WHERE + SQL_BLANK + column + SQL_EQUALS + value;
             }
+
+            System.out.println(fieldSql);
 
 
             Connection connection = getConnection();
