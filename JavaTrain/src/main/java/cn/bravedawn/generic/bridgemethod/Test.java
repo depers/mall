@@ -17,6 +17,7 @@ public class Test {
 
 
         Class<? extends Parent> clz = parent.getClass();
+        System.out.println(clz);
         Method method = clz.getMethod("bridgeMethod", Object.class); // 获取桥接方法
         System.out.println(method.isBridge()); // true
         System.out.println(method.invoke(parent, "hello")); // 调用的是桥接方法

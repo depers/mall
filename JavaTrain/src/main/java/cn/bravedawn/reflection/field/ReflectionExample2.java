@@ -2,6 +2,7 @@ package cn.bravedawn.reflection.field;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 
 public class ReflectionExample2 {
 
@@ -21,6 +22,10 @@ public class ReflectionExample2 {
         // 获取字段类型
         Class fieldType = f.getType();
         System.out.println(fieldType); // class java.lang.String
+
+        // 获取字段的类型
+        Type fieldType2 = f.getGenericType();
+        System.out.println(fieldType2);
 
         // 返回字段的修饰符
         int m = f.getModifiers();

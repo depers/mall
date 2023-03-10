@@ -10,12 +10,13 @@ public class Child implements Parent<String>{
 
     @Override
     public String bridgeMethod(String param) {
+        System.out.println("被桥接方法调用了--------");
         return param;
     }
 
 
     // 在Java编译器编译之后，这个类会生成类似下面的桥接方法。这个方法是为了保证和jdk1.5之前的字节码相兼容
     //public Object bridgeMethod(Object param) {
-    //    return param;
+    //    return this.bridgeMethod((String)param);
     //}
 }

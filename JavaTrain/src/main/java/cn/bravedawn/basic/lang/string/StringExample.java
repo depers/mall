@@ -14,7 +14,7 @@ public class StringExample {
      */
 
     public static void main(String[] args) {
-        String a = "12345";
-        System.out.println(a.substring(a.length() - 4));
+        String a = "lpk20230301374539";
+        System.out.println(a.substring(a.length() - 10));
     }
 }
