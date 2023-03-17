@@ -13,6 +13,12 @@ import java.util.List;
  */
 public class GenericArrayTypeExample<T> {
 
+
+    /**
+     * GenericArrayType的关键方法
+     * getGenericComponentType()：获取数组前面的类型，也就是[]前面的类型
+     */
+
     List<T>[] parameterizedArray;
 
     T[] typeVariableArray;

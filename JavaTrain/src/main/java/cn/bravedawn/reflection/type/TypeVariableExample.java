@@ -18,6 +18,15 @@ import java.util.List;
  */
 public class TypeVariableExample<K extends @MyAnnotation(1) InputStream & Closeable, V> {
 
+
+    /**
+     * TypeVariable的关键方法
+     * 1.getBounds()：获取类型变量的上边界声明的数组，如果没有显示的声明则返回Object
+     * 2.getName()：返回此类型变量的名称
+     * 3.getGenericDeclaration()：返回声明这个类型变量的对象类型
+     * 4.getAnnotatedBounds()：获取所有带注解的边界
+     */
+
     // K 的上边界是 InputStream
     K key;
     // 没有指定的话 ，V 的 上边界 属于 Object

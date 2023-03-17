@@ -14,6 +14,13 @@ import java.util.Map;
  */
 public class ParameterizedTypeExample <K, V>{
 
+    /**
+     * ParameterizedType 参数化类型的关键方法
+     * 1.getActualTypeArguments()：获取<>中的类型定义
+     * 2.getRawType()：获取<>前面的类型
+     * 3.getOwnerType()：获取当前类型的上一层类型，若当前类型为顶层类型，则返回null
+     */
+
 
     private Map<K, V> map;
 
@@ -64,6 +71,7 @@ public class ParameterizedTypeExample <K, V>{
         // 如果当前类型为顶层类型，则返回null（通常情况是这样），例如：Map.Entry中的Entry返回的就是Map，A.B.C中的C返回的就是A$B
         System.out.println(parameterizedType.getOwnerType());
     }
+
 
     private static void testField(String fieldName) throws NoSuchFieldException {
         Field f = ParameterizedTypeExample.class.getDeclaredField(fieldName);

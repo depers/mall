@@ -17,7 +17,9 @@ import java.util.List;
 public class WildcardTypeExample<T> {
 
     /**
-     * 通配符类型WildcardType测试
+     * 通配符类型WildcardType的关键方法
+     * 1.getUpperBounds()：获取通配符类型的上边界
+     * 2.getLowerBounds()：获取通配符类型的下边界
      */
 
     // a没有下界
