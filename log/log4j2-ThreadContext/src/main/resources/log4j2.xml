@@ -54,7 +54,7 @@
     </Appenders>
     <Loggers>
         <!-- 级别顺序（低到高）：TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
-        <Root level="DEBUG" includeLocation="true">
+        <Root level="DEBUG" includeLocation="false">
             <!--AppenderRef中的ref值必须是在前面定义的appenders-->
             <AppenderRef ref="Routing"/>
             <AppenderRef ref="ConsolePrint"/>
