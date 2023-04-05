@@ -6,7 +6,7 @@
     <!--properties:设置全局变量 -->
     <properties>
         <!--LOG_HOME:指定当前日志存放的目录 -->
-        <property name="LOG_HOME">/logs/log4j2-async</property>
+        <property name="LOG_HOME">./logs/log4j2-async</property>
         <!--FILE_NAME:指定日志文件的名称 -->
         <property name="FILE_NAME">asyncLog</property>
         <!--PATTERN_FORMAT：指定日志输出的格式-->
