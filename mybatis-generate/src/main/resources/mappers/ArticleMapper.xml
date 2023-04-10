@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bravedawn.web.mbg.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="cn.bravedawn.web.mbg.model.Article">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="publish_date" jdbcType="DATE" property="publishDate" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.bravedawn.web.mbg.model.Article">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, intro, path, author, publish_date, insert_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.bravedawn.web.mbg.model.Article">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into article (title, intro, path, 
+      author, publish_date, insert_time, 
+      update_time, content)
+    values (#{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{publishDate,jdbcType=DATE}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bravedawn.web.mbg.model.Article">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="publishDate != null">
+        publish_date,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null">
+        #{publishDate,jdbcType=DATE},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bravedawn.web.mbg.model.Article">
+    update article
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null">
+        publish_date = #{publishDate,jdbcType=DATE},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.bravedawn.web.mbg.model.Article">
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=DATE},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bravedawn.web.mbg.model.Article">
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=DATE},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

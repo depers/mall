@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bravedawn.web.mbg.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="cn.bravedawn.web.mbg.model.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="personal_site" jdbcType="VARCHAR" property="personalSite" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, nickname, content, email, personal_site, insert_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.bravedawn.web.mbg.model.Comment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment (article_id, nickname, content, 
+      email, personal_site, insert_time, 
+      update_time)
+    values (#{articleId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{personalSite,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bravedawn.web.mbg.model.Comment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="personalSite != null">
+        personal_site,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personalSite != null">
+        #{personalSite,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bravedawn.web.mbg.model.Comment">
+    update comment
+    <set>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personalSite != null">
+        personal_site = #{personalSite,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bravedawn.web.mbg.model.Comment">
+    update comment
+    set article_id = #{articleId,jdbcType=BIGINT},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      personal_site = #{personalSite,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
