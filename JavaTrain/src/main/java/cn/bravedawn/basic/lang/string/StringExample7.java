@@ -17,5 +17,6 @@ public class StringExample7 {
         System.out.println(str.substring(0, 1).equals("a"));
 
         System.out.println(str.startsWith("a"));
+
     }
 }
