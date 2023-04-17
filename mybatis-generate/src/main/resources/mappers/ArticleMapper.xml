@@ -6,8 +6,8 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
     <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
     <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="publish_date" jdbcType="DATE" property="publishDate" />
     <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -15,7 +15,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, intro, path, author, publish_date, insert_time, update_time
+    id, title, intro, path, sign, author, insert_time, update_time
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -37,10 +37,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article (title, intro, path, 
-      author, publish_date, insert_time, 
+      sign, author, insert_time, 
       update_time, content)
     values (#{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
-      #{author,jdbcType=VARCHAR}, #{publishDate,jdbcType=DATE}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{sign,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bravedawn.web.mbg.model.Article">
@@ -58,11 +58,11 @@
       <if test="path != null">
         path,
       </if>
+      <if test="sign != null">
+        sign,
+      </if>
       <if test="author != null">
         author,
-      </if>
-      <if test="publishDate != null">
-        publish_date,
       </if>
       <if test="insertTime != null">
         insert_time,
@@ -84,11 +84,11 @@
       <if test="path != null">
         #{path,jdbcType=VARCHAR},
       </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
       <if test="author != null">
         #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="publishDate != null">
-        #{publishDate,jdbcType=DATE},
       </if>
       <if test="insertTime != null">
         #{insertTime,jdbcType=TIMESTAMP},
@@ -113,11 +113,11 @@
       <if test="path != null">
         path = #{path,jdbcType=VARCHAR},
       </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
       <if test="author != null">
         author = #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="publishDate != null">
-        publish_date = #{publishDate,jdbcType=DATE},
       </if>
       <if test="insertTime != null">
         insert_time = #{insertTime,jdbcType=TIMESTAMP},
@@ -136,8 +136,8 @@
     set title = #{title,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
-      publish_date = #{publishDate,jdbcType=DATE},
       insert_time = #{insertTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -148,8 +148,8 @@
     set title = #{title,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
-      publish_date = #{publishDate,jdbcType=DATE},
       insert_time = #{insertTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -25,14 +25,14 @@ public class Article implements Serializable {
     private String path;
 
     /**
+     * path的sha值
+     */
+    private String sign;
+
+    /**
      * 作者
      */
     private String author;
-
-    /**
-     * 发布日期
-     */
-    private Date publishDate;
 
     /**
      * 创建时间
@@ -83,20 +83,20 @@ public class Article implements Serializable {
         this.path = path;
     }
 
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
     public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public Date getPublishDate() {
-        return publishDate;
-    }
-
-    public void setPublishDate(Date publishDate) {
-        this.publishDate = publishDate;
     }
 
     public Date getInsertTime() {
@@ -133,8 +133,8 @@ public class Article implements Serializable {
         sb.append(", title=").append(title);
         sb.append(", intro=").append(intro);
         sb.append(", path=").append(path);
+        sb.append(", sign=").append(sign);
         sb.append(", author=").append(author);
-        sb.append(", publishDate=").append(publishDate);
         sb.append(", insertTime=").append(insertTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", content=").append(content);

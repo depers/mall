@@ -1,5 +1,8 @@
 package cn.bravedawn.basic.regex;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author : depers
  * @program : JavaTrain
@@ -23,5 +26,10 @@ public class BracketExample {
         System.out.println("learn Java".matches(re));
         System.out.println("learn php".matches(re));
         System.out.println("learn Go".matches(re));
+
+        Matcher m = Pattern.compile(re).matcher("learn go");
+        if (m.matches()) {
+            System.out.println(m.group(1));
+        }
     }
 }

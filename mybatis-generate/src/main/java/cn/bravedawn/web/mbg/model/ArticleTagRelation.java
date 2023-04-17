@@ -3,16 +3,21 @@ package cn.bravedawn.web.mbg.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Tag implements Serializable {
+public class ArticleTagRelation implements Serializable {
     /**
      * 主键
      */
     private Long id;
 
     /**
-     * 标签名称
+     * 文章id
      */
-    private String name;
+    private Long articleId;
+
+    /**
+     * 标签id
+     */
+    private Long tagId;
 
     /**
      * 创建时间
@@ -34,12 +39,20 @@ public class Tag implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getArticleId() {
+        return articleId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
+
+    public Long getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Long tagId) {
+        this.tagId = tagId;
     }
 
     public Date getInsertTime() {
@@ -65,7 +78,8 @@ public class Tag implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
+        sb.append(", articleId=").append(articleId);
+        sb.append(", tagId=").append(tagId);
         sb.append(", insertTime=").append(insertTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
