@@ -14,6 +14,7 @@ public class JConsoleTestCase {
 
     /**
      * VM参数：-Xms100m -Xmx100m -XX:+UseSerialGC
+     *
      * 内存占位符对象，一个OOMObject大约占64KB
      * 这个例子主要延时JConsole的 [内存] 页的功能，我们可以在内存页查看新生代、老年代的内存使用情况
      */
