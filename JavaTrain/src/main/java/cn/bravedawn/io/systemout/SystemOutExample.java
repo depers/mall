@@ -3,6 +3,7 @@ package cn.bravedawn.io.systemout;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.function.Supplier;
 
 /**
  * @author : depers
@@ -32,4 +33,6 @@ public class SystemOutExample {
             System.out.println("Hello World!");
         }
     }
+
+
 }
