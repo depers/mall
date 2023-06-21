@@ -1,8 +1,11 @@
 package cn.bravedawn.java8.lambdaexpressions.effectivelyfinal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -19,13 +22,10 @@ public class Test {
 
     private ExecutorService executor = Executors.newFixedThreadPool(3);
 
+
     public static void main(String[] args) {
-        int result = workaroundSingleThread();
-        System.out.println(result);
 
-        workaroundMultithreading();
     }
-
 
     Supplier<Integer> incrementer() {
         return () -> start++;
@@ -62,13 +62,27 @@ public class Test {
         new Thread(runnable).start();
 
         // simulating some processing
-        try {
-            Thread.sleep(new Random().nextInt(3) * 1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        // try {
+        //     Thread.sleep(new Random().nextInt(3) * 1000L);
+        // } catch (InterruptedException e) {
+        //     throw new RuntimeException(e);
+        // }
 
+        System.out.println("方法线程执行完毕");
         holder[0] = 0;
     }
+
+    //
+    // public void localVariableMultithreading() {
+    //     boolean run = true;
+    //     executor.execute(() -> {
+    //         while (run) {
+    //             // do operation
+    //         }
+    //     });
+    //
+    //     run = false;
+    // }
+
 
 }

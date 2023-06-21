@@ -11,6 +11,6 @@ public class Student extends Person{
     public Student(String name, int age, int score) {
         super(name, age);
         this.score = score;
-
     }
+
 }
