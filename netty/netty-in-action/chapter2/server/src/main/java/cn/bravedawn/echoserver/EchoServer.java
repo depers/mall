@@ -1,4 +1,4 @@
-package cn.bravedawn.server;
+package cn.bravedawn.echoserver;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -9,7 +9,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 import java.net.InetSocketAddress;
-import java.util.logging.Handler;
 
 /**
  * @author : depers
@@ -25,7 +24,7 @@ public class EchoServer {
         this.port = port;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         if (args.length != 1) {
             System.err.println("Usage: " + EchoServer.class.getSimpleName() + " <port>");
         }
@@ -46,8 +45,10 @@ public class EchoServer {
                             socketChannel.pipeline().addLast(echoServerHandler);
                         }
                     });
-            ChannelFuture channelFuture = serverBootstrap.bind().sync();
-            channelFuture.channel().closeFuture().sync();
+            ChannelFuture f = serverBootstrap.bind().sync();
+            System.out.println(EchoServer.class.getName() +
+                    " started and listening for connections on " + f.channel().localAddress());
+            f.channel().closeFuture().sync();
         } finally {
             eventExecutors.shutdownGracefully().sync();
         }

@@ -1,4 +1,4 @@
-package cn.bravedawn.server;
+package cn.bravedawn.echoserver;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
