@@ -1,6 +1,8 @@
-package cn.bravedawn.pointfunc.annotation;
+package cn.bravedawn.pointfunc.annotationannotation;
 
 import cn.bravedawn.pointfunc.args.*;
+import cn.bravedawn.pointfunc.argsannotation.ArgsAnnotationAspect;
+import cn.bravedawn.pointfunc.argsannotation.ArgsAnnotationController;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.testng.annotations.Test;
 
@@ -44,5 +46,18 @@ public class AspectJProxyTest {
 
         Car car3 = new Train();
         proxy.run(car3);
+    }
+
+    @Test
+    public void beforeProxyForArgsAnnotation() {
+        ArgsAnnotationController target = new ArgsAnnotationController();
+        AspectJProxyFactory factory = new AspectJProxyFactory();
+        // 设置目标类
+        factory.setTarget(target);
+        // 设置切面类
+        factory.addAspect(ArgsAnnotationAspect.class);
+        // 生成织入切面的代理对象
+        ArgsAnnotationController proxy = factory.getProxy();
+        proxy.getStr(1);
     }
 }

@@ -1,4 +1,4 @@
-package cn.bravedawn.pointfunc.annotation;
+package cn.bravedawn.pointfunc.annotationannotation;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -14,7 +14,7 @@ import org.aspectj.lang.annotation.Before;
 public class AnnotationAspect {
 
 
-    @Before("@annotation(cn.bravedawn.pointfunc.annotation.Security)")
+    @Before("@annotation(cn.bravedawn.pointfunc.annotationannotation.Security)")
     public void before() {
         System.out.println("这里使用了@annotation切点函数编写了切面");
     }

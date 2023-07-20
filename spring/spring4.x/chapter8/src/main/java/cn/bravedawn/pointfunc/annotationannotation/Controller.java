@@ -1,6 +1,4 @@
-package cn.bravedawn.pointfunc.annotation;
-
-import cn.bravedawn.pointfunc.annotation.Security;
+package cn.bravedawn.pointfunc.annotationannotation;
 
 /**
  * @author : depers

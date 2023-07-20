@@ -1,4 +1,4 @@
-package cn.bravedawn.pointfunc.annotation;
+package cn.bravedawn.pointfunc.argsannotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
  * @author : depers
  * @program : chapter8
  * @description:
- * @date : Created in 2023/7/11 16:42
+ * @date : Created in 2023/7/13 17:34
  */
 
-@Target(ElementType.METHOD)
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Security {
+public @interface Param {
 
     String value() default "";
 }
