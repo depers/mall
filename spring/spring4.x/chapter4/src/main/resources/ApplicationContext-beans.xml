@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="car" class="cn.bravedawn.applicationbeanfactorydemo.Car"
+          init-method="myInit"
+          destroy-method="myDestroy"
+          p:brand="红旗CA72"
+          p:maxSpeed="200"/>
+
+    <bean id="myInstantiationAwareBeanPostProcessor"
+          class="cn.bravedawn.applicationbeanfactorydemo.MyInstantiationAwareBeanPostProcessor"/>
+
+    <bean id="myBeanPostProcessor"
+          class="cn.bravedawn.applicationbeanfactorydemo.MyBeanPostProcessor"/>
+
+    <bean id="myBeanFactoryPostProcessor"
+          class="cn.bravedawn.applicationbeanfactorydemo.MyBeanFactoryPostProcessor"/>
+
+    <bean id="myBeanDefinitionRegistryPostProcessor"
+          class="cn.bravedawn.applicationbeanfactorydemo.MyBeanDefinitionRegistryPostProcessor"/>
+
+</beans>
