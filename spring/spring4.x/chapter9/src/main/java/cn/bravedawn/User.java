@@ -102,4 +102,9 @@ public class User {
     public void setInterestsMap(Map interestsMap) {
         this.interestsMap = interestsMap;
     }
+
+    public boolean isVipMember(String userName){
+        return "tom".equals(userName) || "jony".equals(userName);
+    }
+
 }
