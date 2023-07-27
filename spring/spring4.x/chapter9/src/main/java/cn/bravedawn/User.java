@@ -1,5 +1,6 @@
 package cn.bravedawn;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +106,27 @@ public class User {
 
     public boolean isVipMember(String userName){
         return "tom".equals(userName) || "jony".equals(userName);
+    }
+
+    public boolean validatePassword(String password){
+        return "123456".equals(password);
+    }
+
+    private boolean validatePassword2(String password){
+        return "123456".equals(password);
+    }
+
+    public static boolean validatePassword3(String password){
+        return "123456".equals(password);
+    }
+
+    public  void addInterests(String... interests){
+        if(interestsList==null){
+            interestsList = new ArrayList();
+        }
+        for(String interest:interests) {
+            interestsList.add(interest);
+        }
     }
 
 }
