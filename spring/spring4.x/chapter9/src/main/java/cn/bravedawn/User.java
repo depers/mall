@@ -24,6 +24,12 @@ public class User {
     private String interestsArray[];
     private Map interestsMap;
 
+    public User() {}
+
+    public User(String userName) {
+        this.userName = userName;
+    }
+
     public int getUserId() {
         return userId;
     }

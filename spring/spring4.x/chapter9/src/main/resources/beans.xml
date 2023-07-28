@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util-4.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:component-scan base-package="cn.bravedawn.spring"/>
+
+    <!--通过systemProperties获取各个系统环境变量-->
+    <bean id="systemPropertyBean" class="cn.bravedawn.spring.SystemPropertyBean"
+          p:osName="#{systemProperties['os.name']}"
+          p:javaHome="#{systemProperties['os.name']}"
+          p:classPath="#{systemProperties['java.class.path']}"
+          p:javaVersion="#{systemProperties['java.version']}"
+    />
+
+    <!--可以通过spel表达式为Bean属性或是构造函数注入动态参数-->
+    <bean id="numberGuess" class="cn.bravedawn.spring.NumberGuess"
+          p:randomNumber="#{T(Math).random()*100.0}"
+    />
+
+    <!--可以通过"Bean名称.属性名"的方式来引用其他Bean的属性-->
+    <bean id="shapeGuess" class="cn.bravedawn.spring.ShapeGuess"
+          p:initialShapeSeed="#{numberGuess.randomNumber}"
+    />
+
+    <!--使用注解的配置-->
+    <util:properties id="properties" location="classpath:jdbc.properties" />
+    <context:property-placeholder properties-ref="properties" />
+
+</beans>
