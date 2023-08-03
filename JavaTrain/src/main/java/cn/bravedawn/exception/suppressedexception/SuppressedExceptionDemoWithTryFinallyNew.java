@@ -12,9 +12,9 @@ public class SuppressedExceptionDemoWithTryFinallyNew {
 
 
     /**
-     * Executable member function demonstrating suppressed exceptions
-     * Suppressed expression is added back in primary exception
+     * 手动调用addSuppressed()方法添加屏蔽异常到堆栈中
      */
+
     public static void memberFunction() throws Exception {
         Throwable th = null;
         DirtyResource resource = new DirtyResource();

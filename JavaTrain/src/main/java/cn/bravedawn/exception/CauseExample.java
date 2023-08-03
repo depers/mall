@@ -6,7 +6,8 @@ public class CauseExample {
 
     /**
      * 在这个类中我们探究了 getCause和printStackTrace的功能
-     * getCause: 返回抛出改异常的原因
+     * getCause: 返回抛该改异常的原因
+     * getStackTrace：返回抛出异常的位置
      * printStackTrace：打印异常堆栈，报错异常原因堆栈和抑制异常
      */
 
@@ -14,7 +15,7 @@ public class CauseExample {
     public static void main(String[] args) {
         IndexOutOfBoundsException indexOutOfBoundsException = new IndexOutOfBoundsException("数组越界了");
         RuntimeException runtimeException = new RuntimeException("运行时异常", indexOutOfBoundsException);
-        Exception e = new Exception(runtimeException);
+        Exception e = new Exception("检查型异常", runtimeException);
 
         System.out.println(indexOutOfBoundsException.getCause());
         System.out.println(runtimeException.getCause());
@@ -23,17 +24,19 @@ public class CauseExample {
 
         System.out.println("--------------------------------");
         Arrays.stream(indexOutOfBoundsException.getStackTrace()).forEach(st -> System.out.println(st));
+        System.out.println(">>");
         Arrays.stream(runtimeException.getStackTrace()).forEach(st -> System.out.println(st));
+        System.out.println(">>");
         Arrays.stream(e.getStackTrace()).forEach(st -> System.out.println(st));
 
         System.out.println("--------------------------------");
-        indexOutOfBoundsException.printStackTrace();
+        //indexOutOfBoundsException.printStackTrace();
         /**
          * java.lang.IndexOutOfBoundsException: 数组越界了
          * 	at cn.bravedawn.exception.CauseExample.main(CauseExample.java:9)
          */
 
-        runtimeException.printStackTrace();
+        //runtimeException.printStackTrace();
         /**
          * java.lang.RuntimeException: 运行时异常
          * 	at cn.bravedawn.exception.CauseExample.main(CauseExample.java:10)

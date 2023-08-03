@@ -11,12 +11,13 @@ import static java.lang.System.err;
 public class SuppressedExceptionDemoWithTryCatch {
 
     public static void memberFunction() throws Exception {
-        try (DirtyResource resource= new DirtyResource()) {
+        try (DirtyResource resource = new DirtyResource()) {
             resource.accessResource();
         }
     }
 
     /**
+     * 调用成员方法演示使用try-with-resources捕获抑制异常：
      * Executable member function demonstrating suppressed exceptions using try-with-resources
      */
     public static void main(String[] arguments) throws Exception {
@@ -27,9 +28,9 @@ public class SuppressedExceptionDemoWithTryCatch {
             final Throwable[] suppressedExceptions = ex.getSuppressed();
             final int numSuppressed = suppressedExceptions.length;
             if (numSuppressed > 0) {
-                err.println("tThere are " + numSuppressed + " suppressed exceptions:");
+                err.println("There are " + numSuppressed + " suppressed exceptions:");
                 for (final Throwable exception : suppressedExceptions) {
-                    err.println("tt" + exception.toString());
+                    err.println("t" + exception.toString());
                 }
             }
         }
@@ -38,8 +39,8 @@ public class SuppressedExceptionDemoWithTryCatch {
 
     /**
      * OUTPUT:
-     * Exception encountered: java.lang.RuntimeException: I wanted to access this resource. Bad luck. Its dirty resource !!!
-     * tThere are 1 suppressed exceptions:
-     * ttjava.lang.NullPointerException: Remember me. I am your worst nightmare !! I am Null pointer exception !!
+     * Exception encountered: java.lang.RuntimeException: 我想访问这个资源，不幸的是他是脏数据！！！
+     * There are 1 suppressed exceptions:
+     * tjava.lang.NullPointerException: 关闭资源的时候，会抛出空指针!!
      */
 }

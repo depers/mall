@@ -9,21 +9,24 @@ package cn.bravedawn.exception.suppressedexception;
 public class SuppressedExceptionDemoWithTryWithResource {
 
     /**
-     * Demonstrating suppressed exceptions using try-with-resources
+     * try-with-resources会将完整的异常堆栈打印出来，包含屏蔽异常
      */
+
     public static void main(String[] arguments) throws Exception {
-        try (DirtyResource resource= new DirtyResource()) {
+        try (DirtyResource resource = new DirtyResource()) {
             resource.accessResource();
         }
     }
 
+
     /**
      * OUTPUT:
-     * Exception in thread "main" java.lang.RuntimeException: I wanted to access this resource. Bad luck. Its dirty resource !!!
-     * 	at cn.bravedawn.basic.exception.DirtyResource.accessResource(DirtyResource.java:15)
-     * 	at cn.bravedawn.basic.exception.SuppressedExceptionDemoWithTryWithResource.main(SuppressedExceptionDemoWithTryWithResource.java:16)
-     * 	Suppressed: java.lang.NullPointerException: Remember me. I am your worst nightmare !! I am Null pointer exception !!
-     * 		at cn.bravedawn.basic.exception.DirtyResource.close(DirtyResource.java:24)
-     * 		at cn.bravedawn.basic.exception.SuppressedExceptionDemoWithTryWithResource.main(SuppressedExceptionDemoWithTryWithResource.java:15)
+     *
+     * Exception in thread "main" java.lang.RuntimeException: 我想访问这个资源，不幸的是他是脏数据！！！
+     * 	at cn.bravedawn.exception.suppressedexception.DirtyResource.accessResource(DirtyResource.java:16)
+     * 	at cn.bravedawn.exception.suppressedexception.SuppressedExceptionDemoWithTryWithResource.main(SuppressedExceptionDemoWithTryWithResource.java:16)
+     * 	Suppressed: java.lang.NullPointerException: 关闭资源的时候，会抛出空指针!!
+     * 		at cn.bravedawn.exception.suppressedexception.DirtyResource.close(DirtyResource.java:26)
+     * 		at cn.bravedawn.exception.suppressedexception.SuppressedExceptionDemoWithTryWithResource.main(SuppressedExceptionDemoWithTryWithResource.java:15)
      */
 }

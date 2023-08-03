@@ -11,9 +11,9 @@ import static java.lang.System.err;
 public class SuppressedExceptionDemoWithTryFinallyPrevious {
 
     /**
-     * Executable member function demonstrating suppressed exceptions
-     * One exception is lost if not added in suppressed exceptions list
+     * finally会将try语句中的屏蔽异常吃掉
      */
+
     public static void memberFunction() throws Exception {
         DirtyResource resource = new DirtyResource();
         try {
@@ -40,5 +40,5 @@ public class SuppressedExceptionDemoWithTryFinallyPrevious {
         }
     }
 
-    // Output: Exception encountered: java.lang.NullPointerException: Remember me. I am your worst nightmare !! I am Null pointer exception !!
+    // Exception encountered: java.lang.NullPointerException: 关闭资源的时候，会抛出空指针!!
 }
