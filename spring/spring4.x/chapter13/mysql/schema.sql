@@ -85,9 +85,9 @@ create index IDX_TOPIC_USER_ID on t_topic
 /* Index: IDX_TOPIC_TITLE                                       */
 /*==============================================================*/
 create index IDX_TOPIC_TITLE on t_topic
-    (
-     topic_title
-        );
+(
+ topic_title
+);
 
 
 insert into t_topic (topic_id, forum_id, topic_title, user_id, topic_time, topic_views, topic_replies) values (1, 2, '主题1', 1, '1-1-1 0:0:1', 166, 1);
