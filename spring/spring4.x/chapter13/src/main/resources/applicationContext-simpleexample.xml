@@ -18,6 +18,7 @@
           p:password="${jdbc.password}" />
 
     <!--定义DBCP数据源的JDBC本地对象的抽取器-->
+    <!--其中设置lazy-init属性为true，是为了避免让Spring在容器启动时就实例化这个Bean-->
     <bean id="nativeJdbcExtractor"
           class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
           lazy-init="true" />
@@ -26,19 +27,26 @@
     <bean id="jdbcTemplate"
           class="org.springframework.jdbc.core.JdbcTemplate"
           p:dataSource-ref="dataSource"
-          p:nativeJdbcExtractor="nativeJdbcExtractor"
+          p:nativeJdbcExtractor-ref="nativeJdbcExtractor"
     />
 
 
     <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
-          lazy-init="true" />
+          lazy-init="true"
+    />
 
     <!-- 1：基于数据表的自增器 -->
     <bean id="incre"
           class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer"
           p:incrementerName="t_post_id"
-          p:columnName="post_id"
+          p:columnName="sequence_id"
           p:cacheSize="10"
           p:dataSource-ref="dataSource"/>
+
+
+    <bean id="namedParamJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 
 </beans>

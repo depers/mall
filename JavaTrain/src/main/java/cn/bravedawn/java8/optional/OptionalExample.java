@@ -1,26 +1,28 @@
 package cn.bravedawn.java8.optional;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 public class OptionalExample {
 
+    /**
+     * Optioal的常用方法
+     *
+     * 1.ofNullable()
+     * 2.of()
+     */
+
     public static void main(String[] args) {
-        Integer value1 = null;
-        Integer value2 = new Integer(10);
+        Object obj = null;
 
-        Optional<Integer> a = Optional.fromNullable(value1);
+        // 1.构建一个Optional对象
+        Optional<Object> opt = Optional.ofNullable(obj);
+        // 是否存在
+        System.out.println(opt.isPresent());
+        // 是否为空
+        System.out.println(opt.isEmpty());
 
-        Optional<Integer> b = Optional.of(value2);
+        // 2.构建一个不能为空的Optional对象，若为空会抛空指针异常
+        Optional<Object> opt2 = Optional.of(obj);
 
-
-
-    }
-
-
-    public static Integer sun(Optional<Integer> a, Optional<Integer> b) {
-        System.out.println("第一个参数值是否存在：" + a.isPresent());
-        System.out.println("第二个参数值是否存在："+ b.isPresent());
-
-        Integer val = a.
     }
 }

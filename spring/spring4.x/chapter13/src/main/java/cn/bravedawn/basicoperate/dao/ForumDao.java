@@ -1,16 +1,23 @@
 package cn.bravedawn.basicoperate.dao;
 
 import cn.bravedawn.basicoperate.domain.Forum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : depers
@@ -22,7 +29,12 @@ import java.util.List;
 @Repository
 public class ForumDao {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
+
+
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static final String INSERT_SQL = "INSERT INTO t_forum(forum_name,forum_desc) VALUES(?, ?)";
     private static final String SELECT_SQL = "SELECT forum_name,forum_desc FROM t_forum WHERE forum_id=?";
@@ -152,5 +164,38 @@ public class ForumDao {
     }
 
 
+    /**
+     * 使用命名参数绑定的模版类，如果有实体类的情况下
+     * @param forum
+     */
+    public void addForumByNamedParams(final Forum forum) {
+        final String sql = "INSERT INTO t_forum (forum_name, forum_desc) values (:forumName, :forumDesc)";
+        SqlParameterSource sps = new BeanPropertySqlParameterSource(forum);
+        namedParameterJdbcTemplate.update(sql, sps);
+    }
+
+    /**
+     * 如果没有实体类的情况下使用命名参数绑定的模版类，可以使用MapSqlParameterSource类命名参数
+     * @param forum
+     */
+    public void addForum(Forum forum) {
+        final String sql = "INSERT INTO t_forum (forum_name, forum_desc) values (:forumName, :forumDesc)";
+        MapSqlParameterSource sps = new MapSqlParameterSource()
+                .addValue("forumName", forum.getForumName())
+                .addValue("forumDesc", forum.getForumDesc());
+
+        namedParameterJdbcTemplate.update(sql, sps);
+    }
+
+
+    /**
+     * NamedParameterJdbcTemplate支持in查询
+     * @param ids
+     */
+    public void selectListByIds(List<Integer> ids) {
+        final String sql = "select id from t_forum id in (:ids)";
+        MapSqlParameterSource sps = new MapSqlParameterSource()
+                .addValue("ids", ids.stream().map(String::valueOf).collect(Collectors.joining(",")));
+    }
 
 }

@@ -16,11 +16,13 @@
         <module>chapter12</module>
         <module>chapter11</module>
         <module>chapter13</module>
+        <module>chapter14</module>
     </modules>
 
     <properties>
         <spring.version>4.2.2.RELEASE</spring.version>
         <testng.version>6.8.7</testng.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
     </properties>
 
 

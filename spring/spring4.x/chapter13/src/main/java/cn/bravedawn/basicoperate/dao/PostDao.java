@@ -64,7 +64,7 @@ public class PostDao {
             @Override
             protected void setValues(PreparedStatement ps, LobCreator lobCreator) throws SQLException, DataAccessException {
                 // 固定主键
-                ps.setInt(1, 1);
+                // ps.setInt(1, 1);
 
                 // 通过自增键生成主键值
                 ps.setInt(1, incre.nextIntValue());
@@ -77,7 +77,7 @@ public class PostDao {
 
 
     /**
-     * 以块的方式读取LOB数据
+     * 以块的方式读取LOB数据，如果lob数据的体积过大，用块的方式读取需要消耗大量的内存，会直接影响程序的运行，所以可以使用流的方式读取lob数据，减少内存的访问。
      * @param userId
      * @return
      */
@@ -99,6 +99,11 @@ public class PostDao {
     }
 
 
+    /**
+     * 使用流的方式读取lob数据，减少内存的访问
+     * @param postId
+     * @param os
+     */
     public void getAttach(final int postId, final OutputStream os) {
         String sql = "SELECT post_attach FROM t_post WHERE post_id=?";
         jdbcTemplate.query(sql, new Object[]{postId}, new AbstractLobStreamingResultSetExtractor<Object>() {
@@ -109,8 +114,6 @@ public class PostDao {
                     FileCopyUtils.copy(is, os);
                 }
             }
-
-
             @Override
             protected void handleNoRowFound() throws DataAccessException {
                 System.out.println("Not Found result");

@@ -3,6 +3,7 @@ package cn.bravedawn.basicoperate.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.sql.CallableStatement;
@@ -86,6 +87,18 @@ public class TopicDao {
         });
 
         return num;
+    }
+
+
+    /**
+     * 以行集的形式返回数据
+     * 行集，我的理解就是多行数据的集合。
+     * @param userId
+     * @return
+     */
+    public SqlRowSet getTopicRowSet(int userId) {
+        String sql = "SELECT topic_id, topic_title FROM t_topic where user_id = ?";
+        return jdbcTemplate.queryForRowSet(sql, userId);
     }
 
 }
