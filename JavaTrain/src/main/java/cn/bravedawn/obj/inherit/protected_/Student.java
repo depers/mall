@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.protectedp;
+package cn.bravedawn.obj.inherit.protected_;
 
 public class Student extends Person{
 

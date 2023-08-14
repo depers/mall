@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.superp;
+package cn.bravedawn.obj.inherit.super_;
 
 public class Person {
 

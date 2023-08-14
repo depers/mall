@@ -1,4 +1,4 @@
-package cn.bravedawn.generic.wildcards.upperbounds.v3;
+package cn.bravedawn.generic.wildcards.upperbounds.comm;
 
 /**
  * @author : depers
@@ -6,4 +6,8 @@ package cn.bravedawn.generic.wildcards.upperbounds.v3;
  * @date : Created in 2022/2/25 21:40
  */
 public class Apple extends Fruit{
+
+    public void printColor() {}
+
+    public void printNum() {}
 }

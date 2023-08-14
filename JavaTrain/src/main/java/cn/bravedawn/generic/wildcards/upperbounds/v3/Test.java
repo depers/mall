@@ -1,5 +1,8 @@
 package cn.bravedawn.generic.wildcards.upperbounds.v3;
 
+import cn.bravedawn.generic.wildcards.upperbounds.comm.Apple;
+import cn.bravedawn.generic.wildcards.upperbounds.comm.Fruit;
+
 /**
  * @author : depers
  * @program : JavaTrain

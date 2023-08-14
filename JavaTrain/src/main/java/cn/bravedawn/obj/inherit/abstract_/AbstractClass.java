@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.abstractp;
+package cn.bravedawn.obj.inherit.abstract_;
 
 public abstract class AbstractClass {
 
