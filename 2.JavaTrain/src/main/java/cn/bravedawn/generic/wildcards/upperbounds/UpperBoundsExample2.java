@@ -24,6 +24,7 @@ public class UpperBoundsExample2 {
 
 
     public static void process(List<? extends Animal> list) {
+        Animal animal = list.get(0);
         System.out.println("...");
     }
 

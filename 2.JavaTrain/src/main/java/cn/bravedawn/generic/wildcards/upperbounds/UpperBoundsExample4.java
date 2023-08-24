@@ -1,6 +1,7 @@
 package cn.bravedawn.generic.wildcards.upperbounds;
 
 import cn.bravedawn.generic.wildcards.Animal;
+import cn.bravedawn.generic.wildcards.Dog;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,10 +21,10 @@ public class UpperBoundsExample4 {
 
     public static void main(String[] args) {
         Collection<? extends Animal> animals = new ArrayList<>();
-        Animal animal = new Animal();
+        Dog dog = new Dog();
 
-        //animals.add(new Animal());  // 编译错误
-        animals.contains(animal);
-        animals.remove(animal);
+        //animals.add(dog);  // 编译错误
+        animals.contains(dog);
+        animals.remove(dog);
     }
 }

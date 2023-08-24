@@ -25,7 +25,7 @@ public class VariantExample2 {
     /**
      * 为什么Java的数组是支持泛型的：
      * 一是Java数组是1.0版本提出来的，那个时候还没有泛型。
-     * 而是Java设计者希望能够对数组进行通用的处理，如果数组不支持协变的话，很多方法就得为每一种类型编写逻辑了，如下所示
+     * 二是Java设计者希望能够对数组进行通用的处理，如果数组不支持协变的话，很多方法就得为每一种类型编写逻辑了，如下所示
      * @param array
      */
     public static void process(Object[] array) {
