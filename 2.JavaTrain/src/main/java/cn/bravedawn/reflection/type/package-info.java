@@ -1,12 +1,8 @@
-/**
- * @program : mybatis
- * @description: Java Type体系
- * @author : depers
- * @date : Created in 2021/3/26 7:17
- */
+package cn.bravedawn.reflection.type;
+
 
 /**
- * https://www.jianshu.com/p/7649f86614d3
- * https://www.jianshu.com/p/e8eeff12c306
+ * Java Type类型体系
+ * 参考文章
+ * https://zhuanlan.zhihu.com/p/64584427
  */
-package cn.bravedawn.reflection.type;
