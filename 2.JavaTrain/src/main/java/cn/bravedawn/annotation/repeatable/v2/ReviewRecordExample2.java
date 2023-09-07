@@ -21,6 +21,7 @@ public class ReviewRecordExample2 {
         for(ReviewRecord recordAnno : recordsAnno.value()) {
             System.out.println(recordAnno);
         }
+        System.out.println("---------------------------");
 
         // 重复使用的注解，直接获取一个会报null
         ReviewRecord reviewRecord = ReviewRecordExample2.class.getAnnotation(ReviewRecord.class);

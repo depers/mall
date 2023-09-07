@@ -7,7 +7,7 @@ package cn.bravedawn.annotation.fruitexample;
  */
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
         FruitInfoUtil.getFruitInfo(Apple.class);
     }
 }

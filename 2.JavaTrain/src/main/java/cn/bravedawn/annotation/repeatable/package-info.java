@@ -8,5 +8,5 @@ package cn.bravedawn.annotation.repeatable;
 
 
 /**
- * 定义重复注解Bean
+ * 这个介绍了重复定义元注解@Repeatable的使用方法
  */
