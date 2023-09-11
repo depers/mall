@@ -17,6 +17,14 @@ import java.nio.charset.StandardCharsets;
 public class ResourceExample {
 
 
+    /**
+     * Spring 提供的进行文件操作的相关API
+     *
+     * 1.PathResource
+     * 2.ClassPathResource
+     */
+
+
     public static void main(String[] args) throws IOException {
         String filePath = "/Users/depers/Desktop/code/mall/7.Spring/1.spring4.x/chapter4/src/main/resources/file.txt";
 

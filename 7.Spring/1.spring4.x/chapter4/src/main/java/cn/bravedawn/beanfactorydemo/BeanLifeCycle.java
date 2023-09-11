@@ -36,7 +36,7 @@ public class BeanLifeCycle {
      */
 
     private static void lifeCycleInBeanFactory() {
-        Resource resource = new ClassPathResource("beans.xml");
+        Resource resource = new ClassPathResource("cn/bravedawn/beanfactory/bean2.xml");
         BeanFactory beanFactory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader((DefaultListableBeanFactory)beanFactory);
         reader.loadBeanDefinitions(resource);
