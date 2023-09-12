@@ -1,4 +1,4 @@
-package cn.bravedawn.applicationbeanfactorydemo;
+package cn.bravedawn.applicationcontext;
 
 import cn.bravedawn.beanfactorydemo.Car;
 import org.springframework.context.annotation.Bean;

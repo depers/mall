@@ -1,4 +1,4 @@
-package cn.bravedawn.applicationbeanfactorydemo;
+package cn.bravedawn.applicationcontext;
 
 import cn.bravedawn.beanfactorydemo.Car;
 import org.springframework.context.ApplicationContext;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @description:
  * @date : Created in 2023/9/11 21:06
  */
-public class ApplicationContextExample {
+public class AnnotationApplicationContextExample {
 
     /**
-     * 使用基于注解类的配置提供的AnnotationConfigApplicationContext启动容器的示例
+     * 使用基于注解类的配置，提供的AnnotationConfigApplicationContext启动容器的示例
      */
 
 
