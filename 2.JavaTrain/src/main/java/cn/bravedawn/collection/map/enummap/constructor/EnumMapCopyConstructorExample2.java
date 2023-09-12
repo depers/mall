@@ -1,6 +1,7 @@
-package cn.bravedawn.collection.map.enummap;
+package cn.bravedawn.collection.map.enummap.constructor;
 
 import cn.bravedawn.basic.enum_.Weekday;
+import cn.bravedawn.collection.map.enummap.DayOfWeek;
 
 import java.util.EnumMap;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package cn.bravedawn.generic;
+package cn.bravedawn.generic.genericarray;
 
 import java.lang.reflect.Array;
 
@@ -28,4 +28,6 @@ public class GenericArray<T> {
     public T[] rep() {
         return array;
     }
+
+
 }

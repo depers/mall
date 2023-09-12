@@ -10,8 +10,7 @@ import java.util.*;
 public class CollectionViews {
 
     /**
-     *
-     * @param args
+     * 集合视图
      */
 
 
