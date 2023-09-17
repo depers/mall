@@ -1,4 +1,4 @@
-package cn.bravedawn.encrypt.symmetric;
+package cn.bravedawn.encrypt.symmetric.aes;
 
 import org.apache.commons.lang3.ArrayUtils;
 

@@ -1,4 +1,4 @@
-package cn.bravedawn.encrypt.symmetric;
+package cn.bravedawn.encrypt.symmetric.aes;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
@@ -12,10 +12,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class AESExample4 {
+public class AESExample2 {
 
     /**
-     * 基于密码的AES加解密方法，IV同密文一同返回，使用System.arraycopy实现数组复制
+     * 基于密码的AES加解密方法
      */
 
     public static final String SALT = "dc0cc7e01d964d82864a5435bdf7250a";
@@ -39,8 +39,7 @@ public class AESExample4 {
             InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, key, iv);
-        byte[] encryptData = join(iv.getIV(), cipher.doFinal(plainText.getBytes()));
-        return Base64.getUrlEncoder().encodeToString(encryptData);
+        return Base64.getUrlEncoder().encodeToString(cipher.doFinal(plainText.getBytes()));
     }
 
 
@@ -48,6 +47,7 @@ public class AESExample4 {
      * 解密
      * @param cipherText
      * @param key
+     * @param iv
      * @return
      * @throws NoSuchPaddingException
      * @throws NoSuchAlgorithmException
@@ -56,20 +56,12 @@ public class AESExample4 {
      * @throws BadPaddingException
      * @throws IllegalBlockSizeException
      */
-    public static String decryptPasswordBased(String cipherText, SecretKey key)
+    public static String decryptPasswordBased(String cipherText, SecretKey key, IvParameterSpec iv)
             throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
             InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-
-        byte[] decodeData = Base64.getUrlDecoder().decode(cipherText);
-        byte[] iv = new byte[16];
-        byte[] data = new byte[decodeData.length - 16];
-        System.arraycopy(decodeData, 0, iv, 0, 16);
-        System.arraycopy(decodeData, 16, data, 0, data.length);
-        IvParameterSpec ivps = new IvParameterSpec(iv);
-
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-        cipher.init(Cipher.DECRYPT_MODE, key, ivps);
-        return new String(cipher.doFinal(data));
+        cipher.init(Cipher.DECRYPT_MODE, key, iv);
+        return new String(cipher.doFinal(Base64.getUrlDecoder().decode(cipherText)));
     }
 
 
@@ -79,7 +71,6 @@ public class AESExample4 {
      */
     public static IvParameterSpec generateIv() {
         byte[] iv = new byte[16];
-        // 生成用户指定数量的随机字节，随机字节会填充到这个数组中
         new SecureRandom().nextBytes(iv);
         return new IvParameterSpec(iv);
     }
@@ -103,20 +94,6 @@ public class AESExample4 {
     }
 
 
-    /**
-     * 合并数据
-     * @param bs1 iv
-     * @param bs2 encrypt array
-     * @return
-     */
-    private static byte[] join(byte[] bs1, byte[] bs2) {
-        byte[] r = new byte[bs1.length + bs2.length];
-        System.arraycopy(bs1, 0, r, 0, bs1.length);
-        System.arraycopy(bs2, 0, r, bs1.length, bs2.length);
-        return r;
-    }
-
-
     public static void main(String[] args) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, InvalidKeySpecException {
         String plainText = "hello world";
         String password = "QeMk6G1U/pRzZDux";
@@ -124,9 +101,7 @@ public class AESExample4 {
         SecretKey key = getKeyFromPassword(password, SALT, KEY_SIZE);
 
         String cipherText = encryptPasswordBased(plainText, key, ivParameterSpec);
-        String decryptedCipherText = decryptPasswordBased(cipherText, key);
-
-        System.out.println(cipherText);
+        String decryptedCipherText = decryptPasswordBased(cipherText, key, ivParameterSpec);
 
         System.out.println(plainText.equals(decryptedCipherText));
     }

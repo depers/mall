@@ -10,6 +10,7 @@
 
     <modules>
         <module>chapter4</module>
+        <module>chapter6</module>
         <module>chapter8</module>
         <module>chapter9</module>
         <module>chapter10</module>
@@ -24,6 +25,8 @@
         <spring.version>4.2.2.RELEASE</spring.version>
         <testng.version>6.8.7</testng.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
+        <commons-lang.version>2.0</commons-lang.version>
+        <mysql.version>5.1.29</mysql.version>
     </properties>
 
 
