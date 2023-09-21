@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.polymorphic.instance_initializer_block.example;
+package cn.bravedawn.obj.inherit.polymorphic.codeblock.instance_initializer_block.example;
 
 /**
  * @author : depers

@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.polymorphic.instance_initializer_block;
+package cn.bravedawn.obj.inherit.polymorphic.codeblock.instance_initializer_block;
 
 /**
  * @author : depers
@@ -6,6 +6,10 @@ package cn.bravedawn.obj.inherit.polymorphic.instance_initializer_block;
  * @date : Created in 2022/11/1 17:30
  */
 public class Bike2 {
+
+    /**
+     * 下面的代码中我们可以看到，初始化代码块先于构造函数代码块执行
+     */
 
     int speed;
 
@@ -18,7 +22,6 @@ public class Bike2 {
     }
 
     public static void main(String args[]) {
-        Bike2 b1 = new Bike2();
         Bike2 b2 = new Bike2();
     }
 }

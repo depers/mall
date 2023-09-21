@@ -1,4 +1,4 @@
-package cn.bravedawn.obj.inherit.polymorphic.instance_initializer_block.example2;
+package cn.bravedawn.obj.inherit.polymorphic.codeblock.instance_initializer_block.example2;
 
 /**
  * @author : depers
@@ -6,6 +6,10 @@ package cn.bravedawn.obj.inherit.polymorphic.instance_initializer_block.example2
  * @date : Created in 2022/11/1 18:05
  */
 public class B extends A{
+
+    /**
+     * 这个例子主要显示了通过调用子类不同的构造函数，从而执行不同的构造函数逻辑
+     */
 
     B() {
         super();
