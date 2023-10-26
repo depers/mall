@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 public class DynamicProxyExample {
 
     /**
-     * 动态代理
+     * 动态代理，使用JDK基于接口的代理
      */
 
     public static void main(String[] args) {

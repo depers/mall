@@ -20,7 +20,7 @@ public class SplitListToSubListsExample2 {
     public static void main(String[] args) {
         Collection<Integer> intCollection = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
 
-        Iterable<List<Integer>> subSets = Iterables.partition(intCollection, 3);
+        Iterable<List<Integer>> subSets = Iterables.partition(intCollection, 5);
 
         List<Integer> firstPartition = subSets.iterator().next();
         System.out.println(firstPartition); // [1, 2, 3]

@@ -1,5 +1,6 @@
 package cn.bravedawn.collection.list;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,10 +19,19 @@ public class ListExample2 {
     public static void main(String[] args) {
 
         func1();
+        System.out.println("---------------------");
 
         func2();
+        System.out.println("---------------------");
 
         func3();
+        System.out.println("---------------------");
+
+        func4();
+        System.out.println("---------------------");
+
+        func5();
+        System.out.println("---------------------");
     }
 
 
@@ -57,6 +67,28 @@ public class ListExample2 {
         for (String s : list) {
             System.out.println(s);
         }
+    }
+
+
+    /**
+     * 当List的size为0时，遍历的时候就不会执行for里面的操作，也不会报错
+     */
+    static void func4() {
+        List<String> list = new ArrayList();
+        System.out.println("list的大小:" + list.size());
+        for (String item : list) {
+            System.out.println(item);
+        }
+    }
+
+
+    /**
+     * 使用Java8的stream流去测试数组的遍历，也不会去执行for里面的操作，不会报错
+     */
+    static void func5() {
+        List<String> list = new ArrayList();
+        System.out.println("list的大小:" + list.size());
+        list.stream().forEach(System.out::println);
     }
 
 }

@@ -11,6 +11,9 @@ public class CollectionViews {
 
     /**
      * 集合视图
+     * 1.键视图
+     * 2.值视图
+     * 3.元素视图
      */
 
 

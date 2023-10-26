@@ -1,4 +1,4 @@
-package cn.bravedawn.encrypt.symmetric.aes;
+package cn.bravedawn.encrypt.symmetric;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;

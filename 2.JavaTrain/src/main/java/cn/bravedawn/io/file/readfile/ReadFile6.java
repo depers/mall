@@ -22,6 +22,7 @@ public class ReadFile6 {
 
     public static void main(String[] args) throws FileNotFoundException {
         String fileName = ResourceHelper.getAbsoluteFilePath("doc/test.txt");
+        System.out.println(fileName);
 
         try (Scanner sc = new Scanner(new FileReader(fileName))) {
             while (sc.hasNextLine()) {
