@@ -18,25 +18,33 @@ public class StringSplitExample {
             System.out.println(retval);
         }
 
+
         System.out.println("");
-        System.out.println("- 分隔符设置分割份数返回值 :" );
+        System.out.println("- 分隔符设置分割份数为正数，分割为2份，返回值 :" );
         for (String retval: str.split("-", 2)){
             System.out.println(retval);
         }
 
         // 正常分割三次就行，多于3次不会报错
         System.out.println("");
-        System.out.println("- 分隔符设置分割份数返回值 :" );
+        System.out.println("- 分隔符设置分割份数为正数，分割为4份，超过了可分割份数，返回值 :" );
         for (String retval: str.split("-", 4)){
             System.out.println(retval);
         }
 
-        // 连续多个结尾分隔符会被丢弃
+        // limit为0的情况下
         System.out.println();
-        System.out.println("连续多个结尾分隔符会被丢弃 :");
+        System.out.println("limit为0时的情况，分割后的空字符串将会被丢弃：");
         String str2 = new String("a-b-c-d---");
         System.out.println("分割后的数组: " + Arrays.toString(str2.split("-")));
-        System.out.println("分割后的数组: " + Arrays.toString(str2.split("-", -1)));
+        System.out.println("分割后的数组: " + Arrays.toString(str2.split("-", 0)));
+
+
+        // 连续多个结尾分隔符会被丢弃
+        System.out.println();
+        System.out.println("弥补连续多个结尾分隔符会被丢弃情况:");
+        System.out.println("limit等于0，分割后的数组: " + Arrays.toString(str2.split("-")));
+        System.out.println("limit小于0，分割后的数组: " + Arrays.toString(str2.split("-", -1)));
 
 
         System.out.println("");
