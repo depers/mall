@@ -1,4 +1,4 @@
-package cn.bravedawn.network.socket;
+package cn.bravedawn.network.socket.v1;
 
 import java.io.IOException;
 import java.net.ServerSocket;

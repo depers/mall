@@ -1,4 +1,4 @@
-package cn.bravedawn.network.socket;
+package cn.bravedawn.network.socket.v1;
 
 import java.io.*;
 import java.net.Socket;
@@ -52,7 +52,6 @@ public class Handler extends Thread{
             writer.write("ok: " + s + "\n");
             writer.flush();
         }
-
 
     }
 }

@@ -1,4 +1,4 @@
-package cn.bravedawn.network.socket;
+package cn.bravedawn.network.socket.v1;
 
 import java.io.*;
 import java.net.Socket;
@@ -39,7 +39,7 @@ public class Client {
             writer.flush();
             String resp = reader.readLine();
             System.out.println("<<< " + resp);
-            if (resp.equals("bye")) {
+            if (resp.equals("byte")) {
                 break;
             }
         }
