@@ -35,6 +35,8 @@ public class SocketServer extends Thread{
     public SocketServer(int port) {
         try {
             serverSocket = new ServerSocket(port);
+            // 设置等待客户端与其建立连接的时间，如果超过这个时间没有客户端与其建立连接，则会报：Accept timed out。这个属性不建议设置，一直让其等待建立连接就好
+            // serverSocket.setSoTimeout(5000);
             executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
             log.info("Socket服务已启动，监听端口={}.", port);
         } catch (Throwable e) {
@@ -54,6 +56,7 @@ public class SocketServer extends Thread{
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
+                // 设置与客户端建立连接后，等待客户端发送数据的超时时间。若超过改时间，服务器就会报：Read timed out
                 socket.setSoTimeout(60000);
                 log.info("[{}]：接收到来自[{}]的请求", Thread.currentThread().getName(), socket.getRemoteSocketAddress());
                 executorService.execute(new SocketServerHandler(socket));

@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang;
+package cn.bravedawn.basic.lang.integer;
 
 public class IntegerExample2 {
 

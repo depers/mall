@@ -35,7 +35,7 @@ public class SocketServerHandler implements Runnable{
             while ((reqStr = reader.readLine()) != null){
                 log.info("请求的报文是：{}", reqStr);
                 // 这个地方写自己的路由逻辑
-                String respStr = "";
+                String respStr = "200|success|hello";
                 writer.write(respStr);
                 writer.flush();
                 log.info("响应的报文是：{}", respStr);
@@ -43,7 +43,7 @@ public class SocketServerHandler implements Runnable{
                 socket.shutdownOutput();
             }
         } catch (Throwable e) {
-            log.error("接收报文信息异常", e);
+            log.error("服务端接收报文信息异常", e);
         } finally {
             try {
                 if (writer != null) {

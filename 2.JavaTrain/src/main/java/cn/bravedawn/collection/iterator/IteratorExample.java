@@ -11,6 +11,10 @@ import java.util.List;
  */
 public class IteratorExample {
 
+    /**
+     * Java迭代器的简单使用
+     */
+
     public static void main(String[] args) {
         List<String> stringList = Arrays.asList("1", "2", "abc");
         Iterator<String> iterator = stringList.iterator();

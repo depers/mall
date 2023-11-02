@@ -39,13 +39,15 @@ public class Handler extends Thread{
     private void handle(InputStream input, OutputStream output) throws IOException {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8));
         BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
-        writer.write("hello\n");
+        writer.write("hello");
+        writer.newLine();
         writer.flush();
 
         while (true) {
             String s = reader.readLine();
             if (s.equals("bye")) {
-                writer.write("byte\n");
+                writer.write("byte");
+
                 writer.flush();
                 break;
             }
