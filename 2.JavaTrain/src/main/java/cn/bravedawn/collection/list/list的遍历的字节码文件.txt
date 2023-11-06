@@ -2,7 +2,7 @@ Classfile /E:/code/mall/JavaTrain/src/main/java/cn/bravedawn/collection/list/Lis
   Last modified Apr 25, 2022; size 1253 bytes
   SHA-256 checksum 984c6c3aab38deb86f55d263e503ba3c0305b6b4db7bde2ed63a4802f106d8a6
   Compiled from "ListExample2.java"
-public class cn.bravedawn.collection.list.ListExample2
+public class cn.bravedawn.collection.list.commonuse.ListExample2
   minor version: 0
   major version: 61
   flags: (0x0021) ACC_PUBLIC, ACC_SUPER
@@ -83,7 +83,7 @@ Constant pool:
   #71 = Utf8               SourceFile
   #72 = Utf8               ListExample2.java
 {
-  public cn.bravedawn.collection.list.ListExample2();
+  public cn.bravedawn.collection.list.commonuse.ListExample2();
     descriptor: ()V
     flags: (0x0001) ACC_PUBLIC
     Code:

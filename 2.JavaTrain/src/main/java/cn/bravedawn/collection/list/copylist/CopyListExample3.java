@@ -61,7 +61,7 @@ public class CopyListExample3 {
         List<Plant> plantsCopy2 = new ArrayList<>(Arrays.asList(new Plant[plantList.size()]));
         System.out.println(plantsCopy2.size());
         Collections.copy(plantsCopy2, plantList);
-        // 修改列表中一个元素的属性
+        // 修改列表中一个元素的属性，会同步体现在两个列表中
         plantsCopy2.get(1).setColor("white");
         System.out.println("Modified plants = " + plantList);
         System.out.println("Modified plantsCopy = " + plantsCopy2);

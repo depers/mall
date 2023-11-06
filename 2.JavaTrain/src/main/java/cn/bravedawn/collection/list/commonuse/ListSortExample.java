@@ -1,4 +1,4 @@
-package cn.bravedawn.collection.list;
+package cn.bravedawn.collection.list.commonuse;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

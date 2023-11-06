@@ -1,4 +1,4 @@
-package cn.bravedawn.collection.list;
+package cn.bravedawn.collection.list.commonuse;
 
 import java.util.ArrayList;
 import java.util.Iterator;

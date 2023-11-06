@@ -42,7 +42,7 @@ public class CopyListExample4 {
         plantList.add(p3);
         System.out.println("plants = " + plantList);
 
-        // 使用addAll()方法进行复制
+        // 使用stream.toList()方法进行复制
         List<Plant> plantsCopy = plantList.stream().toList();
         System.out.println("plantsCopy = " + plantsCopy);
 
