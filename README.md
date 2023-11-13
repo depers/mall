@@ -17,4 +17,5 @@ mall项目是我自己之前学习研发的一个分布式的电商项目。在�
 |  5   |  [Maven](https://github.com/depers/mall/tree/master/maven)   |                   学习Maven使用的demo程序                    |
 |  6   |  [Netty](https://github.com/depers/mall/tree/master/netty/)  |                     学习Netty的demo程序                      |
 |  7   |                            Spring                            |                    Spring技术栈的学习代码                    |
+|      |                            Lombok                            |         这个文件夹下对lombok的实现原理做了简单的实现         |
 
