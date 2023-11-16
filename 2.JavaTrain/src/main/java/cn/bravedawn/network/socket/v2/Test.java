@@ -1,5 +1,7 @@
 package cn.bravedawn.network.socket.v2;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -7,6 +9,8 @@ import java.nio.charset.StandardCharsets;
  * @Project : 2.JavaTrain
  * @Date : Created in 2023-11-02 16:54
  */
+
+@Slf4j
 public class Test {
 
     /**
@@ -20,6 +24,7 @@ public class Test {
 
         // 启动客户端发送数据
         SocketClient socketClient = new SocketClient("localhost", 6666, StandardCharsets.UTF_8);
-        socketClient.send("hello Beijing");
+        String respStr = socketClient.send("hello Beijing");
+        socketServer.printThreadPoolStatus();
     }
 }

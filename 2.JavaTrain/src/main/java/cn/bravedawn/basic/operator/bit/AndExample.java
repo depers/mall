@@ -1,5 +1,8 @@
 package cn.bravedawn.basic.operator.bit;
 
+import com.spdb.safecomponent.core.util.StringUtilities;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author : depers
  * @program : JavaTrain
@@ -22,6 +25,18 @@ public class AndExample {
         System.out.println(b & 1); // 0
         System.out.println(c & 1); // 1
         System.out.println(d & 1); // 0
+
+        System.out.println("15的二级制数：" + StringUtils.leftPad(Integer.toBinaryString(15), 32, "0"));
+        System.out.println("15的二级制数：" + StringUtils.leftPad(Integer.toBinaryString(1949), 32, "0"));
+        System.out.println(15 & 1949); // 13
+        System.out.println(15 & 1950); // 14
+        System.out.println(16 & 1949); // 16
+        System.out.println(16 & 1950); // 16
+        System.out.println("-------");
+        System.out.println(21 & 1949); // 13
+        System.out.println(21 & 1950); // 14
+        System.out.println(22 & 1949); // 16
+        System.out.println(22 & 1950); // 16
 
     }
 }

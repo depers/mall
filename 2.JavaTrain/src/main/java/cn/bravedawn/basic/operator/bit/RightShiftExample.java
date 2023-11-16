@@ -12,6 +12,7 @@ public class RightShiftExample {
 
     /**
      * Java中右移运算符的使用
+     * 右移一位相当于除2，右移2位相当于除4，右移3位相当于除8，依次类推
      */
 
     public static void main(String[] args) {

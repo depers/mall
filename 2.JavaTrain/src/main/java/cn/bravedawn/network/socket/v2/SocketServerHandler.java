@@ -37,10 +37,12 @@ public class SocketServerHandler implements Runnable{
                 // 这个地方写自己的路由逻辑
                 String respStr = "200|success|hello";
                 writer.write(respStr);
+                writer.newLine();
                 writer.flush();
                 log.info("响应的报文是：{}", respStr);
                 // 禁用该socket的输出流
                 socket.shutdownOutput();
+                break;
             }
         } catch (Throwable e) {
             log.error("服务端接收报文信息异常", e);

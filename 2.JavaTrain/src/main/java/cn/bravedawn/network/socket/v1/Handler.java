@@ -40,18 +40,19 @@ public class Handler extends Thread{
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8));
         BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
         writer.write("hello");
-        writer.newLine();
+        writer.newLine(); // 调用此方法来终止输出行
         writer.flush();
 
         while (true) {
             String s = reader.readLine();
             if (s.equals("bye")) {
                 writer.write("byte");
-
+                writer.newLine();
                 writer.flush();
                 break;
             }
-            writer.write("ok: " + s + "\n");
+            writer.write("ok: " + s);
+            writer.newLine();
             writer.flush();
         }
 

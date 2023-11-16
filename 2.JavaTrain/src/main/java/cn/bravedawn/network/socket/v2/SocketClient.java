@@ -58,11 +58,11 @@ public class SocketClient {
 
             // 接收响应报文
             reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream(), StandardCharsets.UTF_8));
-            int ch = 0;
-            while ((ch = reader.read()) != -1) {
-                respStr.append((char) ch);
+            String str = null;
+            while ((str = reader.readLine()) != null) {
+                respStr.append(str);
             }
-            log.info("客户端接收到响应报文");
+            log.info("客户端接收到响应报文，报文内容是：{}", respStr);
 
         } catch (Throwable e) {
             log.error("发送请求失败", e);
@@ -83,6 +83,4 @@ public class SocketClient {
 
         return respStr.toString();
     }
-
-
 }

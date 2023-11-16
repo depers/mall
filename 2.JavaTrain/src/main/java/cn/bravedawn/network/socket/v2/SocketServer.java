@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @Description : TODO
@@ -64,5 +65,13 @@ public class SocketServer extends Thread{
                 log.error("接收请求异常", e);
             }
         }
+    }
+
+
+    public void printThreadPoolStatus() {
+        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executorService;
+        log.info("ThreadPoll status, 当前线程池中的线程数量={}, 线程池已执行和未执行的任务总数={}, 已完成的任务数量={}, 当前线程池中正在执行任务的线程数量={}",
+                threadPoolExecutor.getPoolSize(), threadPoolExecutor.getTaskCount(), threadPoolExecutor.getCompletedTaskCount(),
+                threadPoolExecutor.getActiveCount());
     }
 }

@@ -17,7 +17,9 @@ public class UnsignedRightShiftExample {
 
     public static void main(String[] args) {
         int intValue = -733183670;
-        System.out.println("intValue的二进制：" + StringUtils.leftPad(Integer.toBinaryString(intValue), 32, "0"));
+        int positiveNum = 733183670;
+        System.out.println("-733183670的二进制：" + StringUtils.leftPad(Integer.toBinaryString(intValue), 32, "0"));
+        System.out.println("733183670的二进制：" + StringUtils.leftPad(Integer.toBinaryString(positiveNum), 32, "0"));
 
         System.out.println("intValue无符号右移8位的二进制为：" + Integer.toBinaryString(intValue >>> 8)
                     + ", intValue无符号右移8位：" + (intValue >>> 8));
