@@ -12,10 +12,17 @@ mall项目是我自己之前学习研发的一个分布式的电商项目。在�
 | :--: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |  1   |   [mall](https://github.com/depers/mall/tree/master/mall)    | 电商项目主体，这个是学习《慕课网-Java架构师成长直通车》课程的学习项目 |
 |  2   | [JavaTrain](https://github.com/depers/mall/tree/master/JavaTrain) |                   Java语言知识点的实例程序                   |
-|  3   | [Servlet](https://github.com/depers/mall/tree/master/Servlet) |                    学习Servlet的demo程序                     |
-|  4   |   [Jdbc](https://github.com/depers/mall/tree/master/jdbc)    |                      学习Jdbc的demo程序                      |
-|  5   |  [Maven](https://github.com/depers/mall/tree/master/maven)   |                   学习Maven使用的demo程序                    |
-|  6   |  [Netty](https://github.com/depers/mall/tree/master/netty/)  |                     学习Netty的demo程序                      |
-|  7   |                            Spring                            |                    Spring技术栈的学习代码                    |
-|      |                            Lombok                            |         这个文件夹下对lombok的实现原理做了简单的实现         |
+|  3   | [Servlet](https://github.com/depers/mall/tree/master/Servlet) |                           Servlet                            |
+|  4   |   [Jdbc](https://github.com/depers/mall/tree/master/jdbc)    |                        JDBC、HikariCP                        |
+|  5   |  [Maven](https://github.com/depers/mall/tree/master/maven)   |                            Maven                             |
+|  6   |  [Netty](https://github.com/depers/mall/tree/master/netty/)  |                            Netty                             |
+|  7   |                            Spring                            |                         Spring、Web                          |
+|      |                             JVM                              |                             JVM                              |
+|  9   |                             log                              |                         Java日志框架                         |
+|  10  |                             ORM                              |                           Mybatis                            |
+|  11  |                          httpClient                          |                          http客户端                          |
+|  12  |                         transformat                          |                           Jackson                            |
+|  13  |                             POI                              |                          Office操作                          |
+|  14  |                             Test                             |                             测试                             |
+|  15  |                            Lombok                            |         这个文件夹下对lombok的实现原理做了简单的实现         |
 

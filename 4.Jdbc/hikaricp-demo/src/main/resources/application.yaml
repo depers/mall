@@ -1,0 +1,17 @@
+spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: fx1212
+        url: jdbc:mysql://localhost:3306/dev
+
+        # HikariCP配置
+        hikari:
+            maximum-pool-size: 20
+            auto-commit: true                   # 此属性控制从池返回的连接的默认自动提交行为。默认值：真
+            connection-timeout: 30000           # 此属性控制客户端从连接池获取连接的超时时间，单位：毫秒
+            idle-timeout: 600000                #
+            keep-alive-time: 0
+            max-life-time: 1800000
+            connection-test-query:
