@@ -1,5 +1,7 @@
 package cn.bravedawn.basic.coreclass.decimalformat;
 
+import cn.bravedawn.basic.coreclass.bigdecimal.BigDecimalExample;
+
 import java.text.DecimalFormat;
 
 /**
@@ -27,6 +29,8 @@ public class ZeroPlaceholder {
         System.out.println(b);
         String c = new DecimalFormat("00.000").format(3.14);//结果：03.140
         System.out.println(c);
+        String g = new DecimalFormat("0.00").format(21);
+        System.out.println(g);
 
         // 占位符0的个数少于数字的个数
         String d = new DecimalFormat("00.00").format(13.14567);//结果：13.15
