@@ -123,6 +123,13 @@
             <version>4.4</version>
         </dependency>
 
+        <!--Apache Commons Codec包包含各种格式(如Base64和十六进制)的简单编码器和解码器。-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
+        </dependency>
+
         <!-- Apache针对Java核心类的增强，特别是String的操作方法-->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -155,6 +162,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.12.5</version>
         </dependency>
+
+        <!--<dependency>-->
+        <!--    <groupId>com.spdb</groupId>-->
+        <!--    <artifactId>SECAPI</artifactId>-->
+        <!--    <version>2.0.0-RELEASE</version>-->
+        <!--</dependency>-->
 
 
     </dependencies>

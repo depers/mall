@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 public class ResourceHelper {
 
     /**
-     * 获取resources下文件的路径
+     * 获取编译后resources下文件的路径
      */
 
     public static String getAbsoluteFilePath(String filename) {

@@ -1,4 +1,0 @@
-character streams
-1
-2
-buffered streams

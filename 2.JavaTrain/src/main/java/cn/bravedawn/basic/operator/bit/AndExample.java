@@ -1,6 +1,5 @@
 package cn.bravedawn.basic.operator.bit;
 
-import com.spdb.safecomponent.core.util.StringUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 /**

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>java.io.OutputStream</OriginalElement>
+  <nodes>
+    <node x="107.0" y="304.5">java.io.DataOutputStream</node>
+    <node x="-85.5" y="304.5">java.io.PrintStream</node>
+    <node x="-114.5" y="184.5">java.io.FilterOutputStream</node>
+    <node x="446.5" y="184.5">java.io.ByteArrayOutputStream</node>
+    <node x="129.5" y="184.5">org.springframework.util.FastByteArrayOutputStream</node>
+    <node x="1199.0" y="184.5">java.io.ObjectOutputStream</node>
+    <node x="-95.0" y="64.5">java.io.OutputStream</node>
+    <node x="723.0" y="184.5">java.io.PipedOutputStream</node>
+    <node x="971.5" y="184.5">java.io.FileOutputStream</node>
+    <node x="351.0" y="304.5">java.io.BufferedOutputStream</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.io.ByteArrayOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="566.0" y="159.0" />
+      <point x="-14.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.FilterOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.ObjectOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="1306.0" y="159.0" />
+      <point x="-14.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PipedOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="826.0" y="159.0" />
+      <point x="-14.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.DataOutputStream" target="java.io.FilterOutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="206.0" y="279.0" />
+      <point x="-14.0" y="279.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PrintStream" target="java.io.FilterOutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.BufferedOutputStream" target="java.io.FilterOutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="466.0" y="279.0" />
+      <point x="-14.0" y="279.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.springframework.util.FastByteArrayOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="266.0" y="159.0" />
+      <point x="-14.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.FileOutputStream" target="java.io.OutputStream" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="1066.0" y="159.0" />
+      <point x="-14.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.0730474091547741" showDependencies="false" x="649.9246973970011" y="256.785885387472" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

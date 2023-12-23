@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>java.io.Reader</OriginalElement>
+  <nodes>
+    <node x="97.5" y="184.5">java.io.PushbackReader</node>
+    <node x="1047.5" y="184.5">jdk.internal.org.jline.utils.InputStreamReader</node>
+    <node x="882.5" y="184.5">java.io.FileReader</node>
+    <node x="296.0" y="184.5">java.io.CharArrayReader</node>
+    <node x="-87.5" y="184.5">java.io.StringReader</node>
+    <node x="681.5" y="184.5">java.io.BufferedReader</node>
+    <node x="-64.0" y="64.5">java.io.Reader</node>
+    <node x="513.5" y="184.5">java.io.PipedReader</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jdk.internal.org.jline.utils.InputStreamReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="1149.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PushbackReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="189.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.FileReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="949.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.CharArrayReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="389.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PipedReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="589.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.StringReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.BufferedReader" target="java.io.Reader" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="769.0" y="159.0" />
+      <point x="-11.0" y="159.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.2119434000729192" showDependencies="false" x="580.5832616933021" y="189.38429765204944" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

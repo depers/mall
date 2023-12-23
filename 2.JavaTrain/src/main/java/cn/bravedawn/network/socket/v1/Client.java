@@ -27,37 +27,21 @@ public class Client {
 
 
     private static void handle(InputStream input, OutputStream output) throws IOException {
-        BufferedWriter writer = null;
-        BufferedReader reader = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8));
-            reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("[server] " + reader.readLine());
-            while (true){
-                System.out.print(">>> "); // 打印提示
-                String s = scanner.nextLine(); // 读取一行输入
-                writer.write(s);
-                writer.newLine();
-                writer.flush();
-                String resp = reader.readLine();
-                System.out.println("<<< " + resp);
-                if (resp.equals("byte")) {
-                    break;
-                }
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
-
-            if (reader != null) {
-                reader.close();
+        var writer = new BufferedWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8));
+        var reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("[server] " + reader.readLine());
+        while (true){
+            System.out.print(">>> "); // 打印提示
+            String s = scanner.nextLine(); // 读取一行输入
+            writer.write(s);
+            writer.newLine();
+            writer.flush();
+            String resp = reader.readLine();
+            System.out.println("<<< " + resp);
+            if (resp.equals("byte")) {
+                break;
             }
         }
-
-
     }
 }
