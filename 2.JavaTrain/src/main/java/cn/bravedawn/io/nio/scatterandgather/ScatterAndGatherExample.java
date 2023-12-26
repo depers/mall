@@ -17,7 +17,6 @@ import java.nio.channels.ScatteringByteChannel;
  */
 public class ScatterAndGatherExample {
 
-
     /**
      * 分散读取和聚集写入的案例
      */

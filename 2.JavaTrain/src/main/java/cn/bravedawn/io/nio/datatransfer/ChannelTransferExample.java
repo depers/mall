@@ -1,4 +1,4 @@
-package cn.bravedawn.io.nio.channel;
+package cn.bravedawn.io.nio.datatransfer;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
