@@ -33,7 +33,7 @@ public class GetChannel {
         fc.write(ByteBuffer.wrap("some more".getBytes()));
         fc.close();
 
-        // 读取文件
+        // 读取文件，只读情况下需要显示的调用allocate()方法来分配ByteBuffer
         fc = new FileInputStream("data.txt").getChannel();
         ByteBuffer buff = ByteBuffer.allocate(BSIZE);
         fc.read(buff);

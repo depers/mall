@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang.string.encode;
+package cn.bravedawn.basic.lang.string.charset;
 
 /**
  * @Author : fengx9

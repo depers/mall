@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang.string.encode;
+package cn.bravedawn.basic.lang.string.charset;
 
 
 import org.apache.commons.codec.binary.StringUtils;
@@ -15,6 +15,8 @@ public class EncodeExample2 {
 
     /**
      * 将字符串编码为UTF-8
+     * 将字符串转化为字节的过程，我们称为 编码。
+     * 将字节转化为字符串，我们称为 解码。
      */
 
     public static void main(String[] args) {
@@ -31,8 +33,10 @@ public class EncodeExample2 {
      */
     static void encodingWithCoreJava() {
         String rawString = "中文123abc";
+        // 编码
         byte[] bytes = rawString.getBytes(StandardCharsets.UTF_8);
 
+        // 解码
         String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
         System.out.println(StringUtils.equals(rawString, utf8EncodedString));
     }
