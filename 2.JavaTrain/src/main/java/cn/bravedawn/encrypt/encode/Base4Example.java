@@ -50,6 +50,10 @@ public class Base4Example {
     }
 
 
+    /**
+     * MIME的全称是"Multipurpose Internet Mail Extensions"，中译为"多用途互联网邮件扩展"，它的一个重要特点，就是规定电子邮件只能使用ASCII字符。
+     * 使用Base64.getMimeEncoder().encodeToString()生成的字符编码只有ASCII字符。
+     */
     public static void mineRun() throws UnsupportedEncodingException {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 10; ++i) {

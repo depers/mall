@@ -31,7 +31,7 @@ public class ChannelCopy {
                 out = new FileOutputStream(args[1]).getChannel();
         ByteBuffer buffer = ByteBuffer.allocate(BSIZE);
         while (in.read(buffer) != -1) { // 从通道读取数据到缓冲区
-            buffer.flip();  // 调用read方法告知FileChannel向ByteBuffer存储字节，就必须调用缓冲器的filp方法，让缓冲器做好让别人读取字节的准备
+            buffer.flip();  // 调用read()方法告知FileChannel向ByteBuffer存储字节后，就必须调用缓冲器的flip()方法，让缓冲器做好让别人读取字节的准备
             out.write(buffer); // 将缓冲区的数据写入到通道
             buffer.clear(); // 清除缓冲区中的数据
         }
