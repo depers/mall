@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RandomLocalTimeExample {
 
     /**
-     * 生成 00:00:00到 11.59.59分的随机时间
+     * 生成 00:00:00到 23.59.59分的随机时间
      */
 
     public static void main(String[] args) {

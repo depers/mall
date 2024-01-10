@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
  * @Author : fengx9
  * @Project : 2.JavaTrain
  * @Date : Created in 2023-10-19 17:30
+ *
+ * Class对象的getResourceAsStream()可以从classpath中读取指定资源
  */
 public class ReadResourcesFileExample {
 
