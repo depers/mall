@@ -17,7 +17,7 @@ import java.util.Base64;
 public class AESExample3 {
 
     /**
-     * 基于密码的AES加解密方法，IV同密文一同返回
+     * 基于密码的AES加解密方法，IV同密文一同返回，IV是一个随机数
      */
 
     public static final String SALT = "dc0cc7e01d964d82864a5435bdf7250a";

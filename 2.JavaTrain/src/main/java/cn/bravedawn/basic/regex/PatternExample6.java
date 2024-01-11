@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 public class PatternExample6 {
 
     /**
-     * appendReplacement方法的使用
+     * appendReplacement()方法的使用，这个方法实现了字符串的替换
+     * appendTail()将匹配剩余的字符串进行拼接
      */
 
     public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class PatternExample6 {
             m.appendReplacement(sb, "dog");
             System.out.println(sb);
         }
+        // 添加剩余字符串到sb
         m.appendTail(sb);
         System.out.println(sb.toString());
     }

@@ -11,5 +11,5 @@ package cn.bravedawn.test;
  * 2.Calculator，使用Fixtrue
  * 3.Factorial2，异常测试
  * 4.Config：条件测试
- * 5.参数化测试
+ * 5.Parametric，StringUtilsTest,参数化测试
  */

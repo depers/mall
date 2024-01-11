@@ -26,6 +26,7 @@ public class PBEExample {
         String message = "hello world";
         String password = "hello12345";
 
+        // 生成随机口令
         byte[] salt = SecureRandom.getInstanceStrong().generateSeed(16);
         System.out.println(salt.length);
         System.out.printf("salt: %032x\n", new BigInteger(1, salt));

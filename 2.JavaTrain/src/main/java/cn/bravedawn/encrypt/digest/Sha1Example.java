@@ -1,9 +1,7 @@
 package cn.bravedawn.encrypt.digest;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class Sha1Example {
 

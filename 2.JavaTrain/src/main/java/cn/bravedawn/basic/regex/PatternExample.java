@@ -19,8 +19,11 @@ public class PatternExample {
         pattern.matcher("010-12345678").matches(); // true
         pattern.matcher("021-123456").matches(); // false
         pattern.matcher("022#1234567").matches(); // false
+
         // 获得Matcher对象:
         Matcher matcher = pattern.matcher("010-12345678");
+
+        // 使用(...)分组匹配
         if (matcher.matches()) {
             String whole = matcher.group(0); // "010-12345678", 0表示匹配的整个字符串
             String area = matcher.group(1); // "010", 1表示匹配的第1个子串

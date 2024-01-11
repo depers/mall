@@ -7,7 +7,7 @@ public class CustomExceptionExample {
      * message – 错误信息
      * cause – 错误原因，可以为null，标识不存在原因或是未知
      * enableSuppression – 是否开启抑制异常
-     * writableStackTrace – 表示当前异常的位置是否会被写入异常堆栈
+     * writableStackTrace – 表示当前异常定义的位置是否会被写入异常堆栈
      */
 
 

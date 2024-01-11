@@ -6,6 +6,10 @@ import java.security.*;
 
 public class SHA1withRSAExample {
 
+    /**
+     * SHA1withRSA是一个签名算法
+     */
+
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         // 生成RSA公钥/私钥:

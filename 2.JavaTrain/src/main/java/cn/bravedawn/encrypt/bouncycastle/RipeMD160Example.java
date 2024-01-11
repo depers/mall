@@ -10,6 +10,10 @@ import java.security.Security;
 
 public class RipeMD160Example {
 
+    /**
+     * 使用BouncyCastle提供的RipeMD160算法
+     */
+
     public static void main(String[] args) throws NoSuchAlgorithmException {
         // 注册BouncyCastle
         Security.addProvider(new BouncyCastleProvider());

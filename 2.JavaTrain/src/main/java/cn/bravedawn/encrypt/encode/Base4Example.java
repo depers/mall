@@ -16,6 +16,11 @@ import java.util.UUID;
 @Slf4j
 public class Base4Example {
 
+
+    /**
+     * 二进制数据的传输问题，Base64编码是对二进制数据进行编码，表示成文本格式。
+     */
+
     public static void main(String[] args) throws UnsupportedEncodingException {
         basicRun();
         urlSafeRun();
