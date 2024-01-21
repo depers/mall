@@ -59,6 +59,5 @@ public class GetData {
         bb.rewind();
         bb.asDoubleBuffer().put(99471142);
         System.out.println(bb.getDouble());
-        bb.rewind();
     }
 }

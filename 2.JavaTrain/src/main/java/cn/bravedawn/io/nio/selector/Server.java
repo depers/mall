@@ -57,14 +57,15 @@ public class Server {
                     SocketChannel client = (SocketChannel) ky.channel();
                     ByteBuffer buffer = ByteBuffer.allocate(256);
                     int bytesRead = client.read(buffer);
+                    buffer.flip();
                     if (bytesRead > 0) {
-                        buffer.flip();
                         String output = new String(buffer.array()).trim();
                         System.out.println("Message read from client: " + output);
                         if (output.equals("Bye Bye")) {
                             client.close();
                             System.out.println("The Client messages are complete; close the session.");
                         }
+                        buffer.clear();
                     } else if (bytesRead < 0) {
                         // 客户端断开连接
                         client.close();
