@@ -15,7 +15,7 @@ import java.nio.channels.FileChannel;
 public class ChannelCopy {
 
     /**
-     * 使用NIO复制文件的程序，下面的方法并不是最佳实践，transferTo()和
+     * 使用NIO复制文件的程序，下面的方法并不是最佳实践，transferTo()和transferFrom
      */
 
     private static final int BSIZE = 1024;
