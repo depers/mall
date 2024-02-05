@@ -18,13 +18,13 @@ public class Test {
      */
 
     public static void main(String[] args) {
-        // 启动服务器
-        SocketServer socketServer = new SocketServer(6666);
-        socketServer.start();
+        // // 启动服务器
+        // SocketServer socketServer = new SocketServer(6666);
+        // socketServer.start();
 
         // 启动客户端发送数据
         SocketClient socketClient = new SocketClient("localhost", 6666, StandardCharsets.UTF_8);
         String respStr = socketClient.send("hello Beijing");
-        socketServer.printThreadPoolStatus();
+        // socketServer.printThreadPoolStatus();
     }
 }

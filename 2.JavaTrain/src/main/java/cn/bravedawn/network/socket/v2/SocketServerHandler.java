@@ -24,6 +24,7 @@ public class SocketServerHandler implements Runnable{
 
     @Override
     public void run() {
+        log.info("接收到请求----------------");
         BufferedWriter writer = null;
         BufferedReader reader = null;
 
@@ -55,6 +56,8 @@ public class SocketServerHandler implements Runnable{
                 if (reader != null) {
                     reader.close();
                 }
+                // 关闭socket
+                socket.close();
             } catch (Throwable e) {
                 log.error("资源关闭异常", e);
             }
