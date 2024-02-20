@@ -1,5 +1,6 @@
-package cn.bravedawn.chapter4;
+package cn.bravedawn.chapter6.server;
 
+import cn.bravedawn.chapter6.server.handler.FirstServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -15,7 +16,7 @@ import io.netty.util.concurrent.GenericFutureListener;
  *
  * 递增绑定端口
  */
-public class NettyServerBindPort {
+public class NettyServer {
 
     public static void main(String[] args) {
         // 负责引导服务端的启动工作
@@ -36,7 +37,7 @@ public class NettyServerBindPort {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-
+                        ch.pipeline().addLast(new FirstServerHandler());
                     }
                 });
 

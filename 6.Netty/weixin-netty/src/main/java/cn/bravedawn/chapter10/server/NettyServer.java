@@ -1,12 +1,15 @@
-package cn.bravedawn.chapter4;
+package cn.bravedawn.chapter10.server;
 
+import cn.bravedawn.chapter10.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * @author : depers
@@ -15,7 +18,8 @@ import io.netty.util.concurrent.GenericFutureListener;
  *
  * 递增绑定端口
  */
-public class NettyServerBindPort {
+@Log4j2
+public class NettyServer {
 
     public static void main(String[] args) {
         // 负责引导服务端的启动工作
@@ -36,10 +40,11 @@ public class NettyServerBindPort {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-
+                        ch.pipeline().addLast(new ServerHandler());
                     }
                 });
 
+        serverBootstrap.childOption(ChannelOption.TCP_NODELAY, true);
         bind(serverBootstrap, 1000);
     }
 
@@ -52,9 +57,9 @@ public class NettyServerBindPort {
             @Override
             public void operationComplete(Future<? super Void> future) throws Exception {
                 if (future.isSuccess()) {
-                    System.out.println("端口 ["+ port + "]绑定成功");
+                    log.info("端口 ["+ port + "]绑定成功");
                 } else {
-                    System.out.println("端口 [" + (port + 1) + "]绑定失败");
+                    log.info("端口 [" + (port + 1) + "]绑定失败");
                     bind(serverBootstrap, port + 1);
                 }
             }

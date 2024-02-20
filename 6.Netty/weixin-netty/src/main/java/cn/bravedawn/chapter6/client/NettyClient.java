@@ -1,5 +1,6 @@
-package cn.bravedawn.chapter5;
+package cn.bravedawn.chapter6.client;
 
+import cn.bravedawn.chapter6.client.handler.FirstClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *
  * 带有重连逻辑的客户端
  */
-public class NettyClientRetry {
+public class NettyClient {
 
     public static void main(String[] args) throws InterruptedException {
         // Bootstrap客户端启动的引导类，负责启动客户端和连接服务器
@@ -35,7 +36,7 @@ public class NettyClientRetry {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
-                        channel.pipeline().addLast(new StringEncoder());
+                        channel.pipeline().addLast(new FirstClientHandler());
                     }
                 });
         // 为NioSocketChannel绑定自定义属性
@@ -45,7 +46,7 @@ public class NettyClientRetry {
         bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
 
-        connect(bootstrap, "127.0.0.1", 8000, 1, 10);
+        connect(bootstrap, "127.0.0.1", 1000, 1, 10);
 
     }
 
