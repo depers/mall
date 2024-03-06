@@ -1,6 +1,6 @@
-package cn.bravedawn.chapter10.utils;
+package cn.bravedawn.chapter13.utils;
 
-import cn.bravedawn.chapter10.constant.Attributes;
+import cn.bravedawn.chapter13.constant.Attributes;
 import io.netty.channel.Channel;
 import io.netty.util.Attribute;
 

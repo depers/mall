@@ -20,7 +20,7 @@ public class CreateFile2Nio {
 
 
     public static void main(String[] args) {
-        String fileName = "/Users/depers/newFile.txt";
+        String fileName = "newFile.txt";
         String content = "hello world!";
 
         try {
