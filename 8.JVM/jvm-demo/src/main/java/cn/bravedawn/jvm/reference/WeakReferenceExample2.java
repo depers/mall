@@ -17,12 +17,14 @@ public class WeakReferenceExample2 {
 
 
     public static void main(String[] args) throws InterruptedException {
+        // 引用队列
         ReferenceQueue<RoleDTO> referenceQueue = new ReferenceQueue<>();
         WeakReference<RoleDTO> weakReference = new WeakReference<>(new RoleDTO(1l, "CFO"), referenceQueue);
 
         System.out.println("执行GC之前");
+        System.out.println("weakReference是:" + weakReference);
         Reference<? extends RoleDTO> reference;
-
+        // 引用队列时空的
         while ((reference = referenceQueue.poll()) != null) {
             System.out.println("referenceQueue中：" + reference);
         }
