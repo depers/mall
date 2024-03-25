@@ -53,6 +53,7 @@ public class JndiUnitTest {
             System.out.println(elements.nextElement());
         }
 
+        // /是名称子上下文的分隔符。现在，让我们添加一个子上下文：
         objectName.add("example");
 
         assertEquals("env", objectName.get(1));
@@ -65,6 +66,9 @@ public class JndiUnitTest {
         ctx.bind("java:comp/env/jdbc/datasource", ds);
     }
 
+    /**
+     * 查找JNDI对象
+     */
     @Test
     void givenContext_whenLookupByName_thenValidDataSource() throws Exception {
         DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/datasource");
