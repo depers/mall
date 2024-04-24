@@ -1,0 +1,17 @@
+server:
+    port: 8081
+
+spring:
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: /
+        # 确保消息成功发送到交换器
+        publisher-confirm-type: correlated
+#        # 可以确保消息在未被队列接收时返回
+#        publisher-returns: true
+#        # 该参数与publisher-returns同时配合使用
+#        template:
+#            mandatory: true
