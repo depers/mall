@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.regex;
+package cn.bravedawn.basic.regex.example;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
  * @author : depers
  * @program : JavaTrain
  * @date : Created in 2024/4/24 17:11
+ *
+ * 判断百分数的正则表达式
  */
 public class PercentageRegex {
 
@@ -26,8 +28,10 @@ public class PercentageRegex {
 
 
         Matcher m3 = p.matcher(s3);
+        // 在调用group(index)方法之前，一定先让调find()方法，否则在调group()的时候会报错
         if (m3.find()) {
             System.out.println(m3.groupCount());
+            System.out.println(m3.group(0));
             System.out.println(m3.group(1));
             System.out.println(m3.group(2));
             System.out.println(m3.group(3));

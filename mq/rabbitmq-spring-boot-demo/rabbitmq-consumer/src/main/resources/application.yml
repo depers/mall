@@ -7,6 +7,8 @@ spring:
         virtual-host: /
         listener:
             simple:
+
+
                 #  采用手动应答
                 acknowledge-mode: manual
                 #  当前监听容器数
