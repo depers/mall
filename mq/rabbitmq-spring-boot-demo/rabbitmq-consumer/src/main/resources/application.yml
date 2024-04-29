@@ -7,8 +7,6 @@ spring:
         virtual-host: /
         listener:
             simple:
-
-
                 #  采用手动应答
                 acknowledge-mode: manual
                 #  当前监听容器数
@@ -17,7 +15,6 @@ spring:
                 max-concurrency: 1
                 #  是否支持重试
                 retry:
-                    enabled: true
-                    max-attempts: 3
+                    enabled: false
 server:
     port: 8082

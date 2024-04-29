@@ -1,9 +1,18 @@
 package cn.bravedawn.producer;
 
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.MessageConversionException;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 /**
  * @author : depers
@@ -23,6 +32,8 @@ public class ReturnMsgProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     private static final String EXCHANGE_NAME = "exchange.cat";
     private static final String ROUTING_KEY = "return";
 
@@ -40,6 +51,27 @@ public class ReturnMsgProducer {
         });
         rabbitTemplate.setReturnsCallback(returned -> {
             log.error("The message sent has no corresponding queue! Returned message: {}", returned);
+        });
+        rabbitTemplate.setMessageConverter(new MessageConverter() {
+            @Override
+            public Message toMessage(Object object, MessageProperties messageProperties) throws MessageConversionException {
+                System.out.println("发送消息inner-msg-id={}" + messageProperties.getHeader("inner-msg-id"));
+
+                try {
+                    return new Message(objectMapper.writeValueAsBytes(object), messageProperties);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public Object fromMessage(Message message) throws MessageConversionException {
+                try {
+                    return objectMapper.readValue(message.getBody(), String.class);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         rabbitTemplate.convertAndSend(EXCHANGE_NAME, ROUTING_KEY, "hello, return msg");
     }
