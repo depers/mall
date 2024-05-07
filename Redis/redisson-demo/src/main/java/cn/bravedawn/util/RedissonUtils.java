@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class RedissonUtils {
+public class   RedissonUtils {
 
 
     /**

@@ -1,0 +1,29 @@
+
+server:
+    port: 8082
+
+spring:
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: /
+        # 确保消息成功发送到交换器
+        publisher-confirm-type: correlated
+        simple:
+
+
+        listener:
+            simple:
+                #  采用手动应答
+                acknowledge-mode: manual
+                # 消息拒绝后不再重新入站
+                default-requeue-rejected: false
+                #  当前监听容器数
+                concurrency: 5
+                #  最大数
+                max-concurrency: 10
+                #  是否支持重试
+                retry:
+                    enabled: false
