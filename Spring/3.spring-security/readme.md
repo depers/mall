@@ -106,5 +106,6 @@ Spring Security的整体原理为：
    * 声明验证用户是否有权限的handler。
    * 对接口方法进行角色的限制声明。
 
-
+4. 定义用户访问权限校验逻辑
+    具体参考MyAccessDecisionVoter的实现，参考文章：[Custom AccessDecisionVoters in Spring Security](https://www.baeldung.com/spring-security-custom-voter)
 

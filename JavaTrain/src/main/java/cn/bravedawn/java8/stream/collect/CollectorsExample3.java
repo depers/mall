@@ -63,10 +63,12 @@ public class CollectorsExample3 {
         List<Integer> ageList = list.stream().map(People::getAge).toList();
         Set<Integer> ageSet = list.stream().map(People::getAge).collect(Collectors.toSet());
         Map<String, Integer> peopleMap = list.stream().collect(Collectors.toMap(People::getName, People::getAge));
+        List<People> collect = list.stream().filter(p -> p.getAge() > 20).collect(Collectors.toList());
 
         System.out.println(ageList);
         System.out.println(ageSet);
         System.out.println(peopleMap);
+        System.out.println(collect);
 
     }
 }

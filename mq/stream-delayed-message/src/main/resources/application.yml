@@ -1,6 +1,10 @@
 
 server:
     port: 8082
+    tomcat:
+        accept-count: 100
+        threads:
+            min-spare:
 
 spring:
     rabbitmq:

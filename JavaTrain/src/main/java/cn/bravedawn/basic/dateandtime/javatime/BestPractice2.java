@@ -1,5 +1,7 @@
 package cn.bravedawn.basic.dateandtime.javatime;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,12 +20,11 @@ public class BestPractice2 {
      */
 
     public static void main(String[] args) {
-        // ZonedDateTime -> long:
-        ZonedDateTime zdt = ZonedDateTime.now();
-        long ts = zdt.toEpochSecond() * 1000;
+        // LocalDateTime -> long:
+        ZonedDateTime zdt = LocalDateTime.now().atZone(ZoneId.systemDefault());
 
         // long -> Date:
-        Date date = new Date(ts);
+        Date date = Date.from(zdt.toInstant());
 
         // long -> Calendar:
         Calendar calendar = Calendar.getInstance();

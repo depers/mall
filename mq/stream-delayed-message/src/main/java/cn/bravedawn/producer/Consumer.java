@@ -40,7 +40,7 @@ public class Consumer {
 
 
     /**
-     * 死信队列消费者，只有在消息有效时间内内没有消费者消费这条消息，消息才会传递到死信队列
+     * 死信队列消费者，只有在消息有效时间内没有消费者消费这条消息，消息才会传递到死信队列
      * @param message
      * @param deliveryTag
      * @param channel
