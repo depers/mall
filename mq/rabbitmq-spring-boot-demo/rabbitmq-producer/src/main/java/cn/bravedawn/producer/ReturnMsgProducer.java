@@ -49,9 +49,13 @@ public class ReturnMsgProducer {
                         cause);
             }
         });
+
+        // 设置return Listener，在mandatory为true的情况下
         rabbitTemplate.setReturnsCallback(returned -> {
             log.error("The message sent has no corresponding queue! Returned message: {}", returned);
         });
+
+        // 发送消息时的消息转换器
         rabbitTemplate.setMessageConverter(new MessageConverter() {
             @Override
             public Message toMessage(Object object, MessageProperties messageProperties) throws MessageConversionException {

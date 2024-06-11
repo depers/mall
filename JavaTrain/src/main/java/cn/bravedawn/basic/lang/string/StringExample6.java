@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @date : Created in 2022/7/6 22:39
  */
 
-@Log4j
+@Slf4j
 public class StringExample6 {
 
     /**

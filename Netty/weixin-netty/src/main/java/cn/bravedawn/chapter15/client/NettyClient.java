@@ -1,12 +1,13 @@
 package cn.bravedawn.chapter15.client;
 
-import cn.bravedawn.chapter12.packet.PacketCodec;
-import cn.bravedawn.chapter12.packet.message.MessageRequestPacket;
+import cn.bravedawn.chapter15.packet.PacketCodec;
+import cn.bravedawn.chapter15.packet.message.MessageRequestPacket;
 import cn.bravedawn.chapter15.handler.Spliter;
 import cn.bravedawn.chapter15.handler.clienthandler.LoginResponseHandler;
 import cn.bravedawn.chapter15.handler.clienthandler.MessageResponseHandler;
 import cn.bravedawn.chapter15.packet.PacketDecoder;
 import cn.bravedawn.chapter15.packet.PacketEncoder;
+import cn.bravedawn.chapter15.utils.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -92,14 +93,15 @@ public class NettyClient {
         // 更佳实践：不要显示开启线程，而是使用线程池。
         new Thread(() -> {
             while (!Thread.interrupted()) {
-                log.info("输入消息发送至服务器: ");
-                Scanner sc = new Scanner(System.in);
-                String line = sc.nextLine();
+                if (LoginUtil.hasLogin(channel)) {
+                    log.info("输入消息发送至服务器: ");
+                    Scanner sc = new Scanner(System.in);
+                    String line = sc.nextLine();
 
-                MessageRequestPacket packet = new MessageRequestPacket();
-                packet.setMessage(line);
-                ByteBuf byteBuf = PacketCodec.INSTANCE.encode(channel.alloc(), packet);
-                channel.writeAndFlush(byteBuf);
+                    MessageRequestPacket packet = new MessageRequestPacket(line);
+                    channel.writeAndFlush(packet);
+                }
+
             }
         }).start();
     }

@@ -1,6 +1,7 @@
 package cn.bravedawn.io.encoding;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -12,7 +13,7 @@ import java.util.Arrays;
  * @date : Created in 2022/7/6 22:39
  */
 
-@Log4j
+@Slf4j
 public class EncodingExample {
 
     /**

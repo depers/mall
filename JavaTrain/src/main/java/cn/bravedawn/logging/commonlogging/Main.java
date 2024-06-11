@@ -2,9 +2,10 @@ package cn.bravedawn.logging.commonlogging;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.layout.PatternLayout;
+
 
 /**
  * @Description : TODO
@@ -22,13 +23,13 @@ public class Main {
 
 
     public static void main(String[] args) {
-        // 将控制台追加程序添加到Log4j根记录器
-        Logger root = Logger.getRootLogger();
-        root.addAppender(new ConsoleAppender(new PatternLayout("%r [%t] %p %c %x - %m%n")));
-
-
-        Log log = LogFactory.getLog(Main.class);
-        log.info("stat...");
-        log.warn("end.");
+        // // 将控制台追加程序添加到Log4j根记录器
+        // Logger root = Logger.getRootLogger();
+        // root.addAppender(new ConsoleAppender(new PatternLayout("%r [%t] %p %c %x - %m%n")));
+        //
+        //
+        // Log log = LogFactory.getLog(Main.class);
+        // log.info("stat...");
+        // log.warn("end.");
     }
 }
