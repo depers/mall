@@ -1,6 +1,7 @@
 package cn.bravedawn.chapter20.server;
 
 import cn.bravedawn.chapter20.handler.Spliter;
+import cn.bravedawn.chapter20.handler.idle.HeartBeatRequestHandler;
 import cn.bravedawn.chapter20.handler.idle.IMIdleStateHandler;
 import cn.bravedawn.chapter20.handler.serverhandler.AuthHandler;
 import cn.bravedawn.chapter20.handler.serverhandler.IMHandler;
@@ -53,6 +54,7 @@ public class NettyServer {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
+                        ch.pipeline().addLast(HeartBeatRequestHandler.INSTANCE);
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
                         ch.pipeline().addLast(IMHandler.INSTANCE);
                     }

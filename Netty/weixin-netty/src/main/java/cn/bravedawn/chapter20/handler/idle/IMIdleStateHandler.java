@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
  * @author : depers
  * @program : weixin-netty
  * @date : Created in 2024/6/11 17:26
+ *
+ * 这个类不能声明为单例，因为每个连接都需要单独的一个handler
  */
 @Slf4j
 public class IMIdleStateHandler extends IdleStateHandler {

@@ -4,6 +4,8 @@ import cn.bravedawn.chapter20.handler.Spliter;
 import cn.bravedawn.chapter20.handler.clienthandler.*;
 import cn.bravedawn.chapter20.handler.console.ConsoleCommandManager;
 import cn.bravedawn.chapter20.handler.console.LoginConsoleCommand;
+import cn.bravedawn.chapter20.handler.idle.HeartBeatTimerHandler;
+import cn.bravedawn.chapter20.handler.idle.IMIdleStateHandler;
 import cn.bravedawn.chapter20.packet.PacketDecoder;
 import cn.bravedawn.chapter20.packet.PacketEncoder;
 import cn.bravedawn.chapter20.utils.SessionUtil;
@@ -45,6 +47,7 @@ public class NettyClient {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
+                        channel.pipeline().addLast(new IMIdleStateHandler());
                         channel.pipeline().addLast(new Spliter());
                         channel.pipeline().addLast(new PacketDecoder());
                         channel.pipeline().addLast(new LoginResponseHandler());
@@ -55,6 +58,7 @@ public class NettyClient {
                         channel.pipeline().addLast(new ListGroupMembersResponseHandler());
                         channel.pipeline().addLast(new GroupMessageResponseHandler());
                         channel.pipeline().addLast(new PacketEncoder());
+                        channel.pipeline().addLast(new HeartBeatTimerHandler());
                     }
                 });
         // 为NioSocketChannel绑定自定义属性
