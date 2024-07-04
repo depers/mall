@@ -1,0 +1,22 @@
+spring:
+    main:
+        # 允许循环依赖
+        allow-circular-references: true
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: /
+        # 确保消息成功发送到交换器
+        publisher-confirm-type: correlated
+        listener:
+            simple:
+                acknowledge-mode: auto  # 消息确认方式，其有三种配置方式，分别是none、manual(手动ack) 和auto(自动ack) 默认auto
+                retry:
+                    enabled: true  #监听重试是否可用
+                    max-attempts: 3   #最大重试次数 默认为3
+                    initial-interval: 2000  # 传递消息的时间间隔 默认1s
+
+server:
+    port: 8084

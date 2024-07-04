@@ -52,15 +52,13 @@ public class ReturnMsgProducer {
 
         // 设置return Listener，在mandatory为true的情况下
         rabbitTemplate.setReturnsCallback(returned -> {
-            log.error("The message sent has no corresponding queue! Returned message: {}", returned);
+            log.error("消息并没有投递到指定的队列 {}", returned);
         });
 
         // 发送消息时的消息转换器
         rabbitTemplate.setMessageConverter(new MessageConverter() {
             @Override
             public Message toMessage(Object object, MessageProperties messageProperties) throws MessageConversionException {
-                System.out.println("发送消息inner-msg-id={}" + messageProperties.getHeader("inner-msg-id"));
-
                 try {
                     return new Message(objectMapper.writeValueAsBytes(object), messageProperties);
                 } catch (JsonProcessingException e) {

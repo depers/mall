@@ -10,9 +10,9 @@ spring:
                 #  采用手动应答
                 acknowledge-mode: manual
                 #  当前监听容器数
-                concurrency: 1
+                concurrency: 10
                 #  最大数
-                max-concurrency: 1
+                max-concurrency: 10
                 #  是否支持重试
                 retry:
                     enabled: false
