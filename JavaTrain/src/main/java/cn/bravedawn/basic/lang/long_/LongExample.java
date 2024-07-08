@@ -1,4 +1,4 @@
-package cn.bravedawn.basic.lang;
+package cn.bravedawn.basic.lang.long_;
 
 /**
  * PC: SPDB

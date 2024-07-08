@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author : depers
  * @program : redisson-demo
  * @date : Created in 2024/6/29 21:04
+ *
+ * 实验二：设置锁的有效时间短于被锁逻辑的执行时间
  */
 
 @Slf4j

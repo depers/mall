@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author : depers
  * @program : redisson-demo
  * @date : Created in 2024/6/29 21:04
+ *
+ * 实验一：如果不设置锁的有效时间且不释放锁会怎么样
  */
 
 @Slf4j
