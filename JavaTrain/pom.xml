@@ -180,11 +180,12 @@
             <version>2.12.5</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--    <groupId>com.spdb</groupId>-->
-        <!--    <artifactId>SECAPI</artifactId>-->
-        <!--    <version>2.0.0-RELEASE</version>-->
-        <!--</dependency>-->
+        <!--Bcrypt算法的实现-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
 
 
     </dependencies>

@@ -1,6 +1,7 @@
 package cn.bravedawn.basic.dateandtime.javatime;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * @author : depers
@@ -14,7 +15,15 @@ public class LocalDateExample {
      */
 
     public static void main(String[] args) {
-        LocalDate localDate = LocalDate.now();
+        LocalDate localDate = LocalDate.of(2024, 5, 31);
         System.out.println(localDate);
+
+        LocalDate originalDate = localDate.minusMonths(1);
+        long between = ChronoUnit.DAYS.between(originalDate, localDate);
+        System.out.println(between);
+        System.out.println(originalDate);
+
+        long monthBetween = ChronoUnit.MONTHS.between(originalDate, LocalDate.now());
+        System.out.println(monthBetween);
     }
 }
