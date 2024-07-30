@@ -21,12 +21,12 @@ import java.util.Map;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "exchange.cat";
-    public static final String QUEUE_NAME    = "queue.cat";
-    public static final String ROUTING_KEY      = "return";
+    public static final String EXCHANGE_NAME = "exchange";
+    public static final String QUEUE_NAME = "queue";
+    public static final String ROUTING_KEY = "test";
 
-    //自动创建就是靠他
-    //开启懒加载，不然会有循环依赖问题
+    // 自动创建就是靠他
+    // 开启懒加载，不然会有循环依赖问题
     @Autowired
     private RabbitAdmin rabbitAdmin;
 

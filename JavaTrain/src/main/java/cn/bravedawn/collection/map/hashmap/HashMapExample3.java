@@ -11,7 +11,7 @@ import java.util.Map;
 public class HashMapExample3 {
 
     /**
-     * 尽管我将map设置为final，这只意味着map指向的对象引用不可修改，但是map中存储的值是不能修改的
+     * 尽管我将map设置为final，这只意味着map指向的对象引用不可修改，但是map中存储的值是可以修改的
      */
 
     private static final Map<String, String> map = new HashMap<>();
@@ -22,6 +22,8 @@ public class HashMapExample3 {
 
 
     public static void main(String[] args) {
+
+        map.put("1", "3");
         System.out.println(map);
     }
 }

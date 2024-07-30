@@ -34,8 +34,8 @@ public class ReturnMsgProducer {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String EXCHANGE_NAME = "exchange.cat";
-    private static final String ROUTING_KEY = "return";
+    private static final String EXCHANGE_NAME = "exchange";
+    private static final String ROUTING_KEY = "test";
 
 
     public void send() {

@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 public class LocalDateExample {
 
     /**
-     * 默认只输出时间
+     * 默认只输出日期
      */
 
     public static void main(String[] args) {

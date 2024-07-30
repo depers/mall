@@ -1,0 +1,24 @@
+spring:
+    main:
+        # 允许循环依赖
+        allow-circular-references: true
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: /
+        # 确保消息成功发送到交换器
+        publisher-confirm-type: correlated
+        listener:
+            simple:
+                acknowledge-mode: manual
+                prefetch: 30
+                concurrency: 10
+                max-concurrency: 10
+                retry:
+                    max-attempts: 5
+                    enabled: true
+
+server:
+    port: 8084

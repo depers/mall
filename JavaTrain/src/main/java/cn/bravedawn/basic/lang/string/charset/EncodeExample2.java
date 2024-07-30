@@ -3,6 +3,7 @@ package cn.bravedawn.basic.lang.string.charset;
 
 import org.apache.commons.codec.binary.StringUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
@@ -19,12 +20,24 @@ public class EncodeExample2 {
      * 将字节转化为字符串，我们称为 解码。
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         encodingWithCoreJava();
 
         encodingWithJava7StandardCharsets();
 
         encodingWithCommonsCodec();
+
+        encodingGBK();
+    }
+
+    private static void encodingGBK() throws UnsupportedEncodingException {
+
+        String rawString = "中国";
+
+        byte[] bytes = rawString.getBytes("gbk");
+
+        String str = new String(bytes, "gbk");
+        System.out.println(str);
     }
 
 
