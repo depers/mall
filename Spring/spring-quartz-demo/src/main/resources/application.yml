@@ -7,7 +7,7 @@ spring:
         password: fx1212
     quartz:
         jdbc:
-            initialize-schema: always
+            initialize-schema: never # 这个配置真的很坑人，记得第一次初始化之后要改成never
         job-store-type: jdbc
         properties:
             org:

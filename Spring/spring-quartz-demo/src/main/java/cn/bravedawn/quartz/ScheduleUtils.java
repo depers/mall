@@ -57,10 +57,9 @@ public class ScheduleUtils {
                 .forJob(jobDetail)
                 .withIdentity(jobName, jobGroup)
                 .startAt(nextFireTime)
+                // 如果为misFire任务，项目启动后会执行一次；如果没有到达misFire的时间，项目启动后还会执行一次
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionFireNow())
                 .build();
-        trigger.setMisfireInstruction(SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
-        trigger.setRepeatCount(1);
-        trigger.setRepeatInterval(2000);
         log.info("重复次数：{}, 错过执行策略：{}", trigger.getRepeatCount(), trigger.getMisfireInstruction());
 
         try {
