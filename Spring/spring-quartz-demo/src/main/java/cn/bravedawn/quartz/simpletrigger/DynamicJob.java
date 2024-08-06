@@ -1,4 +1,4 @@
-package cn.bravedawn.quartz;
+package cn.bravedawn.quartz.simpletrigger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.DisallowConcurrentExecution;

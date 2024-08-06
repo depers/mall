@@ -1,10 +1,10 @@
-package cn.bravedawn.quartz;
+package cn.bravedawn.quartz.simpletrigger;
 
+import cn.bravedawn.quartz.common.ScheduleUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.triggers.SimpleTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -18,10 +18,13 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class ScheduleUtils {
+public class SimpleTriggerScheduleUtils {
 
     @Autowired
     private Scheduler scheduler;
+
+    @Autowired
+    private ScheduleUtils scheduleUtils;
 
 
     /**
@@ -36,7 +39,7 @@ public class ScheduleUtils {
     public void addSimpleJob(Class<? extends Job> jobClass, String jobName, String jobGroup,
                              String desc, Map<String, Object> params, Date nextFireTime) {
 
-        if (isExistJob(jobName, jobGroup)) {
+        if (scheduleUtils.isExistJob(jobName, jobGroup)) {
             log.error("批量作业已存在，jobName={}", jobName);
             throw new RuntimeException("批量任务已存在");
         }
@@ -72,45 +75,4 @@ public class ScheduleUtils {
 
     }
 
-
-    /**
-     * 判断简单任务是否存在
-     * @param jobName
-     * @param jobGroup
-     * @return
-     */
-    public boolean isExistJob(String jobName, String jobGroup) {
-        JobKey jobKey = new JobKey(jobName, jobGroup);
-        try {
-            return scheduler.checkExists(jobKey);
-        } catch (SchedulerException e) {
-            log.error("检查批量是否存在报错", e.getMessage());
-        }
-        return false;
-    }
-
-
-    /**
-     * 删除简单任务
-     * @param jobName
-     * @param jobGroup
-     */
-    public void deleteJob(String jobName, String jobGroup) {
-
-        if (!isExistJob(jobName, jobGroup)) {
-            log.info("批量不存在, jobName={}", jobName);
-            return;
-        }
-        TriggerKey triggerKey = new TriggerKey(jobName, jobGroup);
-        try {
-            scheduler.pauseTrigger(triggerKey);
-            scheduler.unscheduleJob(triggerKey);
-            JobKey jobKey = new JobKey(jobName, jobGroup);
-            scheduler.deleteJob(jobKey);
-            log.info("删除任务成功, jobName={}", jobName);
-        } catch (SchedulerException e) {
-            log.error("删除批量任务失败", e);
-        }
-
-    }
 }

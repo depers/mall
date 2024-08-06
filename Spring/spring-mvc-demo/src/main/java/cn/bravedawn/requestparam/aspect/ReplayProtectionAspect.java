@@ -20,7 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 
 @Aspect
-@Component
+// @Component
 @Slf4j
 public class ReplayProtectionAspect {
 
@@ -37,6 +37,7 @@ public class ReplayProtectionAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         log.info("请求的参数：{}", JSONUtil.toJsonStr(request.getParameterMap()));
         log.info("请求url的参数：{}", request.getQueryString());
+
 
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {

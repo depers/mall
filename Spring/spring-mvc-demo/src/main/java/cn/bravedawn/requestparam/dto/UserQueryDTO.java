@@ -1,19 +1,17 @@
 package cn.bravedawn.requestparam.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
  * @author : depers
  * @program : spring-mvc-demo
- * @date : Created in 2024/7/31 17:06
+ * @date : Created in 2024/8/1 16:27
  */
 
 @Data
-@AllArgsConstructor
-public class User {
+public class UserQueryDTO {
 
     private String username;
-    private Integer age;
+    private String age;
     private String gender;
 }
