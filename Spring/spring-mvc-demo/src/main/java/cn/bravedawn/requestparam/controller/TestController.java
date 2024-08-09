@@ -23,8 +23,9 @@ public class TestController {
         return new User("冯晓", 18,"男");
     }
     @GetMapping("/queryInfo")
-    public User query(UserQueryDTO queryDTO) {
+    public User query(UserQueryDTO queryDTO) throws InterruptedException {
         log.info("查询用户信息, req={}", queryDTO);
+        Thread.sleep(300);
         return new User("冯晓", 18,"男");
     }
 

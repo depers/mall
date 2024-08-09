@@ -26,7 +26,7 @@ import java.util.Objects;
  */
 
 @Order
-@Component
+// @Component
 @WebFilter(filterName = "printRequestContentFilter", urlPatterns = "/*")
 @Slf4j
 public class ReplayProtectionFilter extends OncePerRequestFilter {

@@ -19,7 +19,7 @@ import java.io.IOException;
  * @date : Created in 2024/8/2 09:47
  */
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
-@Component
+// @Component
 @WebFilter(filterName = "ContentCachingFilter", urlPatterns = "/*")
 @Slf4j
 public class ContentCachingFilter extends OncePerRequestFilter {
