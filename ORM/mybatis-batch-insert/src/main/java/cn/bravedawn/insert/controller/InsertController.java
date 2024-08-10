@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class InsertController {
     private UserService userService;
 
     /**
+     * 一个一个插入数据
      * 不配置rewriteBatchedStatements参数：500ms
      * 配置rewriteBatchedStatements参数：520ms
      * @return
@@ -75,6 +77,7 @@ public class InsertController {
 
 
     /**
+     * 一个一个插入数据库，在一个事务中
      * 不配置rewriteBatchedStatements参数：420ms
      * 配置rewriteBatchedStatements参数：400ms
      * @return
@@ -113,8 +116,12 @@ public class InsertController {
 
 
     /**
-     * 不配置rewriteBatchedStatements参数：95ms
-     * 配置rewriteBatchedStatements参数：100ms
+     * 使用Mybatis
+     * 1000笔不配置rewriteBatchedStatements参数：95ms
+     * 1000笔配置rewriteBatchedStatements参数：100ms
+     *
+     * 100000笔不配置rewriteBatchedStatements参数：5355ms
+     * 100000笔配置rewriteBatchedStatements参数：5189ms
      * @return
      */
     @GetMapping("batchInsert")
@@ -134,7 +141,7 @@ public class InsertController {
 
         List<User> userList = new ArrayList<>();
 
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 100000; i++) {
             userList.add(user);
         }
 
@@ -147,8 +154,13 @@ public class InsertController {
 
 
     /**
-     * 不配置rewriteBatchedStatements参数：100ms
-     * 配置rewriteBatchedStatements参数：50ms
+     *
+     * 使用JDBC
+     * 1000笔不配置rewriteBatchedStatements参数：100ms
+     * 1000笔配置rewriteBatchedStatements参数：50ms
+     *
+     * 100000笔不配置rewriteBatchedStatements参数：6000ms
+     * 100000笔配置rewriteBatchedStatements参数：2420ms
      * @return
      * @throws SQLException
      */
@@ -177,7 +189,7 @@ public class InsertController {
         PreparedStatement statement = connection.prepareStatement(sql);
 
         try {
-            for(int i = 0; i < 1000; i++) {
+            for(int i = 0; i < 100000; i++) {
 
                 statement.setString(1, user.getName());
                 statement.setInt(2, user.getAge());
@@ -205,8 +217,13 @@ public class InsertController {
 
 
     /**
-     * 不配置rewriteBatchedStatements参数：95ms
-     * 配置rewriteBatchedStatements参数：100ms
+     *
+     * 使用Mybatis-plus
+     * 1000笔不配置rewriteBatchedStatements参数：203ms
+     * 1000笔配置rewriteBatchedStatements参数：152ms
+     *
+     * 100000笔不配置rewriteBatchedStatements参数：14240ms
+     * 1000笔配置rewriteBatchedStatements参数：11277ms
      * @return
      */
     @GetMapping("batchInsertV3")
@@ -223,10 +240,12 @@ public class InsertController {
         user.setEducationBackground(1);
         user.setCreateUser("system");
         user.setUpdateUser("system");
+        user.setInsertTime(new Date());
+        user.setUpdateTime(new Date());
 
         List<User> userList = new ArrayList<>();
 
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 100000; i++) {
             userList.add(user);
         }
 

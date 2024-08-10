@@ -1,5 +1,6 @@
 package cn.bravedawn.config;
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,28 +19,42 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-@MapperScan(basePackages = "cn.bravedawn.dao")
 public class DatasourceConfig {
 
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+
+        return createMPSqlSessionFactory(dataSource);
+
         // org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         // configuration.setMapUnderscoreToCamelCase(true);
         // configuration.addInterceptor(new SqlCostInterceptor());
         // sqlSessionFactoryBean.setConfiguration(configuration);
+        // return sqlSessionFactoryBean.getObject();
+    }
+
+
+    /**
+     * 使用Mybatis plus的配置
+     */
+    public SqlSessionFactory createMPSqlSessionFactory(DataSource dataSource) throws Exception {
+        MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
+        mybatisSqlSessionFactoryBean.setDataSource(dataSource);
+        mybatisSqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        return mybatisSqlSessionFactoryBean.getObject();
+    }
+
+
+    /**
+     * 使用Mybatis的配置
+     */
+    public SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean
-    public DefaultTransactionDefinition datasourceTransactionDefinition() {
-        DefaultTransactionDefinition dtd = new DefaultTransactionDefinition();
-        dtd.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
-        dtd.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-        dtd.setTimeout(10000);
-        return dtd;
-    }
+
 }

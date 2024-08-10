@@ -2,8 +2,8 @@
 
 spring:
     datasource:
-#        url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true
-        url: jdbc:mysql://localhost:3306/test
+        url: jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true
+#        url: jdbc:mysql://localhost:3306/test
         username: root
         password: fx1212
         driver-class-name: com.mysql.cj.jdbc.Driver
