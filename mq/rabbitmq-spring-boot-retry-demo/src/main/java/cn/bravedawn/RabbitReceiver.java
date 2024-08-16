@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,19 +20,12 @@ import org.springframework.stereotype.Component;
 public class RabbitReceiver {
 
 
-    //测试重试
-    // @RabbitListener(queues = "${mq.queueBinding.queue}")
-    // public void infoConsumption(String data, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag, Message message) throws Exception {
-    //     int retryCount = message.getMessageProperties().getHeader("x-retries-count");
-    //     int count  = 1;
-    //     log.info("重试次数 = {}, retryCount={}", count++, retryCount);
-    //
-    // }
+    // 测试重试
+    @RabbitListener(queues = "${mq.queueBinding.queue}", containerFactory = "rabbitListenerContainerFactory")
+    public void infoConsumption(@Payload String msg, String data, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag, Message message) throws Exception {
+        log.info("开始消费消息, msg={}", msg);
+        int i  = 1 / 0;
+    }
 
-    // //测试重试
-    // @RabbitListener(queues = "errorQueue")
-    // public void errorConsumer(String data, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws Exception {
-    //     log.info("接收到死信消息， data = {}", data);
-    // }
 }
 

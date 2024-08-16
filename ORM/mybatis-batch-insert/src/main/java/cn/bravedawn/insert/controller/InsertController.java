@@ -45,8 +45,8 @@ public class InsertController {
 
     /**
      * 一个一个插入数据
-     * 不配置rewriteBatchedStatements参数：500ms
-     * 配置rewriteBatchedStatements参数：520ms
+     * 1000条数据不配置rewriteBatchedStatements参数：500ms
+     * 1000条数据配置rewriteBatchedStatements参数：520ms
      * @return
      */
     @GetMapping("oneByOneInsert")
@@ -78,8 +78,8 @@ public class InsertController {
 
     /**
      * 一个一个插入数据库，在一个事务中
-     * 不配置rewriteBatchedStatements参数：420ms
-     * 配置rewriteBatchedStatements参数：400ms
+     * 1000条数据不配置rewriteBatchedStatements参数：420ms
+     * 1000条数据配置rewriteBatchedStatements参数：400ms
      * @return
      */
     @GetMapping("oneByOneInsertV2")

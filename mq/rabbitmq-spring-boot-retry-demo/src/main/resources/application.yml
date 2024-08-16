@@ -1,16 +1,5 @@
 spring:
     rabbitmq:
-        listener:
-            simple:
-                acknowledge-mode: manual  # 消息确认方式，其有三种配置方式，分别是none、manual(手动ack) 和auto(自动ack) 默认auto
-                retry:
-                    enabled: true  #监听重试是否可用
-                    max-attempts: 5   #最大重试次数 默认为3
-                    initial-interval: 2000  # 传递消息的时间间隔 默认1s
-                    multiplier: 1 # 等待因子，下次等待的时间=上次等待的时间*等待因子
-                    stateless: true
-                default-requeue-rejected: true
-                prefetch: 30
         host: localhost
         port: 5672
         username: guest
@@ -20,6 +9,5 @@ mq:
     queueBinding:
         queue: prod_queue_pay
         exchange:
-            name: exchang_prod_pay
-            type: topic
+            name: exchange_prod_pay
         key: prod_pay

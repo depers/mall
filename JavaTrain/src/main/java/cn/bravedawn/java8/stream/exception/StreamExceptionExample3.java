@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class StreamExceptionExample3 {
 
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 2, 0);
+        List<Integer> list = List.of(1, 0, 2);
 
         log.info("开始执行");
         List<Integer> collect = list.stream()

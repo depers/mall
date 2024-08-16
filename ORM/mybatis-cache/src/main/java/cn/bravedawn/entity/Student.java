@@ -1,6 +1,7 @@
-package cn.bravedawn.cache.entity;
+package cn.bravedawn.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Author : fengx9
@@ -20,6 +21,10 @@ public class Student implements Serializable {
 
     // 班级
     private String className;
+
+    private Date birthTime;
+
+    private Date birthTime2;
 
     public Integer getId() {
         return id;
@@ -53,6 +58,22 @@ public class Student implements Serializable {
         this.className = className;
     }
 
+    public Date getBirthTime() {
+        return birthTime;
+    }
+
+    public void setBirthTime(Date birthTime) {
+        this.birthTime = birthTime;
+    }
+
+    public Date getBirthTime2() {
+        return birthTime2;
+    }
+
+    public void setBirthTime2(Date birthTime2) {
+        this.birthTime2 = birthTime2;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -60,6 +81,8 @@ public class Student implements Serializable {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", className='" + className + '\'' +
+                ", birthTime=" + birthTime +
+                ", birthTime2=" + birthTime2 +
                 '}';
     }
 }

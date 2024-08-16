@@ -10,7 +10,7 @@ import java.util.List;
 public class StreamExceptionExample2 {
 
     public static void main(String[] args) {
-        List<Integer> list = List.of(1, 2, 0);
+        List<Integer> list = List.of(1, 0, 2);
 
         list.stream().map(i -> {
             try {

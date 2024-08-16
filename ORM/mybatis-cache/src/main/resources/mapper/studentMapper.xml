@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.bravedawn.cache.mapper.StudentDao">
+<mapper namespace="cn.bravedawn.mapper.StudentDao">
     <cache/>
 
-    <select id="getStudentById" parameterType="int" resultType="cn.bravedawn.cache.entity.Student">
-        SELECT id,name,age FROM student WHERE id = #{id}
+    <select id="getStudentById" parameterType="int" resultType="cn.bravedawn.entity.Student">
+        SELECT id,name,age, birth_time, birth_time2 FROM student WHERE id = #{id}
     </select>
 
-    <select id="getStudentByIdWithClassInfo" parameterType="int" resultType="cn.bravedawn.cache.entity.Student">
+    <select id="getStudentByIdWithClassInfo" parameterType="int" resultType="cn.bravedawn.entity.Student">
         SELECT  s.id,s.name,s.age,class.name as className
         FROM classroom c
         JOIN student s ON c.student_id = s.id
@@ -15,13 +15,37 @@
         WHERE s.id = #{id};
     </select>
 
-    <insert id="addStudent" parameterType="cn.bravedawn.cache.entity.Student" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO student(name,age) VALUES(#{name}, #{age})
+    <insert id="addStudent" parameterType="cn.bravedawn.entity.Student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO student(name,age, birth_time, birth_time2)
+        VALUES(#{name}, #{age}, #{birthTime}, #{birthTime2})
     </insert>
 
     <update id="updateStudentName">
         UPDATE student SET name = #{name} WHERE id = #{id}
     </update>
+
+    <select id="getAllStudent" resultType="cn.bravedawn.entity.Student">
+        select * from `student`
+    </select>
+
+    <select id="queryByQC" parameterType="cn.bravedawn.choose.QueryCondition" resultType="cn.bravedawn.entity.Student">
+        select
+            *
+        from
+            `student`
+        <where>
+            <if test="age != null and age != ''">
+                <choose>
+                    <when test="age == 18">
+                        age = #{age}
+                    </when>
+                    <otherwise>
+                        age != #{age}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
 </mapper>
 
 

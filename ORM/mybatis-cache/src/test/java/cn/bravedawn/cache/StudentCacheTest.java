@@ -1,6 +1,6 @@
 package cn.bravedawn.cache;
 
-import cn.bravedawn.cache.mapper.StudentDao;
+import cn.bravedawn.mapper.StudentDao;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

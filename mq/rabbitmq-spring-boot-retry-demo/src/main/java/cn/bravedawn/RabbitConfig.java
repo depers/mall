@@ -2,18 +2,23 @@ package cn.bravedawn;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.config.RetryInterceptorBuilder;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.retry.MessageRecoverer;
 import org.springframework.amqp.rabbit.retry.RepublishMessageRecovererWithConfirms;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.interceptor.RetryOperationsInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 /**
  * @author : depers
@@ -39,8 +44,6 @@ public class RabbitConfig {
     @Bean
     public Queue payQueue(){
         Map<String,Object> params = new HashMap<>();
-        // params.put("x-dead-letter-exchange", "errorTopicExchange");
-        // params.put("x-dead-letter-routing-key", "error");
         return QueueBuilder.durable(queueName).withArguments(params).build();
 
     }
@@ -49,35 +52,45 @@ public class RabbitConfig {
      * 交换机
      */
     @Bean
-    public TopicExchange payTopicExchange(){
-        return new TopicExchange(exchangeName,true,false);
+    public DirectExchange payTopicExchange(){
+        return new DirectExchange(exchangeName,true,false);
     }
 
     /**
      * 队列与交换机进行绑定
      */
     @Bean
-    public Binding BindingPayQueueAndPayTopicExchange(Queue payQueue, TopicExchange payTopicExchange){
+    public Binding BindingPayQueueAndPayTopicExchange(Queue payQueue, DirectExchange payTopicExchange){
         return BindingBuilder.bind(payQueue).to(payTopicExchange).with(key);
     }
 
-    // @Bean
-    // public Queue errorQueue(){
-    //     Map<String,Object> params = new HashMap<>();
-    //     return QueueBuilder.durable("errorQueue").withArguments(params).build();
-    // }
-    //
-    // @Bean
-    // public TopicExchange errorTopicExchange(){
-    //     return new TopicExchange("errorTopicExchange",true,false);
-    // }
-    //
-    // @Bean
-    // public Binding BindingErrorQueueAndErrorTopicExchange(Queue errorQueue, TopicExchange errorTopicExchange){
-    //     return BindingBuilder.bind(errorQueue).to(errorTopicExchange).with("error");
-    // }
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory,
+                                                                               RetryOperationsInterceptor retryOperationsInterceptor) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
+        factory.setGlobalQos(false);
+        factory.setConcurrentConsumers(2);
+        factory.setMaxConcurrentConsumers(2);
+        factory.setPrefetchCount(10);
+        factory.setAdviceChain(retryOperationsInterceptor);
+        return factory;
+    }
 
+        @Bean
+    public RetryOperationsInterceptor retryOperationsInterceptor(){
+        return RetryInterceptorBuilder.stateless()
+                .maxAttempts(3)
+                .backOffOptions(1000, 3.0, 10000)
+                .recoverer(new CallBackExhaustedRecover(getConsumer()))
+                .build();
+    }
 
-
+    private BiConsumer<String, Throwable> getConsumer() {
+        return (msg, e) -> {
+            log.info("消息出现异常，已达上限，msg={}, e={}", msg, e);
+        };
+    }
 
 }
