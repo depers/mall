@@ -6,7 +6,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author : depers
  * @program : weixin-netty
  * @date : Created in 2024/6/11 16:01
  */

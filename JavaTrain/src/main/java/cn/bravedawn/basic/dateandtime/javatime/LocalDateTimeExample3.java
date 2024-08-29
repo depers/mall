@@ -20,5 +20,8 @@ public class LocalDateTimeExample3 {
         LocalTime t = LocalTime.of(15, 16, 17);
         LocalDateTime dt = LocalDateTime.of(2022, 1, 19, 10, 40, 10);
         LocalDateTime dt2 = LocalDateTime.of(d, t);
+
+        System.out.println(dt);
+        System.out.println(dt2);
     }
 }

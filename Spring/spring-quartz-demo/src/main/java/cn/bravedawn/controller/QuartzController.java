@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author : depers
@@ -43,10 +41,12 @@ public class QuartzController {
         Map<String, Object> param = new HashMap<>();
         param.put("hello", "world");
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2024, 8, 25, 9, 45, 0);
+        // dateTime = dateTime.plusSeconds(30);
         dateTime = dateTime.plusSeconds(30);
+        String jobName = "simple" + UUID.randomUUID().toString().replace("-", "");
         Date executeDate = DatetimeUtil.localDateTimeToDate(dateTime);
-        simpleTriggerScheduleUtils.addSimpleJob(RealExecuteJob.class, "simple", "default", "动态任务", param, executeDate);
+        simpleTriggerScheduleUtils.addSimpleJob(RealExecuteJob.class, jobName, "default", "动态任务", param, executeDate);
         log.info("任务创建成功，执行时间：{}", executeDate);
     }
 

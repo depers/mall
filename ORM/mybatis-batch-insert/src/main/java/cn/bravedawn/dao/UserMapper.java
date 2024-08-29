@@ -23,4 +23,6 @@ public interface UserMapper extends BaseMapper<User> {
     int updateByPrimaryKey(User record);
 
     int batchInsert(List<User> userList);
+
+    int insertV2(User record);
 }

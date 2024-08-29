@@ -206,4 +206,12 @@
       (#{item.name}, #{item.age}, #{item.gender}, #{item.phone}, #{item.familyAddress}, #{item.email}, #{item.maritalStatus}, #{item.dateOfBirth}, #{item.educationBackground}, #{item.createUser}, #{item.updateUser})
     </foreach>
   </insert>
+
+  <insert id="insertV2" parameterType="cn.bravedawn.model.User">
+    insert into
+    user
+    (name, age, gender, phone, family_address, email, marital_status, date_of_birth, education_background, create_user, update_user)
+    values
+      (#{name}, #{age}, #{gender}, #{phone}, #{familyAddress}, #{email}, #{maritalStatus}, #{dateOfBirth}, #{educationBackground}, #{createUser}, #{updateUser})
+  </insert>
 </mapper>

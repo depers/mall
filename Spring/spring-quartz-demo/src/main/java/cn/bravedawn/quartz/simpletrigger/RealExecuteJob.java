@@ -17,7 +17,7 @@ public class RealExecuteJob extends DynamicJob {
     public void executeJob(Map<String, Object> jobDataMap) {
         log.info("执行具体的任务, jobDataMap={}", jobDataMap);
         try {
-            Thread.sleep(120000);
+            Thread.sleep(60000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

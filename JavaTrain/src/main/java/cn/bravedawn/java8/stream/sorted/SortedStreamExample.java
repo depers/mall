@@ -14,9 +14,9 @@ import java.util.*;
 public class SortedStreamExample {
 
     public static void main(String[] args) {
-        Student s1 = new Student("冯晓", 27, new Date(1996, 9, 21, 0, 0, 0));
-        Student s2 = new Student("李明", 27, new Date(1996, 9, 21, 1, 10, 59));
-        Student s3 = new Student("张婷", 27, new Date(1998, 9, 21, 0, 0, 0));
+        Student s1 = new Student("冯晓", 27, new Date(96, 9, 21, 0, 0, 0));
+        Student s2 = new Student("李明", 27, new Date(96, 9, 21, 1, 10, 59));
+        Student s3 = new Student("张婷", 27, new Date(98, 9, 21, 0, 0, 0));
 
         Date time = new Date(2019, 7, 8, 0, 0, 0);
 
@@ -27,7 +27,12 @@ public class SortedStreamExample {
             return b1.compareTo(b2);
         });
 
-        list.sort(comparator.reversed());
+        Comparator<Date> dateComparator = new Comparator<Date>() {
+            @Override
+            public int compare(Date o1, Date o2) {
+                return o1.compareTo(o2);
+            }
+        };
         System.out.println(list);
     }
 

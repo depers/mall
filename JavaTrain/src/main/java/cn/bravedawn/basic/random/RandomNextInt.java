@@ -21,7 +21,7 @@ public class RandomNextInt {
         System.out.println(randomWithNextInt);
 
         // 使用有参的nextInt方法，可以得到一个范围内的数字
-        System.out.println(getRandomNumber(1, 10));
+        System.out.println(getRandomNumber(0, 10));
     }
 
     static int getRandomNumber(int min, int max) {

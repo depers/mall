@@ -49,7 +49,7 @@ public class NettyClient {
                     protected void initChannel(Channel channel) throws Exception {
                         channel.pipeline().addLast(new IMIdleStateHandler());
                         channel.pipeline().addLast(new Spliter());
-                        channel.pipeline().addLast(new PacketDecoder());
+                        channel.pipeline().addLast(new  PacketDecoder());
                         channel.pipeline().addLast(new LoginResponseHandler());
                         channel.pipeline().addLast(new MessageResponseHandler());
                         channel.pipeline().addLast(new CreateGroupResponseHandler());
