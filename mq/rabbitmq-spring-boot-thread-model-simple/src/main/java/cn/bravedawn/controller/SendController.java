@@ -21,7 +21,7 @@ public class SendController {
 
     @GetMapping("send")
     public String send() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             messageProducer.sendMessage("hello!");
         }
 

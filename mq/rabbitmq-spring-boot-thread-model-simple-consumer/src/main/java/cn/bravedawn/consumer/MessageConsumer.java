@@ -28,6 +28,11 @@ public class MessageConsumer {
         int i = 1 / 0;
     }
 
+    @RabbitListener(queues = RabbitmqConfig.QUEUE_2, containerFactory = "simpleContainerFactory")
+    public void receive2(String message) {
+        log.info("收到simple队列2中的消息：{}", message);
+    }
+
 
     @RabbitListener(queues = RabbitmqConfig.UNIFY_QUEUE)
     public void unifyReceive(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag) throws IOException {

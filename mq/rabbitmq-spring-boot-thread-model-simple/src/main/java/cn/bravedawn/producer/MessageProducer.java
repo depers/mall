@@ -43,8 +43,8 @@ public class MessageProducer {
         rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTING_KEY,
                 message, new CorrelationData(UUID.randomUUID().toString()));
 
-        // rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTING_KEY_2,
-        //         message, new CorrelationData(UUID.randomUUID().toString()));
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTING_KEY_2,
+                message, new CorrelationData(UUID.randomUUID().toString()));
     }
 
 }

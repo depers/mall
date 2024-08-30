@@ -46,20 +46,25 @@ public class RabbitmqConfig {
     @PostConstruct
     public void init() {
         rabbitAdmin.declareQueue(new Queue(QUEUE, true, false, false));
-        // rabbitAdmin.declareQueue(new Queue(QUEUE_2, true, false, false));
+        rabbitAdmin.declareQueue(new Queue(QUEUE_2, true, false, false));
         rabbitAdmin.declareExchange(new DirectExchange(EXCHANGE, true, false));
         rabbitAdmin.declareBinding(new Binding(QUEUE, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY, new HashMap<>()));
-        // rabbitAdmin.declareBinding(new Binding(QUEUE_2, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY_2, new HashMap<>()));
+        rabbitAdmin.declareBinding(new Binding(QUEUE_2, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY_2, new HashMap<>()));
     }
 
 
+    /**
+     * 通过设置MessageListener进行消息的消费
+     * @param connectionFactory
+     * @return
+     */
     @Bean
     public SimpleMessageListenerContainer messageContainer(ConnectionFactory connectionFactory) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         // 绑定Queue1/Queue2
         container.addQueueNames(QUEUE);
-        // container.addQueueNames(QUEUE_2);
+        container.addQueueNames(QUEUE_2);
         // 设置默认 consumer 数为3
         container.setConcurrentConsumers(2);
         // 设置最大 consumer 数为4

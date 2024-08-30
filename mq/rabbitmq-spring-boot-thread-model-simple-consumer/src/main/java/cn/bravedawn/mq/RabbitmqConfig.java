@@ -19,6 +19,7 @@ import org.springframework.retry.support.RetryTemplate;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author : depers
@@ -34,11 +35,15 @@ public class RabbitmqConfig {
     private RabbitAdmin rabbitAdmin;
 
     public static final String QUEUE = "simple-queue-consumer";
+    public static final String QUEUE_2 = "simple-queue-consumer-2";
     public static final String UNIFY_QUEUE = "unify-simple-queue-consumer";
     public static final String EXCHANGE = "simple-exchange";
     public static final String UNIFY_EXCHANGE = "unify-simple-exchange";
     public static final String ROUTING_KEY = "simple-routing-key";
+    public static final String ROUTING_KEY_2 = "simple-routing-key";
     public static final String UNIFY_ROUTING_KEY = "unify-simple-routing-key";
+
+    private AtomicInteger index = new AtomicInteger(0);
 
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
@@ -50,10 +55,12 @@ public class RabbitmqConfig {
     @PostConstruct
     public void init() {
         rabbitAdmin.declareQueue(new Queue(QUEUE, true, false, false));
+        rabbitAdmin.declareQueue(new Queue(QUEUE_2, true, false, false));
         rabbitAdmin.declareQueue(new Queue(UNIFY_QUEUE, true, false, false));
         rabbitAdmin.declareExchange(new DirectExchange(EXCHANGE, true, false));
         rabbitAdmin.declareExchange(new DirectExchange(UNIFY_EXCHANGE, true, false));
         rabbitAdmin.declareBinding(new Binding(QUEUE, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY, new HashMap<>()));
+        rabbitAdmin.declareBinding(new Binding(QUEUE_2, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY_2, new HashMap<>()));
         rabbitAdmin.declareBinding(new Binding(UNIFY_QUEUE, Binding.DestinationType.QUEUE, UNIFY_EXCHANGE, UNIFY_ROUTING_KEY, new HashMap<>()));
     }
 
@@ -74,6 +81,10 @@ public class RabbitmqConfig {
         return rabbitTemplate;
     }
 
+    /**
+     * 声明消息的重试机制
+     * @return
+     */
     @Bean
     public RetryOperationsInterceptor retryInterceptor() {
         return RetryInterceptorBuilder.stateless()
@@ -84,6 +95,10 @@ public class RabbitmqConfig {
     }
 
 
+    /**
+     * 声明消息的重试机制
+     * @return
+     */
     @Bean
     public RetryOperationsInterceptor onceRetryInterceptor() {
         return RetryInterceptorBuilder.stateless()
@@ -102,6 +117,7 @@ public class RabbitmqConfig {
         factory.setConcurrentConsumers(2);
         factory.setMaxConcurrentConsumers(2);
         factory.setPrefetchCount(10);
+        factory.setConsumerTagStrategy(queue -> "consumer" + (index.incrementAndGet()));
 
         factory.setAdviceChain(onceRetryInterceptor);
 
@@ -109,6 +125,10 @@ public class RabbitmqConfig {
     }
 
 
+    /**
+     * 消息到达最大重试次数的处理逻辑
+     * @return
+     */
     public MessageRecoverer messageRecover() {
         return new MessageRecoverer() {
             @Override
