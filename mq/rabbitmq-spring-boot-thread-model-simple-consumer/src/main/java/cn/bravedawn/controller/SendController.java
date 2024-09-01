@@ -25,4 +25,11 @@ public class SendController {
 
         return "success";
     }
+
+    @GetMapping("sendContainer")
+    public String sendContainer() {
+        messageProducer.sendMessage2("container!");
+
+        return "success";
+    }
 }

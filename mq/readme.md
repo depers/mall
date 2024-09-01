@@ -11,7 +11,7 @@
 | 3    | rabbitmq-spring-boot-demo                    | Spring AMQP的简单使用，演示了客户端和服务端的使用。          |
 | 4    | rabbitmq-spring-thread-model-direct          | 对RabbitMQ中的Direct消费者线程模型进行演示和探索。           |
 | 5    | rabbitmq-spring-thread-model-simple          | 对RabbitMQ中的Simple消费者线程模型进行演示和探索。           |
-| 6    | rabbitmq-spring-thread-model-recover         |                                                              |
+| 6    | rabbitmq-spring-thread-model-recover         | 消息重试失败的处理策略。                                     |
 | 7    | rabbitmq-spring-thread-model-simple-consumer | 对消费者SimpleRabbitListenerContainerFactory配置的演示，以及消费端的重试机制。 |
-| 8    | stream-delayed-message                       |                                                              |
+| 8    | stream-delayed-message                       | 延时消息。                                                   |
 

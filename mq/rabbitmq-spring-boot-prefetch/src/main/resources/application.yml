@@ -1,0 +1,15 @@
+spring:
+    main:
+        allow-circular-references: true
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: /
+
+
+server:
+    port: 8082
+
+

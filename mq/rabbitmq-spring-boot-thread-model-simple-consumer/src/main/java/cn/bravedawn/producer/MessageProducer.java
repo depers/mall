@@ -28,10 +28,21 @@ public class MessageProducer {
     public void sendMessage(String message) {
 
         rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTING_KEY,
-                message, new CorrelationData(UUID.randomUUID().toString()));
+                message + "queue1", new CorrelationData(UUID.randomUUID().toString()));
+
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTING_KEY_2,
+                message + "queue2", new CorrelationData(UUID.randomUUID().toString()));
 
         // rabbitTemplate.convertAndSend(RabbitmqConfig.UNIFY_EXCHANGE, RabbitmqConfig.UNIFY_ROUTING_KEY,
                 // message + " unify", new CorrelationData(UUID.randomUUID().toString()));
+    }
+
+    public void sendMessage2(String message) {
+        rabbitTemplate.convertAndSend(RabbitmqConfig.CONTAINER_EXCHANGE, RabbitmqConfig.CONTAINER_ROUTING_KEY,
+                message + "simple-container-queue", new CorrelationData(UUID.randomUUID().toString()));
+
+        rabbitTemplate.convertAndSend(RabbitmqConfig.CONTAINER_EXCHANGE, RabbitmqConfig.CONTAINER_ROUTING_KEY_2,
+                message + "simple-container-queue-2", new CorrelationData(UUID.randomUUID().toString()));
     }
 
 }
