@@ -1,0 +1,29 @@
+spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/quartz
+        username: root
+        password: fx1212
+    quartz:
+        jdbc:
+            initialize-schema: always # 这个配置真的很坑人，记得第一次初始化是always，之后要改成never
+        job-store-type: jdbc
+        properties:
+            org:
+                quartz:
+                    # 作业存储配置
+                    jobStore:
+                        driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+                        tablePrefix: QRTZ_
+                        isClustered: true
+                        clusterCheckinInterval: 10000
+                        misfireThreshold: 10000
+                    # 调度器配置
+                    scheduler:
+                        instanceName: Quartz
+                        instanceId: AUTO
+                    # 线程池配置
+                    threadPool:
+                        class: org.quartz.simpl.SimpleThreadPool
+                        threadCount: 3

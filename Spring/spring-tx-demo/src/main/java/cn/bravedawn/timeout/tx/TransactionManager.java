@@ -23,7 +23,7 @@ public class TransactionManager {
     public TransactionManager() {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-        def.setTimeout(10);
+        def.setTimeout(120);
         this.transactionStatus = transactionManager.getTransaction(def);
     }
 
