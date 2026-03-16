@@ -9,10 +9,10 @@ import java.util.Iterator;
  * @description:
  * @date : Created in 2023/3/28 20:09
  */
-public class FailFastIterator2 {
+public class FailSafeIterator4 {
 
     /**
-     * Fail-fast示例：ArrayList 中的迭代器
+     * Fail-safe示例：Java8+ 最优雅写法（推荐）
      */
 
     public static void main(String[] args) {
@@ -23,14 +23,7 @@ public class FailFastIterator2 {
         students.add("elanie");
         students.add("amara");
 
-        Iterator iterator = students.iterator();
-
-        while (iterator.hasNext()) {
-            // 这里next方法会抛出异常
-            if (((String) iterator.next()).equals("paul")) {
-                students.remove("amara");
-            }
-        }
+        students.removeIf(item -> item.equals("paul"));
 
         System.out.println(students);
 
